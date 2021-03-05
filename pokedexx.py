@@ -93,7 +93,6 @@ def Search(pokemon_search_input):
             
             return pokemon_name,pokemon_type,pokemon_type2
 
-
     #Pokémon Entwichlungsstufe → STAGE
     if len(entwicklung) == 1:
         stage = f"Entwicklungsstufe {pokemon_search_input}: {stufe}/1)"
