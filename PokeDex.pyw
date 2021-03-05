@@ -10,7 +10,6 @@ logging.basicConfig(level=logging.DEBUG)
 
 #returns installed python libraries
 installed_libraries = os.popen("python -m pip list").read()
-
 #splits input to a array with the libraries as single elements
 def Convert(string): 
     converted_list = list(string.split(" ")) 
