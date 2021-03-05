@@ -84,11 +84,13 @@ def Search(pokemon_search_input):
             pokemon_name = str(f"Pokémon '{pokemon_search_input}' konnte nicht gefunden werden!")
             pokemon_type = ""
             pokemon_type2 = ""
-            #Download 404 image
+
+            #Download 404 image when exiting on unsuccessfull search
             opener = urllib.request.build_opener()
             opener.addheaders = [('User-agent', 'Mozilla/5.0')]
             urllib.request.install_opener(opener)
             urllib.request.urlretrieve("https://raw.githubusercontent.com/infinitel8p/PokeDex/master/error_404.png", "sprite.png")
+            
             return pokemon_name,pokemon_type,pokemon_type2
 
 
