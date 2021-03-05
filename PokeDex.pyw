@@ -2,82 +2,15 @@
 import os
 import sys
 import time
-import logging
+import logging   
+from dearpygui.core import *
+from dearpygui.simple import *
+from pokedexx import Search
 
 #sys.dont_write_bytecode = True → just added __pycache__ to .gitignore
 log_output = open("log.txt", "a")
 logging.basicConfig(level=logging.DEBUG)
 
-#returns installed python libraries
-installed_libraries = os.popen("python -m pip list").read()
-#splits input to a array with the libraries as single elements
-def Convert(string): 
-    converted_list = list(string.split(" ")) 
-    return converted_list
-#converts the returned python libraries on the pc and removes empty space in between
-check_output = Convert(installed_libraries)
-check_output = list(filter(None, check_output))
-
-#start check of which libraries are still needed
-required_pdex = True
-required_dpgui = True
-required_bs4 = True
-#search in the array for pokedex.py, dearpygui and bs4
-for modules in check_output:
-    if (modules.find('pokedex.py') != -1): 
-        logging.debug(" pokedex.py is already installed!") 
-        required_pdex = False
-
-    if (modules.find('dearpygui') != -1): 
-        logging.debug(" dearpygui is already installed!") 
-        required_dpgui = False
-
-    if (modules.find('bs4') != -1): 
-        logging.debug(" BeautifulSoup4 is already installed!") 
-        required_bs4 = False
-
-#if needed libraries are not found pip install them
-if required_pdex == True:
-    logging.warning(" pokedex.py is missing. pip install will fetch data.")
-    os.system("pip install pokedex.py")
-    error_time = time.localtime()
-    log_output.write(f"[{error_time[2]}.{error_time[1]}.{error_time[0]} {error_time[3]}:{error_time[4]}:{error_time[5]}] Installed pokedex.py.\n")
-if required_dpgui == True:
-    logging.warning(" dearpygui is missing. pip install will fetch data.")
-    os.system("pip install dearpygui")
-    error_time = time.localtime()
-    log_output.write(f"[{error_time[2]}.{error_time[1]}.{error_time[0]} {error_time[3]}:{error_time[4]}:{error_time[5]}] Installed dearpygui.\n")
-if required_bs4 == True:
-    logging.warning(" beautifulsoup4 is missing. pip install will fetch data.")
-    os.system("pip install beautifulsoup4")
-    error_time = time.localtime()
-    log_output.write(f"[{error_time[2]}.{error_time[1]}.{error_time[0]} {error_time[3]}:{error_time[4]}:{error_time[5]}] Installed beautifulsoup4.\n")
-
-
-#dearpygui and pokedexx imports
-#try importing dearpygui
-#if dearpygui was installed while using app.pyw for the first time the import will fail so the app.pyw needs to be restarted
-try:
-    from dearpygui import core, simple
-except ModuleNotFoundError as error:
-    error_time = time.localtime()
-    logging.error(f" [{error_time[2]}.{error_time[1]}.{error_time[0]} {error_time[3]}:{error_time[4]}:{error_time[5]}] {error}. Applet will be restarted\n")
-    log_output.write(f"[{error_time[2]}.{error_time[1]}.{error_time[0]} {error_time[3]}:{error_time[4]}:{error_time[5]}] {logging.error(error)}. Applet will be restarted\n")
-    log_output.close()
-    time.sleep(2)
-    os.system("python PokeDex.pyw")
-    exit()
-except ImportError as error:
-    error_time = time.localtime()
-    log_output.write(f"[{error_time[2]}.{error_time[1]}.{error_time[0]} {error_time[3]}:{error_time[4]}:{error_time[5]}] {logging.error(error)}. Applet will be restarted\n")
-    log_output.close()
-    time.sleep(2)
-    os.system("python PokeDex.pyw")
-    exit()
-    
-from dearpygui.core import *
-from dearpygui.simple import *
-from pokedexx import Search
 #main worker
 #callback of search button
 
