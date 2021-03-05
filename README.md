@@ -5,6 +5,7 @@ Ever found yourself in a fight against a Pokémon and wondering which attack wou
 #### Contents:  
  - [Update logs](https://github.com/infinitel8p/PokeDex#update-logs)
  - [How to setup](https://github.com/infinitel8p/PokeDex#how-to-setup)
+ - [PokeDex.exe is missing](https://github.com/infinitel8p/PokeDex#pokedex-is-missing)
  - [Used libraries](https://github.com/infinitel8p/PokeDex#used-libraries)
  - [Feature updates](https://github.com/infinitel8p/PokeDex#feature-updates)
 
@@ -17,16 +18,19 @@ v.1.4 : Multiple searches are now possible - last search result gets deleted to 
 v.1.5 : Fixed major error when searching for same thing more than once in a row (still beta)  
 v.1.5.1 : Fixed german name output when searching in enlish (still somewhat broken)  
 v.1.6 : implemented log of last searches  
-v.2.0.1 : Added images of searched Pokémon to the search results
+v.2.1.1 : Added images of searched Pokémon to the search results
+v.3.1 : changed project to ```.exe```  
 
-:zzz: v.2.1 : → currently working on automatic fetching of necessary python libraries
+:zzz: v.x.x : → currently working on nothing specific
 
 ## How to setup:  
 #### :snake: Please make sure that python is installed, [added to path](https://datatofish.com/add-python-to-windows-path/) and that pip is running correctly before you run this app for the first time!  
 
 1. Click ```clone or download``` and choose to download the ZIP file
 2. Extract the folder from the ZIP file
-3. Run the ```PokeDex.pyw``` (you may have to restart the app in case of missing python libraries)
+3. Run the ```PokeDex.exe``` (you may have to check [PokeDex.exe is missing](https://github.com/infinitel8p/PokeDex#pokedex-is-missing))
+
+I will leave the original files in the folder in case you want to start the PokeDex as ```.pyw``` or dont want to add the ```.exe```to your antivirus exceptions
 
 ##### If you want to see the python console output you need to rename the file from ```PokeDex.pyw``` to ```PokeDex.py``` or follow these steps:  
 
@@ -39,11 +43,16 @@ cd C:\Users\Ludo\Desktop\PokeDex
 ```shell
 python app.pyw
 ```  
+## PokeDex.exe is missing  
+
+In case of the ```PokeDex.exe``` missing on your pc you have to tell your Antivirus that these files are fine.
+Check this post for further information: [My Antivirus Detected the exe as a Virus](https://github.com/pyinstaller/pyinstaller/issues/2501#issuecomment-286230354)  
 
 ## Used libraries: 
 - [beautifulsoup4 4.9.3](https://pypi.org/project/beautifulsoup4/)
 - [pokedex.py 1.1.2](https://pypi.org/project/pokedex.py/)
 - [dearpygui 0.6.221](https://pypi.org/project/dearpygui/)
+- [auto-py-to-exe 2.8.0](https://pypi.org/project/auto-py-to-exe/) (to convert the ```PokeDex.pyw``` to a executable)
 - ###### Logo by [Nesim (@nsmdnl)](https://github.com/nsmdnl)
 
 ## Feature Updates:
