@@ -18,7 +18,7 @@ v.1.4 : Multiple searches are now possible - last search result gets deleted to 
 v.1.5 : Fixed major error when searching for same thing more than once in a row (still beta)  
 v.1.5.1 : Fixed german name output when searching in enlish (still somewhat broken)  
 v.1.6 : implemented log of last searches  
-v.2.1.1 : Added images of searched Pokémon to the search results
+v.2.1.1 : Added images of searched Pokémon to the search results  
 v.3.0.1 : changed project to ```.exe```  
 
 :zzz: v.x.x : → currently working on nothing specific
