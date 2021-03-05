@@ -58,9 +58,9 @@ Check this post for further information: [My Antivirus Detected the exe as a Vir
 ## Feature Updates:
 - [x] clear last search results
 - [ ] fix german names in pokemon description
-- [ ] fix restart bug when launching app.pyw without prerequisites
+- [x] fix restart bug when launching app.pyw without prerequisites
 - [x] create "Log" tab for past searches + results (beta)
-- [ ] return search results with sprite of the Pokémon
+- [x] return search results with sprite of the Pokémon
 - [ ] implement interactive redirects to evolution of the Pokémon
 - [ ] change color of the Pokémon´s type
 - [ ] create "Feedback" tab for quick feedback in app.pyw
