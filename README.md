@@ -53,7 +53,7 @@ Check this post for further information: [My Antivirus Detected the exe as a Vir
 - [pokedex.py 1.1.2](https://pypi.org/project/pokedex.py/)
 - [dearpygui 0.6.221](https://pypi.org/project/dearpygui/)
 - [auto-py-to-exe 2.8.0](https://pypi.org/project/auto-py-to-exe/) (to convert the ```PokeDex.pyw``` to a executable)
-- ###### Logo by [Nesim (@nsmdnl)](https://github.com/nsmdnl)
+- ###### Logo by [Nesim (@nsmdnl)](https://github.com/nsmdnl) Logo by Nesim (@nsmdnl)
 
 ## Feature Updates:
 - [x] clear last search results
