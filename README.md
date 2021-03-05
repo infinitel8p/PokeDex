@@ -5,7 +5,7 @@ Ever found yourself in a fight against a Pokémon and wondering which attack wou
 #### Contents:  
  - [Update logs](https://github.com/infinitel8p/PokeDex#update-logs)
  - [How to setup](https://github.com/infinitel8p/PokeDex#how-to-setup)
- - [PokeDex.exe is missing](https://github.com/infinitel8p/PokeDex#pokedex-is-missing)
+ - [PokeDex.exe is missing](https://github.com/infinitel8p/PokeDex#pokedexexe-is-missing)
  - [Used libraries](https://github.com/infinitel8p/PokeDex#used-libraries)
  - [Feature updates](https://github.com/infinitel8p/PokeDex#feature-updates)
 
@@ -28,7 +28,7 @@ v.3.1 : changed project to ```.exe```
 
 1. Click ```clone or download``` and choose to download the ZIP file
 2. Extract the folder from the ZIP file
-3. Run the ```PokeDex.exe``` (you may have to check [PokeDex.exe is missing](https://github.com/infinitel8p/PokeDex#pokedex-is-missing))
+3. Run the ```PokeDex.exe``` (you may have to check [PokeDex.exe is missing](https://github.com/infinitel8p/PokeDex#pokedexexe-is-missing))
 
 I will leave the original files in the folder in case you want to start the PokeDex as ```.pyw``` or dont want to add the ```.exe```to your antivirus exceptions
 
