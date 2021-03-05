@@ -19,7 +19,7 @@ v.1.5 : Fixed major error when searching for same thing more than once in a row 
 v.1.5.1 : Fixed german name output when searching in enlish (still somewhat broken)  
 v.1.6 : implemented log of last searches  
 v.2.1.1 : Added images of searched Pokémon to the search results
-v.3.1 : changed project to ```.exe```  
+v.3.0.1 : changed project to ```.exe```  
 
 :zzz: v.x.x : → currently working on nothing specific
 
