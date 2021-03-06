@@ -63,6 +63,9 @@ def Start_pokemon_check():
 def Credit():
     with window("Credits", width = 520, height = 900):
         set_window_pos("Credits", 0, 0)
+    
+def Browser():
+    os.system("start chrome https://github.com/infinitel8p/PokeDex/")
 
 
 #window object settings
@@ -97,7 +100,7 @@ with window(pokedex_version, width = 520, height = 900):
         
         with tab("Credits"):
             add_spacing(count = 5)
-            add_button("See the credits", callback = Credit)
+            add_button("Go to project page", callback = Browser)
             add_spacing(count = 5)
             add_button("See the logs", callback = show_logger)
 
