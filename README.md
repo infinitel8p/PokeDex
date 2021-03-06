@@ -21,7 +21,7 @@ v.1.6 : implemented log of last searches
 v.2.1.1 : Added images of searched Pokémon to the search results  
 v.3.0.1 : changed project to ```.exe```  
 
-:zzz: v.x.x : → currently working on nothing specific
+:zzz: v.3.1 : → currently working on "more information" tab for more in detail information to a pokemon
 
 ## How to setup:  
 
