@@ -1,0 +1,2 @@
+06.03.2021 : - fixed the name output
+             - added github page to credits tab
