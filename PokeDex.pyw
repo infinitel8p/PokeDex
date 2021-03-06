@@ -18,6 +18,19 @@ search_runs = []
 last_search = ""
 pokedex_version = "Pokedex for PokeOne v.3.0.1"
 
+#test
+def delete_last_result():
+    if search_runs == []:
+        #runs only with the first search (when search_runs[-1] does not exist)
+        add_separator(parent=pokedex_version)
+        add_spacing(count = 2, parent=pokedex_version)
+    else:
+        #hide last search result
+        delete_item(search_runs[-1])
+    
+def Browser():
+    os.system("start chrome https://github.com/infinitel8p/PokeDex/")
+
 def Start_pokemon_check():
 #following snippet would be for results in extra window with title as search input
 #    with window("Search Result for: " + input_value, width = 520, height = 900):
@@ -30,13 +43,8 @@ def Start_pokemon_check():
     global last_search
     if input_value != last_search:
         last_search = input_value
-        if search_runs == []:
-            #runs only with the first search (when search_runs[-1] does not exist)
-            add_separator(parent=pokedex_version)
-            add_spacing(count = 2, parent=pokedex_version)
-        else:
-            #hide last search result
-            hide_item(search_runs[-1])
+        #prepaire for output
+        delete_last_result()
         #get result from search function in pokedexx and set them to a single variable
         pokemon_name, pokemon_type, pokemon_type2 = Search(input_value)
         search_result = pokemon_name + pokemon_type + pokemon_type2
@@ -59,14 +67,6 @@ def Start_pokemon_check():
     else:
         log_error(f"recurring input detected: {input_value}")
 
-#test
-def Credit():
-    with window("Credits", width = 520, height = 900):
-        set_window_pos("Credits", 0, 0)
-    
-def Browser():
-    os.system("start chrome https://github.com/infinitel8p/PokeDex/")
-
 
 #window object settings
 set_main_window_size(536, 925)
@@ -79,30 +79,30 @@ with window(pokedex_version, width = 520, height = 900):
     logging.info(" GUI is running...")
     set_window_pos(pokedex_version, 0, 0)
     
-    #Tabs
-    with tab_bar("Tab Bar"):
-        with tab("Search"):
-            #image logo
-            add_drawing("logo", width=520, height=250) #create some space for the image
-            add_separator()
+    #Menu
+    with menu_bar("Menu Bar"):
+        with menu("Options"):
+            add_menu_item("Go to project page", callback = Browser)
+            add_menu_item("See the logs", callback = show_logger)
+            add_menu_item("Delete last search result", callback=delete_last_result)
+            with menu("Empty Menu"):
+                add_menu_item("Still empty")
 
-            add_spacing(count = 5)
-            add_text("Search for Pokemon to get your results!", color = [200, 100, 100])
-            add_spacing(count = 2)
+    #image logo
+    add_drawing("logo", width=520, height=250) #create some space for the image
+    add_separator()
 
-            #Optional User Input
-            add_input_text("Input", width = 415, default_value = "")
-            
-            #Button
-            add_spacing(count = 5)
-            add_button("Start", callback = Start_pokemon_check)
-            add_spacing(count = 5)
-        
-        with tab("Credits"):
-            add_spacing(count = 5)
-            add_button("Go to project page", callback = Browser)
-            add_spacing(count = 5)
-            add_button("See the logs", callback = show_logger)
+    add_spacing(count = 5)
+    add_text("Search for Pokemon to get your results!", color = [200, 100, 100])
+    add_spacing(count = 2)
+
+    #Optional User Input
+    add_input_text("Input", width = 415, default_value = "")
+    
+    #Button
+    add_spacing(count = 5)
+    add_button("Start", callback = Start_pokemon_check)
+    add_spacing(count = 5)
 
 #place the image inside the space "logo"
 draw_image("logo", r"PokeDex.png", [115,0], [365,250]) #padding 25
