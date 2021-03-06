@@ -2,3 +2,4 @@ v.3.1 06.03.2021 : - fixed the name output
                    - added github page to credits tab
 v.3.2 06.03.2021 : - fixed bug with search results still stacking
                    - started implementing Menus
+                   - started implementing loading screens
