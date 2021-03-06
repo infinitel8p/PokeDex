@@ -25,7 +25,7 @@ def Search(pokemon_search_input):
             german_lines = full_german_names.read().splitlines()
             for lines in german_lines:
                 if pokemon_id in lines:
-                    german_name = lines.rstrip(pokemon_id)
+                    german_name = lines.lstrip(pokemon_id)
                     full_german_names.close()
                     return german_name
             
@@ -61,6 +61,7 @@ def Search(pokemon_search_input):
             for lines in document_lines:
                 if pokemon_search_input in lines:
                     input_was_english = True
+
     #If Name has been found set valuable information to variable       
     if input_was_english == True:
         #Output valuable information to variable
