@@ -60,12 +60,13 @@ Check this post for further information: [My Antivirus Detected the exe as a Vir
 - [x] fix restart bug when launching app.pyw without prerequisites
 - [x] create "Log" tab for past searches + results (beta)
 - [x] return search results with sprite of the Pokémon
-- [ ] fix german names in pokemon description (partly fixed → working on preciser output)
+- [x] fix german names in pokemon description
+- [ ] create "more information" tab for more in detail information to a pokemon
 - [ ] let the app check for updates
-- [ ] add "caught" function
+- [ ] add function to change language
 - [ ] implement interactive redirects to evolution of the Pokémon
 - [ ] change color of the Pokémon´s type
 - [ ] create "Feedback" tab for quick feedback in app.pyw
-- [ ] create "more information" tab for more in detail information to a pokemon
-- [ ] fix various bugs (f.e. search result for "dragoran")
+- [ ] fix various bugs (f.e. search result for "dragoran" or "dratini")
+- [ ] \(optional) add "caught" function
 - [ ] \(optional) adjust supported Pokémon to PokéOne
