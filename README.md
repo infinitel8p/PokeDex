@@ -24,7 +24,6 @@ v.3.0.1 : changed project to ```.exe```
 :zzz: v.x.x : → currently working on nothing specific
 
 ## How to setup:  
-#### :snake: Please make sure that python is installed, [added to path](https://datatofish.com/add-python-to-windows-path/) and that pip is running correctly before you run this app for the first time!  
 
 1. Click ```clone or download``` and choose to download the ZIP file
 2. Extract the folder from the ZIP file
@@ -33,6 +32,7 @@ v.3.0.1 : changed project to ```.exe```
 I will leave the original files in the folder in case you want to start the PokeDex as ```.pyw``` or dont want to add the ```.exe```to your antivirus exceptions
 
 ##### If you want to see the python console output you need to rename the file from ```PokeDex.pyw``` to ```PokeDex.py``` or follow these steps:  
+###### :snake: Please make sure that python is installed, [added to path](https://datatofish.com/add-python-to-windows-path/) and that pip is running correctly before you run the app this way for the first time!  
 
 1. open a command prompt (just search for ```cmd``` in the windows start menu)
 2. navigate to the PokeDex folder. In my case I would use following command and press enter:
@@ -43,8 +43,8 @@ cd C:\Users\Ludo\Desktop\PokeDex
 ```shell
 python app.pyw
 ```  
-## PokeDex.exe is missing  
 
+## PokeDex.exe is missing  
 In case of the ```PokeDex.exe``` missing on your pc you have to tell your Antivirus that these files are fine.
 Check this post for further information: [My Antivirus Detected the exe as a Virus](https://github.com/pyinstaller/pyinstaller/issues/2501#issuecomment-286230354)  
 
@@ -57,12 +57,15 @@ Check this post for further information: [My Antivirus Detected the exe as a Vir
 
 ## Feature Updates:
 - [x] clear last search results
-- [ ] fix german names in pokemon description
 - [x] fix restart bug when launching app.pyw without prerequisites
 - [x] create "Log" tab for past searches + results (beta)
 - [x] return search results with sprite of the Pokémon
+- [ ] fix german names in pokemon description (partly fixed → working on preciser output)
+- [ ] let the app check for updates
+- [ ] add "caught" function
 - [ ] implement interactive redirects to evolution of the Pokémon
 - [ ] change color of the Pokémon´s type
 - [ ] create "Feedback" tab for quick feedback in app.pyw
+- [ ] create "more information" tab for more in detail information to a pokemon
 - [ ] fix various bugs (f.e. search result for "dragoran")
 - [ ] \(optional) adjust supported Pokémon to PokéOne
