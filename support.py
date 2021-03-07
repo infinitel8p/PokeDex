@@ -31,7 +31,7 @@ def Build_app():
             add_spacing(count = 2)
 
             #Optional User Input
-            add_input_text("Input", width = 415, hint = "Insert Pokémon name here", on_enter = True, callback = Start_pokemon_check, label = "")
+            add_input_text("Input", width = 415, hint = "Insert Pokémon name here", default_value = '', on_enter = True, callback = Start_pokemon_check, label = "")
             
             #Button
             add_spacing(count = 5)
@@ -54,6 +54,7 @@ def Browser():
 def Build_menu():
     #creates the menu bar
     with menu_bar("Menu Bar", parent = pokedex_version):
+        add_menu_item("Home", callback = Build_app, parent = "Menu Bar")
         with menu("Options", parent = "Menu Bar"):
             add_menu_item("Go to project page", callback = Browser, parent = "Options")
             add_menu_item("See the logs", callback = show_logger, parent = "Options")
@@ -84,6 +85,8 @@ def Clear_last_result():
         clear_drawing("logo")
         draw_image("logo", r"PokeDex.png", [115,0], [365,250])
     else:
+        with input_text("Input"):
+            default_value = ''
         #clears last search result
         clear_drawing("logo")
         draw_image("logo", r"loading.png", [115,0], [365,250])
