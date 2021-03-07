@@ -15,7 +15,7 @@ pokedex_version = "Pokedex for PokeOne v.3.1"
 def Add_dummy():
     #clears whole program
     delete_item(pokedex_version, children_only = True)
-    add_text("test", parent = pokedex_version)
+    add_text("You nuked the window. Please restart the applet", parent = pokedex_version)
     with window(pokedex_version):
         Build_menu()
     add_dummy(width=150, height=150, parent = pokedex_version)
@@ -35,7 +35,7 @@ def Build_menu(build_parent = pokedex_version):
             add_menu_item("Go to project page", callback = Browser, parent = "Options")
             add_menu_item("See the logs", callback = show_logger, parent = "Options")
             with menu("Not working yet", parent = "Options"):
-                add_menu_item("test 1", callback = Add_dummy, parent = "Not working yet")
+                add_menu_item("Nuke the Window", callback = Add_dummy, parent = "Not working yet")
 
 def Clear_last_result():
     if search_runs == []:
