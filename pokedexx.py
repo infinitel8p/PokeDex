@@ -28,11 +28,11 @@ def Search(pokemon_search_input):
                     german_name = lines.lstrip(pokemon_id)
                     full_german_names.close()
                     return german_name
-            
+
     # Create Session
     continuing = False
     input_was_english = False
-    
+
     #Open Pokémon List and Search for German Name then strip Name to have Pokémon ID
     with open(german_poke_list, 'r') as myfile:
         document_lines = myfile.read().splitlines()
@@ -41,7 +41,7 @@ def Search(pokemon_search_input):
                 indexNr = int(lines.rstrip(pokemon_search_input))
                 continuing = True
 
-    #If Name has been found set valuable information to variable        
+    #If Name has been found set valuable information to variable
     if continuing == True:
         #Output valuable information to variable
         pokemon = pokedex.get_pokemon_by_number(indexNr)
@@ -53,7 +53,7 @@ def Search(pokemon_search_input):
             bild = pokemon["sprite"]
             entwicklung = pokemon["family"]["evolutionLine"]
             stufe = pokemon["family"]["evolutionStage"]
-    
+
     #If Input was not German check in english is success
     if continuing == False:
         with open(english_poke_list, 'r') as myfile:
@@ -62,7 +62,7 @@ def Search(pokemon_search_input):
                 if pokemon_search_input in lines:
                     input_was_english = True
 
-    #If Name has been found set valuable information to variable       
+    #If Name has been found set valuable information to variable
     if input_was_english == True:
         #Output valuable information to variable
         german_name = Translator(pokemon_search_input)
@@ -76,7 +76,7 @@ def Search(pokemon_search_input):
             stufe = pokemon["family"]["evolutionStage"]
         continuing = True
 
-    #If Name has not been found filter input for next action 
+    #If Name has not been found filter input for next action
     if continuing == False:
         if pokemon_search_input == "exit":
             print("Pokédex wird geschlossen.")
@@ -91,7 +91,6 @@ def Search(pokemon_search_input):
             opener.addheaders = [('User-agent', 'Mozilla/5.0')]
             urllib.request.install_opener(opener)
             urllib.request.urlretrieve("https://raw.githubusercontent.com/infinitel8p/PokeDex/master/error_404.png", "sprite.png")
-            
             return pokemon_name,pokemon_type,pokemon_type2
 
     #Pokémon Entwichlungsstufe → STAGE
@@ -102,7 +101,7 @@ def Search(pokemon_search_input):
     elif len(entwicklung) == 3:
         stage = f"Entwicklungsstufe {german_name}: {stufe}/3)"
 
-    #Set Pokémon Information  
+    #Set Pokémon Information
     pokemon_name = f"Deu: {german_name}, Eng: {name}  -  IndexNr: {number}\n{stage}"
 
     #Download Pokemon image
@@ -130,7 +129,7 @@ def Search(pokemon_search_input):
     Rock = ["Pokémon Typ: *Gestein*\n", "Doppelter Schaden: \n - Wasser \n - Pflanze \n - Kampf \n - Boden \n - Stahl", "Halber Schaden: \n - Normal \n - Feuer \n - Gift \n - Flug", "Kein Schaden:\n", "Gestein-Pokémon erleiden keinen Schaden\nim Sandsturm. Außerdem erhöht sich deren \nSpezial - Verteidigung um 50%, wenn ein Sandsturm\nherrscht."]
     Steel = ["Pokémon Typ: *Stahl*\n", "Doppelter Schaden: \n - Feuer \n - Kampf \n - Boden", "Halber Schaden: \n - Normal \n - Pflanze \n - Eis \n - Flug \n - Psycho \n - Käfer \n - Gestein \n - Drache \n - Stahl \n - Fee", "Kein Schaden: \n - Gift\n", "Stahl-Pokémon erleiden keinen Schaden durch \nSandsturm. Weiterhin können sie durch Toxin \nund Giftspitzen nicht vergiftet werden."]
     Water = ["Pokémon Typ: *Wasser*\n", "Doppelter Schaden: \n - Pflanze \n - Elektro", "Halber Schaden: \n - Feuer \n - Wasser \n - Eis \n - Stahl", "Kein Schaden:\n", "k.A."]    
-    
+
     length = len(types)
 
     if length == 1:
@@ -146,7 +145,7 @@ def Search(pokemon_search_input):
             typus = Dark
             pokemon_type = f"\n{typus[0]}\n{typus[1]}\n{typus[2]}\n{typus[3]}\nEffekt: {typus[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2          
+            return pokemon_name,pokemon_type,pokemon_type2
         if types[0] == "Dragon":
             typus = Dragon
             pokemon_type = f"\n{typus[0]}\n{typus[1]}\n{typus[2]}\n{typus[3]}\nEffekt: {typus[4]}"
@@ -242,7 +241,7 @@ def Search(pokemon_search_input):
             pokemon_type = f"\n{typus[0]}\n{typus[1]}\n{typus[2]}\n{typus[3]}\nEffekt: {typus[4]}\n\n"
         if types[0] == "Dark":
             typus = Dark
-            pokemon_type = f"\n{typus[0]}\n{typus[1]}\n{typus[2]}\n{typus[3]}\nEffekt: {typus[4]}\n\n"       
+            pokemon_type = f"\n{typus[0]}\n{typus[1]}\n{typus[2]}\n{typus[3]}\nEffekt: {typus[4]}\n\n"
         if types[0] == "Dragon":
             typus = Dragon
             pokemon_type = f"\n{typus[0]}\n{typus[1]}\n{typus[2]}\n{typus[3]}\nEffekt: {typus[4]}\n\n"
@@ -292,7 +291,7 @@ def Search(pokemon_search_input):
             typus = Water
             pokemon_type = f"\n{typus[0]}\n{typus[1]}\n{typus[2]}\n{typus[3]}\nEffekt: {typus[4]}\n\n"
 
-                    
+
         if types[1] == "Bug":
             typus2 = Bug
             pokemon_type2 = f"\n{typus2[0]}\n{typus2[1]}\n{typus2[2]}\n{typus2[3]}\nEffekt: {typus2[4]}"
@@ -300,7 +299,7 @@ def Search(pokemon_search_input):
         if types[1] == "Dark":
             typus2 = Dark
             pokemon_type2 = f"\n{typus2[0]}\n{typus2[1]}\n{typus2[2]}\n{typus2[3]}\nEffekt: {typus2[4]}"
-            return  pokemon_name,pokemon_type,pokemon_type2           
+            return  pokemon_name,pokemon_type,pokemon_type2
         if types[1] == "Dragon":
             typus2 = Dragon
             pokemon_type2 = f"\n{typus2[0]}\n{typus2[1]}\n{typus2[2]}\n{typus2[3]}\nEffekt: {typus2[4]}"
