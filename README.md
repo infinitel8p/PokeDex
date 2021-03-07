@@ -1,4 +1,4 @@
-# PokeDex - v.3.0.1
+# PokeDex - v.3.1
 ### This PokeDex helps you pick the best possible attack against most Pokémon
 Ever found yourself in a fight against a Pokémon and wondering which attack would be the most effective? Check exactly that with this specialized version of the Pokedex!
 
@@ -20,8 +20,9 @@ v.1.5.1 : Fixed german name output when searching in enlish (still somewhat brok
 v.1.6 : implemented log of last searches  
 v.2.1.1 : Added images of searched Pokémon to the search results  
 v.3.0.1 : changed project to ```.exe```  
+v.3.1 : moved functions to ```support.py``` and fixed a error which caused the output to add up
 
-:zzz: v.3.1 : → currently working on "more information" tab for more in detail information to a pokemon
+:zzz: v.3.2 : → currently working on "more information" tab for more in detail information to a pokemon
 
 ## How to setup:  
 
