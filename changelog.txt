@@ -3,4 +3,4 @@ v.3.1 06.03.2021 : - fixed the name output
 v.3.2 06.03.2021 : - fixed bug with search results still stacking
                    - started implementing Menus
                    - added loading screen
-                   moved functions to support.py
+                   - moved functions to support.py
