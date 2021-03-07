@@ -37,11 +37,11 @@ def Build_app():
             add_spacing(count = 5)
             add_button("Search", callback = Start_pokemon_check)
             add_same_line()
-            add_button("Clear", callback = Clear_last_result)
+            add_button("Clear", callback = Clear_last_result, tip = "Delete the last\n search output.")
             add_spacing(count = 5)
         
         #place the image inside the space "logo"
-        draw_image("logo", r"PokeDex.png", [115,0], [365,250]) #padding 25
+        draw_image("logo", r"PokeDex.png", [115,0], [365,250], tag = "Pokemon") #padding 25
     
 def Browser():
     #opens chrome and navigates to project page
@@ -58,21 +58,27 @@ def Build_menu():
         with menu("Options", parent = "Menu Bar"):
             add_menu_item("Go to project page", callback = Browser, parent = "Options")
             add_menu_item("See the logs", callback = show_logger, parent = "Options")
-            with menu("Not working yet", parent = "Options"):
-                add_menu_item("Nuke the Window", callback = Clear_app, parent = "Not working yet")
-                add_menu_item("Rebuild the Window", callback = Build_app, parent = "Not working yet")
-        add_menu_item("More Information", callback = Build_more_information, parent = "Menu Bar")
+            with menu("Beta functions", label = "Not working yet", parent = "Options"):
+                add_menu_item("More information", callback = Build_more_information, parent = "Beta functions")
+                add_menu_item("Nuke the Window", callback = Clear_app, parent = "Beta functions")
+                add_menu_item("Rebuild the Window", callback = Build_app, parent = "Beta functions")
         add_menu_item("Help", callback = Build_help, parent = "Menu Bar")
 
 def Build_help():
+    #!!!WORKS WITH CHILDS - STILL NOT FULLY TESTED
     Clear_app()
     add_child("help window", parent = pokedex_version, border = False)
-    add_text("This is the help window. We are still working on it", parent = "help window")
+    add_text("[Version] " + pokedex_version, parent = "help window", color = [200, 100, 100])
+    add_spacing(count = 2, parent = "help window")
+    add_text("With this app you can search for the opposing Pokémon\nto see which type of attack is the most effective\nagainst it.\nIf the Pokémon has two types you get both them in\nthe output. You may have to check if the Pokémon's\nsecond type makes a attack type ineffective again.", parent = "help window")
+    add_spacing(count = 5, parent = "help window")
+    add_button("Go back to Search", callback = Build_app, parent = "help window")
 
 def Build_more_information():
-    delete_item(pokedex_version, children_only = True)
-    Build_menu()
-    add_text("This is the more information window. We are still working on it", parent = pokedex_version)
+    Clear_app()
+    add_text("This is the 'more information' window.\nIt is part of the app that has yet to be finished.", parent = pokedex_version, tip = "Nothing you can\nreally do here yet.")
+    add_spacing(count = 5, parent = pokedex_version)
+    add_button("Go back to Search", callback = Build_app, parent = pokedex_version)
 
 def Clear_app():
     #clears whole program
@@ -85,8 +91,6 @@ def Clear_last_result():
         clear_drawing("logo")
         draw_image("logo", r"PokeDex.png", [115,0], [365,250])
     else:
-        with input_text("Input"):
-            default_value = ''
         #clears last search result
         clear_drawing("logo")
         draw_image("logo", r"loading.png", [115,0], [365,250])
