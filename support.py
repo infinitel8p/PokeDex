@@ -34,21 +34,23 @@ def Build_menu(build_parent = pokedex_version):
         with menu("Options"):
             add_menu_item("Go to project page", callback = Browser, parent = "Options")
             add_menu_item("See the logs", callback = show_logger, parent = "Options")
-            add_menu_item("Delete last search result", callback = Delete_last_result, parent = "Options")
             with menu("Not working yet", parent = "Options"):
                 add_menu_item("test 1", callback = Add_dummy, parent = "Not working yet")
 
+def Clear_last_result():
+    if search_runs == []:
+        clear_drawing("logo")
+        draw_image("logo", r"PokeDex.png", [115,0], [365,250])
+    else:
+        Delete_last_result()
+        clear_drawing("logo")
+        draw_image("logo", r"PokeDex.png", [115,0], [365,250])
+
 def Delete_last_result():
     #clears last search result
-    if search_runs == []:
-        #runs only with the first search (when search_runs[-1] does not exist)
-        add_separator(parent = pokedex_version)
-        add_spacing(count = 2, parent = pokedex_version)
-    else:
-        #hide last search result
-        clear_drawing("logo")
-        draw_image("logo", r"loading.png", [115,0], [365,250])
-        delete_item(search_runs[-1])
+    clear_drawing("logo")
+    draw_image("logo", r"loading.png", [115,0], [365,250])
+    delete_item(search_runs[-1])
 
 def Start_pokemon_check():
     #main function - handles pokemon search    
@@ -56,29 +58,35 @@ def Start_pokemon_check():
     input_value = input_value.lower()
     input_value = input_value.capitalize()
     
-    global last_search
-    if input_value != last_search:
-        last_search = input_value
-        #prepaire for output
-        Delete_last_result()
-        #get result from search function in pokedexx and set them to a single variable
-        pokemon_name, pokemon_type, pokemon_type2 = Search(input_value)
-        search_result = pokemon_name + pokemon_type + pokemon_type2
-        #append search_result to the search_runs array and display it
-        search_runs.append(search_result)
-        clear_drawing("logo")
-        draw_image("logo", r"sprite.png", [115,0], [365,250]) #padding 25
-        add_text(search_runs[-1], parent = pokedex_version)
-
-        #stuff for logs
-        error_output = search_result.replace(input_value, '')
-        error_text = "Pokémon '' konnte nicht gefunden werden!"
-        if error_output == error_text:
-            log_error(input_value)
-        else:
-            log_info(input_value)
-            #log_debug("Debug Message")
-            #log_warning("Warning Message")
-
+    #global last_search
+    #if input_value != last_search:
+    last_search = input_value
+    #prepaire for output
+    if search_runs == []:
+        #runs only with the first search (when search_runs[-1] does not exist)
+        add_separator(parent = pokedex_version)
+        add_spacing(count = 2, parent = pokedex_version)
     else:
-        log_error(f"recurring input detected: {input_value}")
+        #hide last search result
+        Delete_last_result()
+    #get result from search function in pokedexx and set them to a single variable
+    pokemon_name, pokemon_type, pokemon_type2 = Search(input_value)
+    search_result = pokemon_name + pokemon_type + pokemon_type2
+    #append search_result to the search_runs array and display it
+    search_runs.append(search_result)
+    clear_drawing("logo")
+    draw_image("logo", r"sprite.png", [115,0], [365,250]) #padding 25
+    add_text(search_runs[-1], parent = pokedex_version)
+
+    #stuff for logs
+    error_output = search_result.replace(input_value, '')
+    error_text = "Pokémon '' konnte nicht gefunden werden!"
+    if error_output == error_text:
+        log_error(input_value)
+    else:
+        log_info(input_value)
+        #log_debug("Debug Message")
+        #log_warning("Warning Message")
+
+    #else:
+     #   log_error(f"recurring input detected: {input_value}")
