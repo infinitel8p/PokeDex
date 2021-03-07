@@ -39,7 +39,9 @@ with window(pokedex_version, width = 520, height = 900):
     
     #Button
     add_spacing(count = 5)
-    add_button("Start", callback = Start_pokemon_check)
+    add_button("Search", callback = Start_pokemon_check)
+    add_same_line()
+    add_button("Clear", callback = Clear_last_result)
     add_spacing(count = 5)
 
 #place the image inside the space "logo"
