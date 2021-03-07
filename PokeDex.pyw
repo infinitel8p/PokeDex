@@ -2,7 +2,7 @@
 import os
 import sys
 import time
-import logging   
+import logging
 from dearpygui.core import *
 from dearpygui.simple import *
 from support import *
