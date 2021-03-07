@@ -7,6 +7,7 @@ from dearpygui.core import *
 from dearpygui.simple import *
 from support import *
 
+
 log_output = open("log.txt", "a")
 logging.basicConfig(level=logging.DEBUG)
 
