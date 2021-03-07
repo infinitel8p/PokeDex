@@ -14,8 +14,10 @@ important files :   - PokeDex.pyw
 
 v.3.1 06.03.2021 : - fixed the name output
                    - added github page to credits tab
-v.3.2 07.03.2021 : - fixed bug with search results still stacking
+                   - fixed bug with search results still stacking
                    - started implementing Menus
                    - added loading screen
                    - moved functions to support.py
                    - added button to clear last result
+v.3.2 07.03.2021 : - changed search box style → search can be started with enter
+                   - 
