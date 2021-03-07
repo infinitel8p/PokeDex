@@ -1,10 +1,10 @@
 import os
+import sys
 from pokedex import pokedex
 import requests
 from bs4 import BeautifulSoup
 import urllib.request
 from urllib.request import Request, urlopen
-import sys
 
 pokedex = pokedex.Pokedex(version='v1', user_agent='ExampleApp (https://example.com, v2.0.1)')
 
@@ -25,7 +25,7 @@ def Search(pokemon_search_input):
             german_lines = full_german_names.read().splitlines()
             for lines in german_lines:
                 if pokemon_id in lines:
-                    german_name = lines.rstrip(pokemon_id)
+                    german_name = lines.lstrip(pokemon_id)
                     full_german_names.close()
                     return german_name
             
@@ -61,6 +61,7 @@ def Search(pokemon_search_input):
             for lines in document_lines:
                 if pokemon_search_input in lines:
                     input_was_english = True
+
     #If Name has been found set valuable information to variable       
     if input_was_english == True:
         #Output valuable information to variable
@@ -95,11 +96,11 @@ def Search(pokemon_search_input):
 
     #Pokémon Entwichlungsstufe → STAGE
     if len(entwicklung) == 1:
-        stage = f"Entwicklungsstufe {pokemon_search_input}: {stufe}/1)"
+        stage = f"Entwicklungsstufe {german_name}: {stufe}/1)"
     elif len(entwicklung) == 2:
-        stage = f"Entwicklungsstufe {pokemon_search_input}: {stufe}/2)"
+        stage = f"Entwicklungsstufe {german_name}: {stufe}/2)"
     elif len(entwicklung) == 3:
-        stage = f"Entwicklungsstufe {pokemon_search_input}: {stufe}/3)"
+        stage = f"Entwicklungsstufe {german_name}: {stufe}/3)"
 
     #Set Pokémon Information  
     pokemon_name = f"Deu: {german_name}, Eng: {name}  -  IndexNr: {number}\n{stage}"
@@ -128,7 +129,7 @@ def Search(pokemon_search_input):
     Psychic =["Pokémon Typ: *Psycho*\n", "Doppelter Schaden: \n - Käfer \n - Geist \n - Unlicht", "Halber Schaden: \n - Kampf \n - Psycho", "Kein Schaden:\n", "k.A."]
     Rock = ["Pokémon Typ: *Gestein*\n", "Doppelter Schaden: \n - Wasser \n - Pflanze \n - Kampf \n - Boden \n - Stahl", "Halber Schaden: \n - Normal \n - Feuer \n - Gift \n - Flug", "Kein Schaden:\n", "Gestein-Pokémon erleiden keinen Schaden\nim Sandsturm. Außerdem erhöht sich deren \nSpezial - Verteidigung um 50%, wenn ein Sandsturm\nherrscht."]
     Steel = ["Pokémon Typ: *Stahl*\n", "Doppelter Schaden: \n - Feuer \n - Kampf \n - Boden", "Halber Schaden: \n - Normal \n - Pflanze \n - Eis \n - Flug \n - Psycho \n - Käfer \n - Gestein \n - Drache \n - Stahl \n - Fee", "Kein Schaden: \n - Gift\n", "Stahl-Pokémon erleiden keinen Schaden durch \nSandsturm. Weiterhin können sie durch Toxin \nund Giftspitzen nicht vergiftet werden."]
-    Water = ["Pokémon Typ: *Wasser*\n", "Doppelter Schaden: \n - Pflanze \n - Elektro", "Halber Schaden: \n - Feuer \n - Wasser \n - Eis \n-Stahl", "Kein Schaden:\n", "k.A."]    
+    Water = ["Pokémon Typ: *Wasser*\n", "Doppelter Schaden: \n - Pflanze \n - Elektro", "Halber Schaden: \n - Feuer \n - Wasser \n - Eis \n - Stahl", "Kein Schaden:\n", "k.A."]    
     
     length = len(types)
 
