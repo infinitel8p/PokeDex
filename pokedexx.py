@@ -1,10 +1,10 @@
 import os
+import sys
 from pokedex import pokedex
 import requests
 from bs4 import BeautifulSoup
 import urllib.request
 from urllib.request import Request, urlopen
-import sys
 
 pokedex = pokedex.Pokedex(version='v1', user_agent='ExampleApp (https://example.com, v2.0.1)')
 
