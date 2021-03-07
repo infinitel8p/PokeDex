@@ -91,6 +91,12 @@ def Clear_last_result():
         clear_drawing("logo")
         draw_image("logo", r"PokeDex.png", [115,0], [365,250])
 
+def Delete_last_result():
+    #clears last search result
+    clear_drawing("logo")
+    draw_image("logo", r"loading.png", [115,0], [365,250])
+    delete_item(search_runs[-1])
+
 def Start_pokemon_check():
     #main function - handles pokemon search    
     input_value = get_value("Input")
@@ -104,7 +110,9 @@ def Start_pokemon_check():
         add_spacing(count = 2, parent = pokedex_version)
     else:
         #hide last search result
-        Delete_last_result()
+        clear_drawing("logo")
+        draw_image("logo", r"loading.png", [115,0], [365,250])
+        delete_item(search_runs[-1])
     #get result from search function in pokedexx and set them to a single variable
     pokemon_name, pokemon_type, pokemon_type2 = Search(input_value)
     search_result = pokemon_name + pokemon_type + pokemon_type2
