@@ -2,7 +2,7 @@
 import os
 import sys
 import time
-import logging   
+import logging
 from dearpygui.core import *
 from dearpygui.simple import *
 from pokedexx import *
@@ -18,7 +18,7 @@ def Build_app():
     finally:
         with window(pokedex_version, width = 520, height = 900):
             set_window_pos(pokedex_version, 0, 0)
-            
+
             #add menu to main window
             Build_menu()
 
@@ -32,17 +32,17 @@ def Build_app():
 
             #Optional User Input
             add_input_text("Input", width = 415, hint = "Insert Pokémon name here", default_value = '', on_enter = True, callback = Start_pokemon_check, label = "")
-            
+
             #Button
             add_spacing(count = 5)
             add_button("Search", callback = Start_pokemon_check)
             add_same_line()
             add_button("Clear", callback = Clear_last_result, tip = "Delete the last\n search output.")
             add_spacing(count = 5)
-        
+
         #place the image inside the space "logo"
         draw_image("logo", r"PokeDex.png", [115,0], [365,250], tag = "Pokemon") #padding 25
-    
+
 def Browser():
     #opens chrome and navigates to project page
     try:
@@ -105,11 +105,11 @@ def Delete_last_result():
     delete_item(search_runs[-1])
 
 def Start_pokemon_check():
-    #main function - handles pokemon search    
+    #main function - handles pokemon search
     input_value = get_value("Input")
     input_value = input_value.lower()
     input_value = input_value.capitalize()
-    
+
     #prepaire for output
     if search_runs == []:
         #runs only with the first search (when search_runs[-1] does not exist)
