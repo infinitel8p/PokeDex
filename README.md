@@ -1,8 +1,12 @@
 # PokeDex - v.3.2
 
-![Codacy Badge](https://api.codacy.com/project/badge/Grade/15b2db02581044d19df555befd7fff14) 
-![Codacy Badge2](https://img.shields.io/codacy/grade/15b2db02581044d19df555befd7fff14)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/infinitel8p/PokeDex) 
+![Codacy Badge](https://img.shields.io/codacy/grade/15b2db02581044d19df555befd7fff14)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/infinitel8p/PokeDex)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/infinitel8p/PokeDex)
+![Github last commit](https://img.shields.io/github/last-commit/infinitel8p/PokeDex)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/infinitel8p/pokedex)
+![Github license](https://img.shields.io/github/license/infinitel8p/pokedex)
+![Discord Widget](https://img.shields.io/discord/751084847555936408)
 
 ### This PokeDex helps you pick the best possible attack against most Pokémon
 Ever found yourself in a fight against a Pokémon and wondering which attack would be the most effective? Check exactly that with this specialized version of the Pokedex!
