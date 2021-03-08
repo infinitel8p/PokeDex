@@ -1,6 +1,5 @@
 from pokedex import pokedex
 import urllib.request
-from urllib.request import urlopen
 
 pokedex = pokedex.Pokedex(version='v1', user_agent='ExampleApp (https://example.com, v2.0.1)')
 
