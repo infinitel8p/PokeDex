@@ -10,6 +10,10 @@ from pokedexx import *
 search_runs = []
 last_search = ""
 pokedex_version = "Pokedex for PokeOne v.3.1"
+#Language for home
+german_app_language = ["Suche nach Pokémon um Informationen zu bekommen!", "Pokémon Namen hier einfügen", "Suchen", "Löschen", "Löscht das letzte\nSuchergebnis."]
+english_app_language = ["Search for Pokémon to get information!", "Insert Pokémon name here", "Search", "Clear", "Deletes the last\nsearch output."]
+current_languge = english_app_language
 
 #callback functions
 def Build_app():
@@ -18,28 +22,22 @@ def Build_app():
     finally:
         with window(pokedex_version, width = 520, height = 900):
             set_window_pos(pokedex_version, 0, 0)
-
             #add menu to main window
             Build_menu()
-
             #image logo
             add_drawing("logo", width=520, height=250) #create some space for the image
             add_separator()
-
             add_spacing(count = 5)
-            add_text("Search for Pokemon to get your results!", color = [200, 100, 100])
+            add_text(current_languge[0], color = [200, 100, 100])
             add_spacing(count = 2)
-
             #Optional User Input
-            add_input_text("Input", width = 415, hint = "Insert Pokémon name here", default_value = '', on_enter = True, callback = Start_pokemon_check, label = "")
-
+            add_input_text("Input", width = 415, hint = current_languge[1], default_value = '', on_enter = True, callback = Start_pokemon_check, label = "")
             #Button
             add_spacing(count = 5)
-            add_button("Search", callback = Start_pokemon_check)
+            add_button(current_languge[2], callback = Start_pokemon_check)
             add_same_line()
-            add_button("Clear", callback = Clear_last_result, tip = "Delete the last\n search output.")
+            add_button(current_languge[3], callback = Clear_last_result, tip = current_languge[4])
             add_spacing(count = 5)
-
         #place the image inside the space "logo"
         draw_image("logo", r"PokeDex.png", [115,0], [365,250], tag = "Pokemon") #padding 25
 
@@ -55,14 +53,19 @@ def Build_menu():
     #creates the menu bar
     with menu_bar("Menu Bar", parent = pokedex_version):
         add_menu_item("Home", callback = Build_app, parent = "Menu Bar")
-        with menu("Options", parent = "Menu Bar"):
-            add_menu_item("Go to project page", callback = Browser, parent = "Options")
-            add_menu_item("See the logs", callback = show_logger, parent = "Options")
-            with menu("Beta functions", label = "Not working yet", parent = "Options"):
+        add_menu_item("test", label = "  ", enabled = False)
+        with menu("More", parent = "Menu Bar"):
+            add_menu_item("Go to project page", callback = Browser, parent = "More")
+            add_menu_item("See the logs", callback = show_logger, parent = "More")
+            with menu("Beta functions", label = "Not working yet", parent = "More"):
                 add_menu_item("More information", callback = Build_more_information, parent = "Beta functions")
                 add_menu_item("Nuke the Window", callback = Clear_app, parent = "Beta functions")
                 add_menu_item("Rebuild the Window", callback = Build_app, parent = "Beta functions")
         add_menu_item("Help", callback = Build_help, parent = "Menu Bar")
+        with menu("Settings", parent = "Menu Bar"):
+            with  menu("Language", parent = "Settings"):
+                add_menu_item("German", callback = Change_home_language_to_german, parent = "Language")
+                add_menu_item("English", callback = Change_home_language_to_english, parent = "Language")
 
 def Build_help():
     #!!!WORKS WITH CHILDS - STILL NOT FULLY TESTED
@@ -79,6 +82,16 @@ def Build_more_information():
     add_text("This is the 'more information' window.\nIt is part of the app that has yet to be finished.", parent = pokedex_version, tip = "Nothing you can\nreally do here yet.")
     add_spacing(count = 5, parent = pokedex_version)
     add_button("Go back to Search", callback = Build_app, parent = pokedex_version)
+
+def Change_home_language_to_english():
+    global current_languge
+    current_languge = english_app_language
+    Build_app()
+
+def Change_home_language_to_german():
+    global current_languge
+    current_languge = german_app_language
+    Build_app()
 
 def Clear_app():
     #clears whole program
@@ -109,7 +122,6 @@ def Start_pokemon_check():
     input_value = get_value("Input")
     input_value = input_value.lower()
     input_value = input_value.capitalize()
-
     #prepaire for output
     if search_runs == []:
         #runs only with the first search (when search_runs[-1] does not exist)
@@ -128,7 +140,6 @@ def Start_pokemon_check():
     clear_drawing("logo")
     draw_image("logo", r"sprite.png", [115,0], [365,250]) #padding 25
     add_text(search_runs[-1], parent = pokedex_version)
-
     #stuff for logs
     error_output = search_result.replace(input_value, '')
     error_text = "Pokémon '' konnte nicht gefunden werden!"
