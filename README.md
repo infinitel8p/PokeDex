@@ -1,8 +1,6 @@
 # PokeDex - v.3.2
 
-<p align="center">
-  <b>![Codacy Badge](https://img.shields.io/codacy/grade/15b2db02581044d19df555befd7fff14)</b>
-</p>
+![Codacy Badge](https://img.shields.io/codacy/grade/15b2db02581044d19df555befd7fff14)
 ![Codacy Badge](https://img.shields.io/codacy/grade/15b2db02581044d19df555befd7fff14)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/infinitel8p/PokeDex)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/infinitel8p/PokeDex)
