@@ -47,7 +47,7 @@ def Search(pokemon_search_input):
         pokemon = pokedex.get_pokemon_by_number(indexNr)
         for pokemon in pokemon:
             german_name = pokemon_search_input
-            name = pokemon["name"]
+            english_name = pokemon["name"]
             types = pokemon["types"]
             number = pokemon["number"]
             bild = pokemon["sprite"]
@@ -68,7 +68,7 @@ def Search(pokemon_search_input):
         german_name = Translator(pokemon_search_input)
         pokemon = pokedex.get_pokemon_by_name(pokemon_search_input)
         for pokemon in pokemon:
-            name = pokemon["name"]
+            english_name = pokemon["name"]
             types = pokemon["types"]
             number = pokemon["number"]
             bild = pokemon["sprite"]
@@ -76,13 +76,31 @@ def Search(pokemon_search_input):
             stufe = pokemon["family"]["evolutionStage"]
         continuing = True
 
+    #Check selected language (gets written in support.py to settings.txt)
+    #The check has to be done here because else it would be referencing variables before assignment
+    last_language = open("settings.txt", "r")
+    if last_language.read() == "english":
+        current_languge = "english"
+        last_language.close()
+    last_language = open("settings.txt", "r")
+    if last_language.read() == "german":
+        current_languge = "german"
+        last_language.close()
+    #set pokemon information language to selected language
+    english_language = [f"Pokémon '{pokemon_search_input}' could not be found!", f"Evolution {pokemon_search_input}: {stufe}"]
+    german_language = [f"Pokémon '{pokemon_search_input}' konnte nicht gefunden werden!", f"Entwicklungsstufe {pokemon_search_input}: {stufe}"]
+    if current_languge == "english":
+        language = english_language
+    if current_languge == "german":
+        language = german_language
+
     #If Name has not been found filter input for next action
     if continuing == False:
-        if pokemon_search_input == "exit":
-            print("Pokédex wird geschlossen.")
+        if pokemon_search_input == "Exit":
+            print("Closing Pokédex.")
             exit()
         else:
-            pokemon_name = str(f"Pokémon '{pokemon_search_input}' konnte nicht gefunden werden!")
+            pokemon_name = language[0]
             pokemon_type = ""
             pokemon_type2 = ""
 
@@ -95,14 +113,17 @@ def Search(pokemon_search_input):
 
     #Pokémon Entwichlungsstufe → STAGE
     if len(entwicklung) == 1:
-        stage = f"Entwicklungsstufe {german_name}: {stufe}/1)"
+        stage = language[1] + "/1)"
     elif len(entwicklung) == 2:
-        stage = f"Entwicklungsstufe {german_name}: {stufe}/2)"
+        stage = language[1] + "/2)"
     elif len(entwicklung) == 3:
-        stage = f"Entwicklungsstufe {german_name}: {stufe}/3)"
+        stage = language[1] + "/3)"
 
     #Set Pokémon Information
-    pokemon_name = f"Deu: {german_name}, Eng: {name}  -  IndexNr: {number}\n{stage}"
+    #add pokemon_name information to the language arrays now that the variable stage has been defined
+    english_language.insert(3, f"Ger: {german_name}, Eng: {english_name}  -  IndexNr: {number}\n{stage}")
+    german_language.insert(3, f"Deu: {german_name}, Eng: {english_name}  -  IndexNr: {number}\n{stage}")
+    pokemon_name = language[2]
 
     #Download Pokemon image
     opener = urllib.request.build_opener()
@@ -128,7 +149,7 @@ def Search(pokemon_search_input):
     Psychic =["Pokémon Typ: *Psycho*\n", "Doppelter Schaden: \n - Käfer \n - Geist \n - Unlicht", "Halber Schaden: \n - Kampf \n - Psycho", "Kein Schaden:\n", "k.A."]
     Rock = ["Pokémon Typ: *Gestein*\n", "Doppelter Schaden: \n - Wasser \n - Pflanze \n - Kampf \n - Boden \n - Stahl", "Halber Schaden: \n - Normal \n - Feuer \n - Gift \n - Flug", "Kein Schaden:\n", "Gestein-Pokémon erleiden keinen Schaden\nim Sandsturm. Außerdem erhöht sich deren \nSpezial - Verteidigung um 50%, wenn ein Sandsturm\nherrscht."]
     Steel = ["Pokémon Typ: *Stahl*\n", "Doppelter Schaden: \n - Feuer \n - Kampf \n - Boden", "Halber Schaden: \n - Normal \n - Pflanze \n - Eis \n - Flug \n - Psycho \n - Käfer \n - Gestein \n - Drache \n - Stahl \n - Fee", "Kein Schaden: \n - Gift\n", "Stahl-Pokémon erleiden keinen Schaden durch \nSandsturm. Weiterhin können sie durch Toxin \nund Giftspitzen nicht vergiftet werden."]
-    Water = ["Pokémon Typ: *Wasser*\n", "Doppelter Schaden: \n - Pflanze \n - Elektro", "Halber Schaden: \n - Feuer \n - Wasser \n - Eis \n - Stahl", "Kein Schaden:\n", "k.A."]    
+    Water = ["Pokémon Typ: *Wasser*\n", "Doppelter Schaden: \n - Pflanze \n - Elektro", "Halber Schaden: \n - Feuer \n - Wasser \n - Eis \n - Stahl", "Kein Schaden:\n", "k.A."]
 
     length = len(types)
 
