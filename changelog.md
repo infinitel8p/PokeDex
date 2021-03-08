@@ -15,7 +15,7 @@ important files:
 - settings.txt
 
 
-##v.3.1 06.03.2021  
+## v.3.1 06.03.2021  
 - fixed the name output  
 - added github page to credits tab  
 - fixed bug with search results still stacking  
@@ -23,8 +23,8 @@ important files:
 - added loading screen  
 - added button to clear last result  
 
-##v.3.1.1 07.03.2021  
+## v.3.1.1 07.03.2021  
 - changed search box style → search can be started with enter  
 
-##v.3.2 08.03.2021 :  
+## v.3.2 08.03.2021 :  
 - added multiple languages (english & german for now)  
