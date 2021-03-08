@@ -1,5 +1,3 @@
-import os
-import sys
 import logging
 from dearpygui.core import *
 from dearpygui.simple import *
