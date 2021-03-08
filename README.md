@@ -1,4 +1,5 @@
 # PokeDex - v.3.2
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/db334f9df56b4bd9bdc29bd06cbf3171)](https://www.codacy.com/gh/infinitel8p/PokeDex/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=infinitel8p/PokeDex&amp;utm_campaign=Badge_Grade)
 ### This PokeDex helps you pick the best possible attack against most Pokémon
 Ever found yourself in a fight against a Pokémon and wondering which attack would be the most effective? Check exactly that with this specialized version of the Pokedex!
 
