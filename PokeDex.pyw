@@ -1,7 +1,5 @@
-#Precheck for all dependecies
 import os
 import sys
-import time
 import logging
 from dearpygui.core import *
 from dearpygui.simple import *
