@@ -26,5 +26,5 @@ important files:
 ## v.3.1.1 07.03.2021
 - changed search box style → search can be started with enter
 
-## v.3.2 08.03.2021 :
+## v.3.2 08.03.2021
 - added multiple languages (english & german for now)
