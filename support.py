@@ -9,7 +9,7 @@ from pokedexx import *
 
 search_runs = []
 last_search = ""
-pokedex_version = "Pokedex for PokeOne v.3.1"
+pokedex_version = "Pokedex for PokeOne v.3.2"
 
 #Set language on startup
 try:
