@@ -2,7 +2,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![Codacy Badge](https://img.shields.io/codacy/grade/15b2db02581044d19df555befd7fff14)](https://github.com/infinitel8p/PokeDex)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/infinitel8p/PokeDex)](https://github.com/infinitel8p/PokeDex)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/infinitel8p/PokeDex)](https://github.com/infinitel8p/PokeDex/releases/tag/v.3.2)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/infinitel8p/PokeDex)](https://github.com/infinitel8p/PokeDex/releases)
 [![Github last commit](https://img.shields.io/github/last-commit/infinitel8p/PokeDex)](https://github.com/infinitel8p/PokeDex/commits/master)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/infinitel8p/pokedex)](https://github.com/infinitel8p/PokeDex/issues?q=is%3Aissue+is%3Aclosed)
 [![Github license](https://img.shields.io/github/license/infinitel8p/pokedex)](https://github.com/infinitel8p/PokeDex/blob/master/LICENSE)
