@@ -20,4 +20,4 @@ v.3.1 06.03.2021 : - fixed the name output
                    - moved functions to support.py
                    - added button to clear last result
 v.3.2 07.03.2021 : - changed search box style → search can be started with enter
-                   - 
+v.3.3 08.03.2021 : - added multiple languages (english & german for now)
