@@ -24,7 +24,6 @@ def Search(pokemon_search_input):
     if current_languge == "german":
         language = german_language
 
-
     #Translate Evolution Stages to German Names
     def Translator(suchbegriff):
         with open(english_poke_list, 'r') as full_english_names:
