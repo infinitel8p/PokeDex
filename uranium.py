@@ -61,13 +61,13 @@ search_input = search_input.capitalize()
 for pokemon in Pokédex_Uranium:
     if search_input == pokemon.get_name():
         search_input = pokemon
-        print("1. " + pokemon.get_name())
-        if pokemon.get_versionen() != None:
-            print("2. " + pokemon.get_versionen().get_name())
+        print("1. " + search_input.get_name())
+        if search_input.get_versionen() != None:
+            print("2. " + search_input.get_versionen().get_name())
             version_choice = input("Willst du Version 1 oder 2 sehen?")
             if version_choice == "1":
-                print(pokemon.get_name())
+                print(search_input.get_name())
             elif version_choice == "2":
-                print(pokemon.get_versionen().get_name())
+                print(search_input.get_versionen().get_name())
             else:
                 print("Error 404")
