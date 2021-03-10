@@ -1,6 +1,10 @@
 class Pokemon ():
 
+<<<<<<< HEAD
     def __init__ (self, pokemon_name, pokemon_indexnr, pokemon_sprite, pokemon_picture, pokemon_type, pokemon_type2, pokemon_versions):
+=======
+    def __init__ (self, pokemon_name, pokemon_indexnr, pokemon_sprite, pokemon_picture, pokemon_type, pokemon_type2, pokemon_versionen = None):
+>>>>>>> 0b5c647f7adf09da40560475cfc10789fc8ad94a
         self.pokemon_name = pokemon_name
         self.pokemon_indexnr = pokemon_indexnr
         self.pokemon_sprite = pokemon_sprite
@@ -8,6 +12,7 @@ class Pokemon ():
         self.pokemon_versions = versions
         self.pokemon_type = pokemon_type
         self.pokemon_type2 = pokemon_type2
+        self.pokemon_versionen = pokemon_versionen
 
     def get_name(self):
         return self.pokemon_name
@@ -29,8 +34,15 @@ class Pokemon ():
             return self.pokemon_type
         else:
             return str(self.pokemon_type, self.pokemon_type2)
+    
+    def get_versionen(self):
+        if self.pokemon_versionen == None:
+            pass
+        else:
+            return self.pokemon_versionen
 
 
+<<<<<<< HEAD
 Orchynx = Pokemon("Orchynx", "#001", "google.de/bild", "google.de/bild2", 1, "Grass", "Steel")
 Metalynx = Pokemon("Metalynx", "#002", "google.de/bild", "google.de/bild2", 2, "Grass", "Steel")         #Mega
 Raptorch = Pokemon("Raptorch", "#003", "google.de/bild", "google.de/bild2", 1, "Fire", "Ground")
@@ -52,6 +64,18 @@ Grozard = Pokemon("Grozard", "#018", "google.de/bild", "google.de/bild2", 1, "Gr
 Terlard = Pokemon("Terlard", "#019", "google.de/bild", "google.de/bild2", 1, "Ground", "Dragon")
 
 Pokédex_Uranium = [Orchynx, Metalynx, Raptorch, Archilles, Eletux, Electruxo, Chyinmunk, Kinetmunk]
+=======
+Orchynx = Pokemon("Orchynx", "#001", "google.de/bild", "google.de/bild2", "Grass", "Steel")
+Metalynx = Pokemon("Metalynx", "#002", "google.de/bild", "google.de/bild2", "Grass", "Steel")
+Raptorch = Pokemon("Raptorch", "#003", "google.de/bild", "google.de/bild2", "Fire", "Ground")
+Archilles = Pokemon("Archilles", "#004", "google.de/bild", "google.de/bild2", "Fire", "Ground")
+Eletux = Pokemon("Eletux", "#005", "google.de/bild", "google.de/bild2", "Water", "Electric")
+Electruxo = Pokemon("Electruxo", "#006", "google.de/bild", "google.de/bild2", "Water", "Electric")
+Nuclear_Chyinmunk = Pokemon("Nuclear Chyinmunk", "#007", "google.de/bild", "google.de/bild2", "Normal", "Nuclear")
+Chyinmunk = Pokemon("Chyinmunk", "#007", "google.de/bild", "google.de/bild2", "Normal", None, Nuclear_Chyinmunk)
+
+Pokédex_Uranium = [Orchynx, Metalynx, Raptorch, Archilles, Eletux, Electruxo, Chyinmunk, Nuclear_Chyinmunk]
+>>>>>>> 0b5c647f7adf09da40560475cfc10789fc8ad94a
 
 search_input = input("Welches Pokémon möchtest du suchen? ")
 search_input = search_input.lower()
@@ -60,4 +84,4 @@ search_input = search_input.capitalize()
 for pokemon in Pokédex_Uranium:
     if search_input == pokemon.get_name():
         search_input = pokemon
-        print(search_input.get_indexnr())
+        print(search_input.get_versionen().get_name())
