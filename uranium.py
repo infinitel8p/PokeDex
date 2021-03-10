@@ -28,7 +28,7 @@ class Pokemon ():
             return str(self.pokemon_type, self.pokemon_type2)
 
     def get_versionen(self):
-        self.pokemon_versionen
+        return self.pokemon_versionen
 
 
 Orchynx = Pokemon("Orchynx", "#001", "google.de/bild", "google.de/bild2", "Grass", "Steel")
