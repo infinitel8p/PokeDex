@@ -1,8 +1,12 @@
-log.txt
-.vscode
-sprite.png
 __pycache__
+.vscode
+
+icon.ico
+sprite.png
+
 oldversion.py
 apichange.py
-icon.ico
+uranium.py
+
 settings.txt
+log.txt
