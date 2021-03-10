@@ -28,10 +28,7 @@ class Pokemon ():
             return str(self.pokemon_type, self.pokemon_type2)
 
     def get_versionen(self):
-        if self.pokemon_versionen == None:
-            pass
-        else:
-            return self.pokemon_versionen
+        self.pokemon_versionen
 
 
 Orchynx = Pokemon("Orchynx", "#001", "google.de/bild", "google.de/bild2", "Grass", "Steel")
@@ -64,13 +61,13 @@ search_input = search_input.capitalize()
 for pokemon in Pokédex_Uranium:
     if search_input == pokemon.get_name():
         search_input = pokemon
-
-        print("1. " + search_input.get_name())
-        print("2. " + search_input.get_versionen().get_name())
-version_choice = input("Willst du Version 1 oder 2 sehen?")
-if version_choice == "1":
-    print(search_input.get_name())
-elif version_choice == "2":
-    print(search_input.get_versionen().get_name())
-else:
-    print("Error 404")
+        print("1. " + pokemon.get_name())
+        if pokemon.get_versionen() != None:
+            print("2. " + pokemon.get_versionen().get_name())
+            version_choice = input("Willst du Version 1 oder 2 sehen?")
+            if version_choice == "1":
+                print(pokemon.get_name())
+            elif version_choice == "2":
+                print(pokemon.get_versionen().get_name())
+            else:
+                print("Error 404")
