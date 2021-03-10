@@ -1,5 +1,5 @@
 class Pokemon ():
-
+#test
     def __init__ (self, pokemon_name, pokemon_indexnr, pokemon_sprite, pokemon_picture, pokemon_type, pokemon_type2 = None):
         self.pokemon_name = pokemon_name
         self.pokemon_indexnr = pokemon_indexnr
