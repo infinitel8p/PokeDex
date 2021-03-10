@@ -1,4 +1,3 @@
-import os
 class Pokemon ():
 
     def __init__ (self, pokemon_name, pokemon_indexnr, pokemon_sprite, pokemon_picture, pokemon_type, pokemon_type2, pokemon_versionen = None):
@@ -332,15 +331,11 @@ search_input = input("Welches Pokémon möchtest du suchen? ")
 search_input = search_input.lower()
 search_input = search_input.capitalize()
 
-
 for pokemon in Pokédex_Uranium:
     if search_input == pokemon.get_name():
         search_input = pokemon
         print("1. " + search_input.get_name())
         if search_input.get_versionen() != None:
-            print("2. " + search_input.get_versionen().get_name())
-            os.system("cls")
-            print("1. " + search_input.get_name())
             search_input2 = search_input.get_versionen()
             if search_input.get_versionen() != None:
                 print("2. " + search_input2.get_name())
