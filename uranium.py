@@ -327,17 +327,17 @@ Pokédex_Uranium =   [Orchynx, Mega_Metalynx, Metalynx, Raptorch, Mega_Archilles
                     Garlikid, Baitatao, Leviathao, Krakanao, Lanthan, Nuclear_Actan, Actan, Gamma_Urayne, Alpha_Urayne, Urayne, Aotius, Mutios, Zephy #191-#200
                     ]
 
-search_input = input("Welches Pokémon möchtest du suchen? ")
-search_input = search_input.lower()
-search_input = search_input.capitalize()
-
-for pokemon in Pokédex_Uranium:
-    if search_input == pokemon.get_name():
-        search_input = pokemon
-        print("1. " + search_input.get_name())
-        if search_input.get_versionen() != None:
-            search_input2 = search_input.get_versionen()
-            if search_input.get_versionen() != None:
-                print("2. " + search_input2.get_name())
-                if search_input2.get_versionen() != None:
-                    print("3. " + search_input2.get_versionen().get_name())
+def Uranium_Search(pokemon_search_input):
+    for pokemon in Pokédex_Uranium:
+        if pokemon_search_input == pokemon.get_name():
+            pokemon_search_result = ("1. " + str(pokemon.get_name()))
+            if pokemon.get_versionen() == None:
+                return pokemon_search_result
+            if pokemon.get_versionen() != None:
+                pokemon_search_for_more = pokemon.get_versionen()
+                if pokemon_search_for_more != None:
+                    pokemon_search_result = pokemon_search_result + "\n2. " + str(pokemon_search_for_more.get_name())
+                    if pokemon_search_for_more.get_versionen() == None:
+                        return pokemon_search_result
+                    if pokemon_search_for_more.get_versionen() != None:
+                        return(pokemon_search_result + "\n3. " + pokemon_search_for_more.get_versionen().get_name())

@@ -1,5 +1,6 @@
 from pokedex import pokedex
 import urllib.request
+from uranium import *
 
 pokedex = pokedex.Pokedex(version='v1', user_agent='ExampleApp (https://example.com, v2.0.1)')
 

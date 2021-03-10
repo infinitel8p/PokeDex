@@ -2,6 +2,7 @@ import os
 from dearpygui.core import *
 from dearpygui.simple import *
 from pokedexx import *
+from uranium import *
 
 search_runs = []
 last_search = ""
@@ -65,8 +66,8 @@ def Browser():
         os.system("start iexplore https://github.com/infinitel8p/PokeDex/")
 
 def Build_menu():
-    english_menu_language = ["Home", "More", "Go to project page", "See the logs", "Beta functions", "Not working yet", "Information", "Nuke", "Rebuild", "Help", "Settings", "Language", "German", "English"]
-    german_menu_language = ["Home", "Mehr", "Projekt Seite", "Logs anzeigen", "Beta Funktionen", "Noch nicht fertig", "Informationen", "'Nuke'", "'Rebuild'", "Hilfe", "Einstellungen", "Sprache", "Deutsch", "Englisch"]
+    english_menu_language = ["Home", "More", "Go to project page", "See the logs", "Beta functions", "Not working yet", "Information", "Uranium", "Rebuild", "Help", "Settings", "Language", "German", "English"]
+    german_menu_language = ["Home", "Mehr", "Projekt Seite", "Logs anzeigen", "Beta Funktionen", "Noch nicht fertig", "Informationen", "Uranium", "'Rebuild'", "Hilfe", "Einstellungen", "Sprache", "Deutsch", "Englisch"]
     if current_languge == "english":
         language = english_menu_language
     if current_languge == "german":
@@ -80,7 +81,7 @@ def Build_menu():
             add_menu_item(language[3], callback = show_logger, parent = language[1])
             with menu(language[4], label = language[5], parent = language[1]):
                 add_menu_item(language[6], callback = Build_more_information, parent = language[4])
-                add_menu_item(language[7], callback = Clear_app, parent = language[4])
+                add_menu_item(language[7], callback = Build_uranium, parent = language[4])
                 add_menu_item(language[8], callback = Build_app, parent = language[4])
         add_menu_item(language[9], callback = Build_help, parent = "Menu Bar")
         with menu(language[10], parent = "Menu Bar"):
@@ -116,6 +117,46 @@ def Build_more_information():
     add_spacing(count = 5, parent = pokedex_version)
     add_button(language[2], callback = Build_app, parent = pokedex_version)
 
+def Build_uranium():
+    pass
+    """
+        if continuing == False:
+            if Uranium_Search(pokemon_search_input) != None:
+                pokemon_type = ""
+                pokemon_type2 = ""
+                return Uranium_Search(pokemon_search_input), pokemon_type, pokemon_type2
+    Clear_app()
+    english_app_language = ["Search for Pokémon to get information!", "Insert Pokémon name here", "Search", "Clear", "Deletes the last\nsearch output."]
+    german_app_language = ["Suche nach Pokémon um Informationen zu bekommen!", "Pokémon Namen hier einfügen", "Suchen", "Löschen", "Löscht das letzte\nSuchergebnis."]
+    if current_languge == "english":
+        language = english_app_language
+    if current_languge == "german":
+        language = german_app_language
+    #clears main window
+    try:
+        delete_item(pokedex_version, children_only = True)
+    finally:
+        with window(pokedex_version, width = 520, height = 900):
+            set_window_pos(pokedex_version, 0, 0)
+            #add menu to main window
+            Build_menu()
+            #image logo
+            add_drawing("logo", width=520, height=250) #create some space for the image
+            add_separator()
+            add_spacing(count = 5)
+            add_text(language[0], color = [200, 100, 100])
+            add_spacing(count = 2)
+            #Optional User Input
+            add_input_text("Input", width = 415, hint = language[1], default_value = '', on_enter = True, callback = Start_pokemon_check, label = "")
+            #Button
+            add_spacing(count = 5)
+            add_button(language[2], callback = Start_pokemon_check)
+            add_same_line()
+            add_button(language[3], callback = Clear_last_result, tip = language[4])
+            add_spacing(count = 5)
+        #place the image inside the space "logo"
+        draw_image("logo", r"PokeDex.png", [115,0], [365,250], tag = "Pokemon") #padding 25
+"""
 def Change_language_to_english():
     global current_languge
     current_languge = "english"
