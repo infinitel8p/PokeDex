@@ -32,14 +32,18 @@ class Pokemon ():
 
 
 Orchynx = Pokemon("Orchynx", "#001", "google.de/bild", "google.de/bild2", "Grass", "Steel")
-Metalynx = Pokemon("Metalynx", "#002", "google.de/bild", "google.de/bild2", "Grass", "Steel")
+Mega_Metalynx = Pokemon("Mega Metalynx", "#002", "google.de/bild", "google.de/bild2", "Grass", "Steel")
+Metalynx = Pokemon("Metalynx", "#002", "google.de/bild", "google.de/bild2", "Grass", "Steel", Mega_Metalynx)
 Raptorch = Pokemon("Raptorch", "#003", "google.de/bild", "google.de/bild2", "Fire", "Ground")
-Archilles = Pokemon("Archilles", "#004", "google.de/bild", "google.de/bild2", "Fire", "Ground")
+Mega_Archilles = Pokemon("Mega Archilles", "#004", "google.de/bild", "google.de/bild2", "Fire", "Ground")
+Archilles = Pokemon("Archilles", "#004", "google.de/bild", "google.de/bild2", "Fire", "Ground", Mega_Archilles)
 Eletux = Pokemon("Eletux", "#005", "google.de/bild", "google.de/bild2", "Water", "Electric")
-Electruxo = Pokemon("Electruxo", "#006", "google.de/bild", "google.de/bild2", "Water", "Electric")
+Mega_Electruxo = Pokemon("Mega Electruxo", "#006", "google.de/bild", "google.de/bild2", "Water", "Electric")
+Electruxo = Pokemon("Electruxo", "#006", "google.de/bild", "google.de/bild2", "Water", "Electric", Mega_Electruxo)
 Nuclear_Chyinmunk = Pokemon("Nuclear Chyinmunk", "#007", "google.de/bild", "google.de/bild2", "Normal", "Nuclear")
 Chyinmunk = Pokemon("Chyinmunk", "#007", "google.de/bild", "google.de/bild2", "Normal", None, Nuclear_Chyinmunk)
-Kinetmunk = Pokemon("Kinetmunk", "#008", "google.de/bild", "google.de/bild2", 2, "Normal", "Electric")   #Nuclear
+Nuclear_Kinetmunk = Pokemon("Kinetmunk", "#008", "google.de/bild", "google.de/bild2", 2, "Normal", "Nuclear")
+Kinetmunk = Pokemon("Kinetmunk", "#008", "google.de/bild", "google.de/bild2", 2, "Normal", "Electric", Nuclear_Kinetmunk)
 Birbie = Pokemon("Birbie", "#009", "google.de/bild", "google.de/bild2", 1, "Normal", "Flying")
 Aveden = Pokemon("Aveden", "#010", "google.de/bild", "google.de/bild2", 1, "Normal", "Flying")
 Splendifowl = Pokemon("Splendifowl", "#011", "google.de/bild", "google.de/bild2", 1, "Normal", "Flying")
@@ -52,7 +56,7 @@ Gararewl = Pokemon("Gararewl", "#017", "google.de/bild", "google.de/bild2", 1, "
 Grozard = Pokemon("Grozard", "#018", "google.de/bild", "google.de/bild2", 1, "Ground")
 Terlard = Pokemon("Terlard", "#019", "google.de/bild", "google.de/bild2", 1, "Ground", "Dragon")
 
-Pokédex_Uranium = [Orchynx, Metalynx, Raptorch, Archilles, Eletux, Electruxo, Chyinmunk, Nuclear_Chyinmunk]
+Pokédex_Uranium = [Orchynx, Mega_Metalynx, Metalynx, Raptorch, Mega_Archilles, Archilles, Eletux, Mega_Electruxo, Electruxo, Chyinmunk, Nuclear_Chyinmunk, Nuclear_Kinetmunk, Kinetmunk, Birbie, Aveden, Splendifowl, Cubbug, Cubblfly, Nimflora, Barewl, Dearewl, Gararewl, Grozard, Terlard]
 
 search_input = input("Welches Pokémon möchtest du suchen? ")
 search_input = search_input.lower()
