@@ -30,6 +30,18 @@ class Pokemon ():
     def get_versionen(self):
         return self.pokemon_versionen
 
+#Links to the folders
+#https://github.com/infinitel8p/PokeDexSprites/tree/main/Uranium/Pokemon
+#https://github.com/infinitel8p/PokeDexSprites/tree/main/Uranium/Mega
+#https://github.com/infinitel8p/PokeDexSprites/tree/main/Uranium/Nuclear
+#https://github.com/infinitel8p/PokeDexSprites/tree/main/Uranium/Sprites
+
+#Links to the pictures
+#https://github.com/infinitel8p/PokeDexSprites/blob/main/Uranium/Pokemon/001Popkas.png
+#https://github.com/infinitel8p/PokeDexSprites/blob/main/Uranium/Mega/002_1Popkas.png
+#https://github.com/infinitel8p/PokeDexSprites/blob/main/Uranium/Nuclear/N007Popkas.png
+#https://github.com/infinitel8p/PokeDexSprites/blob/main/Uranium/Sprites/Icon001.gif
+
 #001-#010
 Orchynx = Pokemon("Orchynx", "#001", "google.de/bild", "google.de/bild2", "Grass", "Steel")
 Mega_Metalynx = Pokemon("Mega Metalynx", "#002", "google.de/bild", "google.de/bild2", "Grass", "Steel")
