@@ -10,7 +10,6 @@ logging.basicConfig(level=logging.DEBUG)
 #window object settings
 set_main_window_size(536, 925)
 set_global_font_scale(1.25)
-set_theme("Red") #Background #161616
 set_style_window_padding(20, 20)
 
 #main window

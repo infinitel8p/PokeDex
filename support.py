@@ -26,6 +26,7 @@ except FileNotFoundError:
 
 #callback functions
 def Build_app():
+    set_theme("Red") #Background #161616
     english_app_language = ["Search for Pokémon to get information!", "Insert Pokémon name here", "Search", "Clear", "Deletes the last\nsearch output."]
     german_app_language = ["Suche nach Pokémon um Informationen zu bekommen!", "Pokémon Namen hier einfügen", "Suchen", "Löschen", "Löscht das letzte\nSuchergebnis."]
     if current_languge == "english":
@@ -91,6 +92,7 @@ def Build_menu():
 
 def Build_help():
     #!!!WORKS WITH CHILDS - STILL NOT FULLY TESTED
+    set_theme("Red")
     english_help_language = ["With this app you can search for the opposing Pokémon\nto see which type of attack is the most effective\nagainst it.\nIf the Pokémon has two types you get both them in\nthe output. You may have to check if the Pokémon's\nsecond type makes a attack type ineffective again.", "Go back to Search"]
     german_help_language = ["Mit dieser App kannst du nach dem gegnerischen Poké-\nmon suchen um herauszufinden, welche Attacke die\neffektivste dagegen ist.\nFalls das Pokémon zwei Typen hat, bekommst du beide\nim Suchergebnis zurück. Du musst gegebenenfalls\nüberprüfen ob der zweite Typ die effektivität\nmancher Attacken doch noch vermindert.", "Zurück zur Suche"]
     if current_languge == "english":
@@ -118,14 +120,11 @@ def Build_more_information():
     add_button(language[2], callback = Build_app, parent = pokedex_version)
 
 def Build_uranium():
-    pass
-    """
-        if continuing == False:
-            if Uranium_Search(pokemon_search_input) != None:
-                pokemon_type = ""
-                pokemon_type2 = ""
-                return Uranium_Search(pokemon_search_input), pokemon_type, pokemon_type2
+    #!!!WORKS WITH CHILDS - STILL NOT FULLY TESTED
+    set_theme("Dark Grey")
     Clear_app()
+    add_child("uranium", parent = pokedex_version, border = False)
+
     english_app_language = ["Search for Pokémon to get information!", "Insert Pokémon name here", "Search", "Clear", "Deletes the last\nsearch output."]
     german_app_language = ["Suche nach Pokémon um Informationen zu bekommen!", "Pokémon Namen hier einfügen", "Suchen", "Löschen", "Löscht das letzte\nSuchergebnis."]
     if current_languge == "english":
@@ -134,29 +133,25 @@ def Build_uranium():
         language = german_app_language
     #clears main window
     try:
-        delete_item(pokedex_version, children_only = True)
+        delete_item("uranium", children_only = True)
     finally:
-        with window(pokedex_version, width = 520, height = 900):
-            set_window_pos(pokedex_version, 0, 0)
-            #add menu to main window
-            Build_menu()
-            #image logo
-            add_drawing("logo", width=520, height=250) #create some space for the image
-            add_separator()
-            add_spacing(count = 5)
-            add_text(language[0], color = [200, 100, 100])
-            add_spacing(count = 2)
-            #Optional User Input
-            add_input_text("Input", width = 415, hint = language[1], default_value = '', on_enter = True, callback = Start_pokemon_check, label = "")
-            #Button
-            add_spacing(count = 5)
-            add_button(language[2], callback = Start_pokemon_check)
-            add_same_line()
-            add_button(language[3], callback = Clear_last_result, tip = language[4])
-            add_spacing(count = 5)
-        #place the image inside the space "logo"
-        draw_image("logo", r"PokeDex.png", [115,0], [365,250], tag = "Pokemon") #padding 25
-"""
+        #image logo
+        add_drawing("logo", width=520, height=250) #create some space for the image
+        add_separator()
+        add_spacing(count = 5)
+        add_text(language[0], color = [124, 252, 0])
+        add_spacing(count = 2)
+        #Optional User Input
+        add_input_text("Input", width = 415, hint = language[1], default_value = '', on_enter = True, callback = Start_pokemon_uranium_check, label = "")
+        #Button
+        add_spacing(count = 5)
+        add_button(language[2], callback = Start_pokemon_uranium_check)
+        add_same_line()
+        add_button(language[3], callback = Clear_last_uranium_result, tip = language[4])
+        add_spacing(count = 5)
+    #place the image inside the space "logo"
+    draw_image("logo", r"Uranium.png", [115,0], [365,250], tag = "Pokemon") #padding 25
+
 def Change_language_to_english():
     global current_languge
     current_languge = "english"
@@ -190,6 +185,18 @@ def Clear_last_result():
         delete_item(search_runs[-1])
         clear_drawing("logo")
         draw_image("logo", r"PokeDex.png", [115,0], [365,250])
+
+def Clear_last_uranium_result():
+    if search_runs == []:
+        clear_drawing("logo")
+        draw_image("logo", r"Uranium.png", [115,0], [365,250])
+    else:
+        #clears last search result
+        clear_drawing("logo")
+        draw_image("logo", r"loading.png", [115,0], [365,250])
+        delete_item(search_runs[-1])
+        clear_drawing("logo")
+        draw_image("logo", r"Uranium.png", [115,0], [365,250])
 
 def Delete_last_result():
     #clears last search result
@@ -229,3 +236,32 @@ def Start_pokemon_check():
         log_info(input_value)
         #log_debug("Debug Message")
         #log_warning("Warning Message")
+
+def Start_pokemon_uranium_check():
+    #main function - handles pokemon search
+    input_value = get_value("Input")
+    input_value = input_value.lower()
+    input_value = input_value.capitalize()
+    #prepaire for output
+    if search_runs == []:
+        #runs only with the first search (when search_runs[-1] does not exist)
+        add_separator(parent = "uranium")
+        add_spacing(count = 2, parent = "uranium")
+    else:
+        #hide last search result
+        clear_drawing("logo")
+        draw_image("logo", r"loading.png", [115,0], [365,250])
+        delete_item(search_runs[-1])
+    #get result from search function in pokedexx and set them to a single variable
+    search_result = Uranium_Search(input_value)
+    clear_drawing("logo")
+    draw_image("logo", r"sprite.png", [115,0], [365,250]) #padding 25
+    error_text = f"Pokémon '{input_value}' konnte nicht gefunden werden!"
+    if search_result == None:
+        search_runs.append(error_text)
+        add_text(search_runs[-1], parent = "uranium")
+        log_error(error_text)
+    else:
+        search_runs.append(search_result)
+        add_text(search_runs[-1], parent = "uranium")
+        log_info(input_value)
