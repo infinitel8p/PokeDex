@@ -121,8 +121,8 @@ def Build_more_information():
 
 def Build_uranium():
     #!!!WORKS WITH CHILDS - STILL NOT FULLY TESTED
-    set_theme("Dark Grey")
     Clear_app()
+    set_theme("Dark Grey")
     add_child("uranium", parent = pokedex_version, border = False)
 
     english_app_language = ["Search for Pokémon to get information!", "Insert Pokémon name here", "Search", "Clear", "Deletes the last\nsearch output."]
@@ -138,6 +138,9 @@ def Build_uranium():
         #image logo
         add_drawing("logo", width=520, height=250) #create some space for the image
         add_separator()
+        add_tab_bar("pokemon_tab_bar", parent = "uranium")
+        add_tab_button("test1", parent="pokemon_tab_bar")
+        add_tab("test", parent="pokemon_tab_bar")
         add_spacing(count = 5)
         add_text(language[0], color = [124, 252, 0])
         add_spacing(count = 2)
