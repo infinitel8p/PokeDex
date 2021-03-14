@@ -138,9 +138,6 @@ def Build_uranium():
         #image logo
         add_drawing("logo", width=520, height=250) #create some space for the image
         add_separator()
-        add_tab_bar("pokemon_tab_bar", parent = "uranium")
-        add_tab_button("test1", parent="pokemon_tab_bar")
-        add_tab("test", parent="pokemon_tab_bar")
         add_spacing(count = 5)
         add_text(language[0], color = [124, 252, 0])
         add_spacing(count = 2)
@@ -246,15 +243,24 @@ def Start_pokemon_uranium_check():
     input_value = input_value.lower()
     input_value = input_value.capitalize()
     #prepaire for output
+    set_theme("Dark 2")
+    set_theme("Dark Grey")
     if search_runs == []:
         #runs only with the first search (when search_runs[-1] does not exist)
-        add_separator(parent = "uranium")
+        add_tab_bar("pokemon_tab_bar", parent = "uranium")
+        add_tab_button("test1", parent="pokemon_tab_bar")
+        add_tab("test", parent="pokemon_tab_bar")
         add_spacing(count = 2, parent = "uranium")
     else:
         #hide last search result
         clear_drawing("logo")
         draw_image("logo", r"loading.png", [115,0], [365,250])
         delete_item(search_runs[-1])
+        delete_item("pokemon_tab_bar")
+        add_tab_bar("pokemon_tab_bar", parent = "uranium")
+        add_tab_button("test1", parent="pokemon_tab_bar")
+        add_tab("test", parent="pokemon_tab_bar")
+        add_spacing(count = 2, parent = "uranium")
     #get result from search function in pokedexx and set them to a single variable
     resulted_pokemon, resulted_pokemon2, resulted_pokemon3 = Uranium_Search(input_value)
     if resulted_pokemon != None:
@@ -263,8 +269,6 @@ def Start_pokemon_uranium_check():
         search_result += resulted_pokemon2.get_name()
     if resulted_pokemon3 != None:
         search_result += resulted_pokemon3.get_name()
-    clear_drawing("logo")
-    draw_image("logo", r"sprite.png", [115,0], [365,250]) #padding 25
     error_text = f"Pokémon '{input_value}' konnte nicht gefunden werden!"
     if resulted_pokemon == None:
         clear_drawing("logo")
@@ -276,3 +280,9 @@ def Start_pokemon_uranium_check():
         search_runs.append(search_result)
         add_text(search_runs[-1], parent = "uranium")
         log_info(input_value)
+        opener = urllib.request.build_opener()
+        opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+        urllib.request.install_opener(opener)
+        urllib.request.urlretrieve(resulted_pokemon.get_picture(), "sprite.png")
+        clear_drawing("logo")
+        draw_image("logo", r"sprite.png", [115,0], [365,250]) #padding 25
