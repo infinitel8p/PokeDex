@@ -260,7 +260,6 @@ def Start_pokemon_uranium_check():
         add_tab_bar("pokemon_tab_bar", parent = "uranium")
         add_tab_button("test1", parent="pokemon_tab_bar")
         add_tab("test", parent="pokemon_tab_bar")
-        add_spacing(count = 2, parent = "uranium")
     else:
         #hide last search result
         clear_drawing("logo")
@@ -268,9 +267,8 @@ def Start_pokemon_uranium_check():
         delete_item(search_runs[-1])
         delete_item("pokemon_tab_bar")
         add_tab_bar("pokemon_tab_bar", parent = "uranium")
-        add_tab_button("test1", parent="pokemon_tab_bar")
-        add_tab("test", parent="pokemon_tab_bar")
-        add_spacing(count = 2, parent = "uranium")
+        add_tab_button("test2", parent="pokemon_tab_bar")
+        add_tab("test3", parent="pokemon_tab_bar")
     #get result from search function in pokedexx and set them to a single variable
     resulted_pokemon, resulted_pokemon2, resulted_pokemon3 = Uranium_Search(input_value)
     if resulted_pokemon != None:
