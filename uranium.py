@@ -356,5 +356,3 @@ def Uranium_Search(pokemon_search_input):
 #print(result.get_name())
 #print(test)
 #print(test1)
-
-#MEGA ARCHILLES DOES NOT WORK EBCAUSE OF THE SPACING

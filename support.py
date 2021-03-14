@@ -240,8 +240,18 @@ def Start_pokemon_check():
 def Start_pokemon_uranium_check():
     #main function - handles pokemon search
     input_value = get_value("Input")
-    input_value = input_value.lower()
-    input_value = input_value.capitalize()
+    #formats input
+    if " " in input_value:
+        to_be_formatted = input_value.split()
+        after_format = []
+        for word in to_be_formatted:
+            word = word.lower()
+            word = word.capitalize()
+            after_format.append(word)
+        input_value = " ".join(after_format)
+    else:
+        input_value = input_value.lower()
+        input_value = input_value.capitalize()
     #prepaire for output
     set_theme("Dark 2")
     set_theme("Dark Grey")
@@ -266,9 +276,9 @@ def Start_pokemon_uranium_check():
     if resulted_pokemon != None:
         search_result = resulted_pokemon.get_name()
     if resulted_pokemon2 != None:
-        search_result += resulted_pokemon2.get_name()
+        search_result += ", " + resulted_pokemon2.get_name()
     if resulted_pokemon3 != None:
-        search_result += resulted_pokemon3.get_name()
+        search_result += ", " + resulted_pokemon3.get_name()
     error_text = f"Pokémon '{input_value}' konnte nicht gefunden werden!"
     if resulted_pokemon == None:
         clear_drawing("logo")
