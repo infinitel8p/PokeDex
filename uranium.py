@@ -342,14 +342,16 @@ Pokédex_Uranium =   [Orchynx, Mega_Metalynx, Metalynx, Raptorch, Mega_Archilles
 def Uranium_Search(pokemon_search_input):
     for pokemon in Pokédex_Uranium:
         if pokemon_search_input == pokemon.get_name():
-            pokemon_search_result = ("1. " + str(pokemon.get_name()))
             if pokemon.get_versionen() == None:
-                return pokemon_search_result
+                return pokemon, None, None
             if pokemon.get_versionen() != None:
-                pokemon_search_for_more = pokemon.get_versionen()
-                if pokemon_search_for_more != None:
-                    pokemon_search_result = pokemon_search_result + "\n2. " + str(pokemon_search_for_more.get_name())
-                    if pokemon_search_for_more.get_versionen() == None:
-                        return pokemon_search_result
-                    if pokemon_search_for_more.get_versionen() != None:
-                        return(pokemon_search_result + "\n3. " + pokemon_search_for_more.get_versionen().get_name())
+                    if pokemon.get_versionen().get_versionen() == None:
+                        return pokemon, pokemon.get_versionen(), None
+                    if pokemon.get_versionen().get_versionen() != None:
+                        return pokemon, pokemon.get_versionen(), pokemon.get_versionen().get_versionen()
+        return None, None, None
+
+#result, test, test1 = Uranium_Search("Gyarados")
+#print(result.get_name())
+#print(test)
+#print(test1)

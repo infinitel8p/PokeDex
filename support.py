@@ -256,11 +256,19 @@ def Start_pokemon_uranium_check():
         draw_image("logo", r"loading.png", [115,0], [365,250])
         delete_item(search_runs[-1])
     #get result from search function in pokedexx and set them to a single variable
-    search_result = Uranium_Search(input_value)
+    resulted_pokemon, resulted_pokemon2, resulted_pokemon3 = Uranium_Search(input_value)
+    if resulted_pokemon != None:
+        search_result = resulted_pokemon.get_name()
+    if resulted_pokemon2 != None:
+        search_result += resulted_pokemon2.get_name()
+    if resulted_pokemon3 != None:
+        search_result += resulted_pokemon3.get_name()
     clear_drawing("logo")
     draw_image("logo", r"sprite.png", [115,0], [365,250]) #padding 25
     error_text = f"Pokémon '{input_value}' konnte nicht gefunden werden!"
-    if search_result == None:
+    if resulted_pokemon == None:
+        clear_drawing("logo")
+        draw_image("logo", r"error_404.png", [115,0], [365,250]) #padding 25
         search_runs.append(error_text)
         add_text(search_runs[-1], parent = "uranium")
         log_error(error_text)
