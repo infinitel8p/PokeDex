@@ -7,6 +7,9 @@ from uranium import *
 search_runs = []
 last_search = ""
 pokedex_version = "Pokedex for PokeOne v.3.2"
+new_value1 = None
+new_value2 = None
+new_value3 = None
 
 #Set language on startup
 try:
@@ -152,6 +155,18 @@ def Build_uranium():
     #place the image inside the space "logo"
     draw_image("logo", r"Uranium.png", [115,0], [365,250], tag = "Pokemon") #padding 25
 
+def Change_input_value():
+    set_value(name = "Input", value = new_value1)
+    Start_pokemon_uranium_check()
+
+def Change_input_value2():
+    set_value(name = "Input", value = new_value2)
+    Start_pokemon_uranium_check()
+
+def Change_input_value3():
+    set_value(name = "Input", value = new_value3)
+    Start_pokemon_uranium_check()
+
 def Change_language_to_english():
     global current_languge
     current_languge = "english"
@@ -238,8 +253,13 @@ def Start_pokemon_check():
         #log_warning("Warning Message")
 
 def Start_pokemon_uranium_check():
+    global new_value1
+    global new_value2
+    global new_value3
+
     #main function - handles pokemon search
     input_value = get_value("Input")
+
     #formats input
     if " " in input_value:
         to_be_formatted = input_value.split()
@@ -257,26 +277,31 @@ def Start_pokemon_uranium_check():
     set_theme("Dark Grey")
     if search_runs == []:
         #runs only with the first search (when search_runs[-1] does not exist)
-        add_tab_bar("pokemon_tab_bar", parent = "uranium")
-        add_tab_button("test1", parent="pokemon_tab_bar")
-        add_tab("test", parent="pokemon_tab_bar")
+        add_spacing(count = 2, parent = "uranium")
     else:
         #hide last search result
         clear_drawing("logo")
         draw_image("logo", r"loading.png", [115,0], [365,250])
         delete_item(search_runs[-1])
         delete_item("pokemon_tab_bar")
-        add_tab_bar("pokemon_tab_bar", parent = "uranium")
-        add_tab_button("test2", parent="pokemon_tab_bar")
-        add_tab("test3", parent="pokemon_tab_bar")
     #get result from search function in pokedexx and set them to a single variable
     resulted_pokemon, resulted_pokemon2, resulted_pokemon3 = Uranium_Search(input_value)
     if resulted_pokemon != None:
-        search_result = resulted_pokemon.get_name()
+        add_tab_bar("pokemon_tab_bar", parent = "uranium")
+        new_value1 = resulted_pokemon.get_name()
+        add_tab_button(resulted_pokemon.get_name(), parent="pokemon_tab_bar", callback = Change_input_value)
+        if resulted_pokemon.get_type()[1] == []:
+            search_result = f"Eng: {resulted_pokemon.get_name()}  -  IndexNr: {resulted_pokemon.get_indexnr()}\n{resulted_pokemon.get_type()[0][0]}\n{resulted_pokemon.get_type()[0][1]}\n{resulted_pokemon.get_type()[0][2]}\n{resulted_pokemon.get_type()[0][3]}\n{resulted_pokemon.get_type()[0][4]}"
+        if resulted_pokemon.get_type()[1] != []:
+            search_result = f"Eng: {resulted_pokemon.get_name()}  -  IndexNr: {resulted_pokemon.get_indexnr()}\n{resulted_pokemon.get_type()[0][0]}\n{resulted_pokemon.get_type()[0][1]}\n{resulted_pokemon.get_type()[0][2]}\n{resulted_pokemon.get_type()[0][3]}\n{resulted_pokemon.get_type()[0][4]}\n###################################################\n{resulted_pokemon.get_type()[1][0]}\n{resulted_pokemon.get_type()[1][1]}\n{resulted_pokemon.get_type()[1][2]}\n{resulted_pokemon.get_type()[1][3]}\n{resulted_pokemon.get_type()[1][4]}"
     if resulted_pokemon2 != None:
-        search_result += ", " + resulted_pokemon2.get_name()
+        new_value2 = resulted_pokemon2.get_name()
+        add_tab_button(resulted_pokemon2.get_name(), parent="pokemon_tab_bar", callback = Change_input_value2)
+        #add_tab("test3", parent="pokemon_tab_bar")
     if resulted_pokemon3 != None:
-        search_result += ", " + resulted_pokemon3.get_name()
+        new_value3 = resulted_pokemon3.get_name()
+        add_tab_button(resulted_pokemon3.get_name(), parent="pokemon_tab_bar", callback = Change_input_value3)
+        #search_result += ", " + resulted_pokemon3.get_name()
     error_text = f"Pokémon '{input_value}' konnte nicht gefunden werden!"
     if resulted_pokemon == None:
         clear_drawing("logo")
