@@ -1,4 +1,12 @@
-import urllib.request
+#Set language based on settings.txt
+last_language = open("settings.txt", "r")
+if last_language.read() == "english":
+    current_languge = "english"
+    last_language.close()
+last_language = open("settings.txt", "r")
+if last_language.read() == "german":
+    current_languge = "german"
+    last_language.close()
 class Pokemon ():
 
     def __init__ (self, pokemon_name, pokemon_indexnr, pokemon_sprite, pokemon_picture, pokemon_type, pokemon_type2, pokemon_versionen = None):
@@ -23,25 +31,26 @@ class Pokemon ():
         return self.pokemon_picture
 
     def get_type(self):
+        #set pokemon information language to selected language
+        if current_languge == "english":
+            type_names = english_type_names
+        if current_languge == "german":
+            type_names = german_type_names
+
         if self.pokemon_type2 == None:
-            return self.pokemon_type
+            return type_names[self.pokemon_type]
         else:
-            return str(self.pokemon_type, self.pokemon_type2)
+            #returns types as array
+            return type_names[self.pokemon_type], type_names[self.pokemon_type2]
 
     def get_versionen(self):
         return self.pokemon_versionen
 
-#Links to the folders
+#Links to the folders with pictures
 #https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/tree/main/Uranium/Pokemon
 #https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/tree/main/Uranium/Mega
 #https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/tree/main/Uranium/Nuclear
 #https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/tree/main/Uranium/Sprites
-
-#Links to the pictures
-#https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Pokemon/001Popkas.png
-#https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Mega/002_1Popkas.png
-#https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Nuclear/N007Popkas.png
-#https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Sprites/Icon001.gif
 
 #001-#010
 Orchynx = Pokemon("Orchynx", "#001", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Sprites/Icon001.gif", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Pokemon/001Popkas.png", "Grass", "Steel")
@@ -379,7 +388,7 @@ english_type_names = {"Bug": ["Pokémon type: *Bug*\n", "Double damage: \n - Fir
                     "Rock" : ["Pokémon type: *Rock*\n", "Double damage: \n - Water \n - Grass \n - Fighting \n - Ground \n - Steel \n - Nuclear", "Half damage: \n - Normal \n - Fire \n - Poison \n - Flying", "No damage: \n", "The Special Defense of a Rock-type Pokémon is\nincreased by 50% during a sandstorm,\nin addition to being immune to the damage caused by it."],
                     "Steel" : ["Pokémon type: *Steel*\n", "Double damage: \n - Fire \n - Fighting \n - Ground", "Half damage: \n - Normal \n - Grass \n - Ice \n - Flying \n - Psychic \n - Bug \n - Rock \n - Dragon \n - Steel \n - Fairy \n - Nuclear", "No damage: \n - Poison\n", "Steel-type Pokémon cannot cannot be poisoned\n(except by Corrosion) or damaged by a sandstorm."],
                     "Water" : ["Pokémon type: *Water*\n", "Double damage: \n - Grass \n - Electric \n - Nuclear", "Half damage: \n - Fire \n - Water \n - Ice \n - Steel", "No damage: \n", "n / a"],
-                    "Nuclear" : ["Pokémon type: *Nuclear*\n", "Double damage: \n - Normal \n - Fire \n - Fighting \n - Water \n - Flying \n - Grass \n - Electro \n - Ground \n - Psychic \n - Rock \n - Ice \n - Bug \n - Dragon \n - Ghost \n - Dark \n - Steel \n - Fairy \n - Poison", "Half damage: \n - Nuclear ", "No damage:\n", "k.A."]
+                    "Nuclear" : ["Pokémon type: *Nuclear*\n", "Double damage: \n - Normal \n - Fire \n - Fighting \n - Water \n - Flying \n - Grass \n - Electro \n - Ground \n - Psychic \n - Rock \n - Ice \n - Bug \n - Dragon \n - Ghost \n - Dark \n - Steel \n - Fairy \n - Poison", "Half damage: \n - Nuclear ", "No damage:\n", "n / a"]
                     }
 
 def Uranium_Search(pokemon_search_input):
@@ -396,5 +405,7 @@ def Uranium_Search(pokemon_search_input):
 
 #result, test, test1 = Uranium_Search("Gyarados")
 #print(result.get_name())
+#print(result.get_type())
+#print(result.get_type()[0])
 #print(test)
 #print(test1)
