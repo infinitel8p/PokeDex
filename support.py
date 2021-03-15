@@ -198,6 +198,7 @@ def Clear_last_result():
         clear_drawing("logo")
         draw_image("logo", r"loading.png", [115,0], [365,250])
         delete_item(search_runs[-1])
+        set_value(name = "Input", value = "")
         clear_drawing("logo")
         draw_image("logo", r"PokeDex.png", [115,0], [365,250])
 
@@ -210,6 +211,8 @@ def Clear_last_uranium_result():
         clear_drawing("logo")
         draw_image("logo", r"loading.png", [115,0], [365,250])
         delete_item(search_runs[-1])
+        delete_item("pokemon_tab_bar")
+        set_value(name = "Input", value = "")
         clear_drawing("logo")
         draw_image("logo", r"Uranium.png", [115,0], [365,250])
 
