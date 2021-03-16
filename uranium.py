@@ -1,12 +1,18 @@
 #Set language based on settings.txt
-last_language = open("settings.txt", "r")
-if last_language.read() == "english":
+try:
+    last_language = open("settings.txt", "r")
+    if last_language.read() == "english":
+        current_languge = "english"
+        last_language.close()
+    last_language = open("settings.txt", "r")
+    if last_language.read() == "german":
+        current_languge = "german"
+        last_language.close()
+except FileNotFoundError:
+    last_language = open("settings.txt", "w")
+    last_language.write("english")
+    last_language.close()
     current_languge = "english"
-    last_language.close()
-last_language = open("settings.txt", "r")
-if last_language.read() == "german":
-    current_languge = "german"
-    last_language.close()
 class Pokemon ():
 
     def __init__ (self, pokemon_name, pokemon_indexnr, pokemon_sprite, pokemon_picture, pokemon_type, pokemon_type2, pokemon_versionen = None):
