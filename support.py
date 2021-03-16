@@ -253,9 +253,7 @@ def Start_pokemon_check():
 
     else:
         #hide last search result
-        clear_drawing("logo")
-        draw_image("logo", r"loading.png", [115,0], [365,250])
-        delete_item(search_runs[-1])
+        Delete_last_result()
     #get result from search function in pokedexx and set them to a single variable
     pokemon_name, pokemon_type, pokemon_type2 , pokemon_evolution = Search(input_value)
     search_result = pokemon_name + pokemon_type + pokemon_type2
@@ -321,10 +319,7 @@ def Start_pokemon_uranium_check():
         add_spacing(count = 2, parent = "uranium")
     else:
         #hide last search result
-        clear_drawing("logo")
-        draw_image("logo", r"loading.png", [115,0], [365,250])
-        delete_item(search_runs[-1])
-        delete_item("pokemon_tab_bar")
+        Delete_last_result()
     #get result from search function in pokedexx and set them to a single variable
     resulted_pokemon, resulted_pokemon2, resulted_pokemon3 = Uranium_Search(input_value)
     if resulted_pokemon != None:
