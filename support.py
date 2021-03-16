@@ -256,7 +256,6 @@ def Start_pokemon_check():
         clear_drawing("logo")
         draw_image("logo", r"loading.png", [115,0], [365,250])
         delete_item(search_runs[-1])
-        delete_item("pokemon_tab_bar")
     #get result from search function in pokedexx and set them to a single variable
     pokemon_name, pokemon_type, pokemon_type2 , pokemon_evolution = Search(input_value)
     search_result = pokemon_name + pokemon_type + pokemon_type2
