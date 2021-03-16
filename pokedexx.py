@@ -7,6 +7,23 @@ pokedex = pokedex.Pokedex(version='v1', user_agent='ExampleApp (https://example.
 german_poke_list = r"pokemonlist.txt"
 english_poke_list = r"pokemonlisten.txt"
 #Pokedex
+#Translate Evolution Stages to German Names
+def Translator(suchbegriff):
+    with open(english_poke_list, 'r') as full_english_names:
+        english_lines = full_english_names.read().splitlines()
+        for lines in english_lines:
+            if suchbegriff in lines:
+                full_english_names.close()
+                pokemon_id = lines.rstrip(suchbegriff)
+
+    with open(german_poke_list, 'r') as full_german_names:
+        german_lines = full_german_names.read().splitlines()
+        for lines in german_lines:
+            if pokemon_id in lines:
+                german_name = lines.lstrip(pokemon_id)
+                full_german_names.close()
+                return german_name
+
 def Search(pokemon_search_input):
     #Check selected language (gets written in support.py to settings.txt)
     last_language = open("settings.txt", "r")
@@ -24,23 +41,6 @@ def Search(pokemon_search_input):
         language = english_language
     if current_languge == "german":
         language = german_language
-
-    #Translate Evolution Stages to German Names
-    def Translator(suchbegriff):
-        with open(english_poke_list, 'r') as full_english_names:
-            english_lines = full_english_names.read().splitlines()
-            for lines in english_lines:
-                if suchbegriff in lines:
-                    full_english_names.close()
-                    pokemon_id = lines.rstrip(suchbegriff)
-
-        with open(german_poke_list, 'r') as full_german_names:
-            german_lines = full_german_names.read().splitlines()
-            for lines in german_lines:
-                if pokemon_id in lines:
-                    german_name = lines.lstrip(pokemon_id)
-                    full_german_names.close()
-                    return german_name
 
     # Create Session
     continuing = False
@@ -88,7 +88,6 @@ def Search(pokemon_search_input):
             pokemon_evolution = pokemon["family"]["evolutionLine"]
             pokemon_stage = pokemon["family"]["evolutionStage"]
         continuing = True
-
     #If Name has not been found filter input for next action
     if continuing == False:
         if pokemon_search_input == "Exit":
@@ -104,7 +103,7 @@ def Search(pokemon_search_input):
             opener.addheaders = [('User-agent', 'Mozilla/5.0')]
             urllib.request.install_opener(opener)
             urllib.request.urlretrieve("https://raw.githubusercontent.com/infinitel8p/PokeDex/master/error_404.png", "sprite.png")
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, ""
 
     #add information for stage to the language arrays now that the variable pokemon_stage has been defined
     english_language.insert(1, f"Evolution {pokemon_search_input}: {pokemon_stage}")
@@ -184,92 +183,92 @@ def Search(pokemon_search_input):
             Bug = type_names["Bug"]
             pokemon_type = f"\n{Bug[0]}\n{Bug[1]}\n{Bug[2]}\n{Bug[3]}\n{Bug[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Dark":
             Dark = type_names["Dark"]
             pokemon_type = f"\n{Dark[0]}\n{Dark[1]}\n{Dark[2]}\n{Dark[3]}\n{Dark[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Dragon":
             Dragon = type_names["Dragon"]
             pokemon_type = f"\n{Dragon[0]}\n{Dragon[1]}\n{Dragon[2]}\n{Dragon[3]}\n{Dragon[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Electric":
             Electric = type_names["Electric"]
             pokemon_type = f"\n{Electric[0]}\n{Electric[1]}\n{Electric[2]}\n{Electric[3]}\n{Electric[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Fairy":
             Fairy = type_names["Fairy"]
             pokemon_type = f"\n{Fairy[0]}\n{Fairy[1]}\n{Fairy[2]}\n{Fairy[3]}\n{Fairy[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Fighting":
             Fighting = type_names["Fighting"]
             pokemon_type = f"\n{Fighting[0]}\n{Fighting[1]}\n{Fighting[2]}\n{Fighting[3]}\n{Fighting[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Fire":
             Fire = type_names["Fire"]
             pokemon_type = f"\n{Fire[0]}\n{Fire[1]}\n{Fire[2]}\n{Fire[3]}\n{Fire[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Flying":
             Flying = type_names["Flying"]
             pokemon_type = f"\n{Flying[0]}\n{Flying[1]}\n{Flying[2]}\n{Flying[3]}\n{Flying[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Ghost":
             Ghost = type_names["Ghost"]
             pokemon_type = f"\n{Ghost[0]}\n{Ghost[1]}\n{Ghost[2]}\n{Ghost[3]}\n{Ghost[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Grass":
             Grass = type_names["Grass"]
             pokemon_type = f"\n{Grass[0]}\n{Grass[1]}\n{Grass[2]}\n{Grass[3]}\n{Grass[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Ground":
             Ground = type_names["Ground"]
             pokemon_type = f"\n{Ground[0]}\n{Ground[1]}\n{Ground[2]}\n{Ground[3]}\n{Ground[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Ice":
             Ice = type_names["Ice"]
             pokemon_type = f"\n{Ice[0]}\n{Ice[1]}\n{Ice[2]}\n{Ice[3]}\n{Ice[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Normal":
             Normal = type_names["Normal"]
             pokemon_type = f"\n{Normal[0]}\n{Normal[1]}\n{Normal[2]}\n{Normal[3]}\n{Normal[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Poison":
             Poison = type_names["Poison"]
             pokemon_type = f"\n{Poison[0]}\n{Poison[1]}\n{Poison[2]}\n{Poison[3]}\n{Poison[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Psychic":
             Psychic = type_names["Psychic"]
             pokemon_type = f"\n{Psychic[0]}\n{Psychic[1]}\n{Psychic[2]}\n{Psychic[3]}\n{Psychic[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Rock":
             Rock = type_names["Rock"]
             pokemon_type = f"\n{Rock[0]}\n{Rock[1]}\n{Rock[2]}\n{Rock[3]}\n{Rock[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Steel":
             Steel = type_names["Steel"]
             pokemon_type = f"\n{Steel[0]}\n{Steel[1]}\n{Steel[2]}\n{Steel[3]}\n{Steel[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[0] == "Water":
             Water = type_names["Water"]
             pokemon_type = f"\n{Water[0]}\n{Water[1]}\n{Water[2]}\n{Water[3]}\n{Water[4]}"
             pokemon_type2 = ""
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
 
     if length == 2:
         if pokemon_types[0] == "Bug":
@@ -331,72 +330,72 @@ def Search(pokemon_search_input):
         if pokemon_types[1] == "Bug":
             Bug2 = type_names["Bug"]
             pokemon_type2 = f"\n###################################################\n{Bug2[0]}\n{Bug2[1]}\n{Bug2[2]}\n{Bug2[3]}\n{Bug2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Dark":
             Dark2 = type_names["Dark"]
             pokemon_type2 = f"\n###################################################\n{Dark2[0]}\n{Dark2[1]}\n{Dark2[2]}\n{Dark2[3]}\n{Dark2[4]}"
-            return  pokemon_name,pokemon_type,pokemon_type2
+            return  pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Dragon":
             Dragon2 = type_names["Dragon"]
             pokemon_type2 = f"\n###################################################\n{Dragon2[0]}\n{Dragon2[1]}\n{Dragon2[2]}\n{Dragon2[3]}\n{Dragon2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Electric":
             Electric2 = type_names["Electric"]
             pokemon_type2 = f"\n###################################################\n{Electric2[0]}\n{Electric2[1]}\n{Electric2[2]}\n{Electric2[3]}\n{Electric2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Fairy":
             Fairy2 = type_names["Fairy"]
             pokemon_type2 = f"\n###################################################\n{Fairy2[0]}\n{Fairy2[1]}\n{Fairy2[2]}\n{Fairy2[3]}\n{Fairy2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Fighting":
             Fighting2 = type_names["Fighting"]
             pokemon_type2 = f"\n###################################################\n{Fighting2[0]}\n{Fighting2[1]}\n{Fighting2[2]}\n{Fighting2[3]}\n{Fighting2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Fire":
             Fire2 = type_names["Fire"]
             pokemon_type2 = f"\n###################################################\n{Fire2[0]}\n{Fire2[1]}\n{Fire2[2]}\n{Fire2[3]}\n{Fire2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Flying":
             Flying2 = type_names["Flying"]
             pokemon_type2 = f"\n###################################################\n{Flying2[0]}\n{Flying2[1]}\n{Flying2[2]}\n{Flying2[3]}\n{Flying2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Ghost":
             Ghost2 = type_names["Ghost"]
             pokemon_type2 = f"\n###################################################\n{Ghost2[0]}\n{Ghost2[1]}\n{Ghost2[2]}\n{Ghost2[3]}\n{Ghost2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Grass":
             Grass2 = type_names["Grass"]
             pokemon_type2 = f"\n###################################################\n{Grass2[0]}\n{Grass2[1]}\n{Grass2[2]}\n{Grass2[3]}\n{Grass2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Ground":
             Ground2 = type_names["Ground"]
             pokemon_type2 = f"\n###################################################\n{Ground2[0]}\n{Ground2[1]}\n{Ground2[2]}\n{Ground2[3]}\n{Ground2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Ice":
             Ice2 = type_names["Ice"]
             pokemon_type2 = f"\n###################################################\n{Ice2[0]}\n{Ice2[1]}\n{Ice2[2]}\n{Ice2[3]}\n{Ice2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Normal":
             Normal2 = type_names["Normal"]
             pokemon_type2 = f"\n###################################################\n{Normal2[0]}\n{Normal2[1]}\n{Normal2[2]}\n{Normal2[3]}\n{Normal2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Poison":
             Poison2 = type_names["Poison"]
             pokemon_type2 = f"\n###################################################\n{Poison2[0]}\n{Poison2[1]}\n{Poison2[2]}\n{Poison2[3]}\n{Poison2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Psychic":
             Psychic2 = type_names["Psychic"]
             pokemon_type2 = f"\n###################################################\n{Psychic2[0]}\n{Psychic2[1]}\n{Psychic2[2]}\n{Psychic2[3]}\n{Psychic2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Rock":
             Rock2 = type_names["Rock"]
             pokemon_type2 = f"\n###################################################\n{Rock2[0]}\n{Rock2[1]}\n{Rock2[2]}\n{Rock2[3]}\n{Rock2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Steel":
             Steel2 = type_names["Steel"]
             pokemon_type2 = f"\n###################################################\n{Steel2[0]}\n{Steel2[1]}\n{Steel2[2]}\n{Steel2[3]}\n{Steel2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution
         if pokemon_types[1] == "Water":
             Water2 = type_names["Water"]
             pokemon_type2 = f"\n###################################################\n{Water2[0]}\n{Water2[1]}\n{Water2[2]}\n{Water2[3]}\n{Water2[4]}"
-            return pokemon_name,pokemon_type,pokemon_type2
+            return pokemon_name,pokemon_type,pokemon_type2, pokemon_evolution

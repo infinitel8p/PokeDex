@@ -6,7 +6,7 @@ from uranium import *
 
 search_runs = []
 last_search = ""
-pokedex_version = "Pokedex for PokeOne v.3.2"
+pokedex_version = "Pokedex for PokeOne v.4.0.1"
 new_value1 = None
 new_value2 = None
 new_value3 = None
@@ -70,8 +70,8 @@ def Browser():
         os.system("start iexplore https://github.com/infinitel8p/PokeDex/")
 
 def Build_menu():
-    english_menu_language = ["Home", "More", "Go to project page", "See the logs", "Beta functions", "Not working yet", "Information", "Uranium", "Rebuild", "Help", "Settings", "Language", "German", "English"]
-    german_menu_language = ["Home", "Mehr", "Projekt Seite", "Logs anzeigen", "Beta Funktionen", "Noch nicht fertig", "Informationen", "Uranium", "'Rebuild'", "Hilfe", "Einstellungen", "Sprache", "Deutsch", "Englisch"]
+    english_menu_language = ["Home", "More", "Go to project page", "See the logs", "Beta functions", "Not working yet", "Information", "Uranium", "Reset", "Help", "Settings", "Language", "German", "English"]
+    german_menu_language = ["Home", "Mehr", "Projekt Seite", "Logs anzeigen", "Beta Funktionen", "Noch nicht fertig", "Informationen", "Uranium", "Reset", "Hilfe", "Einstellungen", "Sprache", "Deutsch", "Englisch"]
     if current_languge == "english":
         language = english_menu_language
     if current_languge == "german":
@@ -79,25 +79,25 @@ def Build_menu():
     #creates the menu bar
     with menu_bar("Menu Bar", parent = pokedex_version):
         add_menu_item(language[0], callback = Build_app, parent = "Menu Bar")
-        #add_menu_item("Test", label = "  ", enabled = False)
+        add_menu_item(language[7], callback = Build_uranium, parent = "Menu Bar")
+        add_menu_item(language[9], callback = Build_help, parent = "Menu Bar")
         with menu(language[1], parent = "Menu Bar"):
             add_menu_item(language[2], callback = Browser, parent = language[1])
             add_menu_item(language[3], callback = show_logger, parent = language[1])
             with menu(language[4], label = language[5], parent = language[1]):
                 add_menu_item(language[6], callback = Build_more_information, parent = language[4])
-                add_menu_item(language[7], callback = Build_uranium, parent = language[4])
-                add_menu_item(language[8], callback = Build_app, parent = language[4])
-        add_menu_item(language[9], callback = Build_help, parent = "Menu Bar")
         with menu(language[10], parent = "Menu Bar"):
+            add_menu_item(language[8], callback = Build_app, parent = language[10])
             with  menu(language[11], parent = language[10]):
                 add_menu_item(language[12], callback = Change_language_to_german, parent = language[11])
                 add_menu_item(language[13], callback = Change_language_to_english, parent = language[11])
+                #add_menu_item("Test", label = "  ", enabled = False)
 
 def Build_help():
     #!!!WORKS WITH CHILDS - STILL NOT FULLY TESTED
     set_theme("Red")
     english_help_language = ["With this app you can search for the opposing Pokémon\nto see which type of attack is the most effective\nagainst it.\nIf the Pokémon has two types you get both them in\nthe output. You may have to check if the Pokémon's\nsecond type makes a attack type ineffective again.", "Go back to Search"]
-    german_help_language = ["Mit dieser App kannst du nach dem gegnerischen Poké-\nmon suchen um herauszufinden, welche Attacke die\neffektivste dagegen ist.\nFalls das Pokémon zwei Typen hat, bekommst du beide\nim Suchergebnis zurück. Du musst gegebenenfalls\nüberprüfen ob der zweite Typ die effektivität\nmancher Attacken doch noch vermindert.", "Zurück zur Suche"]
+    german_help_language = ["Mit dieser App kannst du nach dem gegnerischen Poké-\nmon suchen um herauszufinden, welche Attacke die\neffektivste dagegen ist.\nFalls das Pokémon zwei Typen hat, bekommst du beide\nim Suchergebnis zurück. Du musst gegebenenfalls\nüberprüfen, ob der zweite Typ die effektivität\nmancher Attacken nicht doch noch vermindert.", "Zurück zur Suche"]
     if current_languge == "english":
         language = english_help_language
     if current_languge == "german":
@@ -155,17 +155,30 @@ def Build_uranium():
     #place the image inside the space "logo"
     draw_image("logo", r"Uranium.png", [115,0], [365,250], tag = "Pokemon") #padding 25
 
-def Change_input_value():
+def Change_input_value1():
     set_value(name = "Input", value = new_value1)
-    Start_pokemon_uranium_check()
+    Start_pokemon_check()
 
 def Change_input_value2():
     set_value(name = "Input", value = new_value2)
-    Start_pokemon_uranium_check()
+    Start_pokemon_check()
 
 def Change_input_value3():
     set_value(name = "Input", value = new_value3)
+    Start_pokemon_check()
+
+def Change_uranium_input_value1():
+    set_value(name = "Input", value = new_value1)
     Start_pokemon_uranium_check()
+
+def Change_uranium_input_value2():
+    set_value(name = "Input", value = new_value2)
+    Start_pokemon_uranium_check()
+
+def Change_uranium_input_value3():
+    set_value(name = "Input", value = new_value3)
+    Start_pokemon_uranium_check()
+
 
 def Change_language_to_english():
     global current_languge
@@ -186,6 +199,7 @@ def Change_language_to_german():
 def Clear_app():
     #clears whole program
     delete_item(pokedex_version, children_only = True)
+    set_value(name = "Input", value = "")
     with window(pokedex_version):
         Build_menu()
 
@@ -198,6 +212,7 @@ def Clear_last_result():
         clear_drawing("logo")
         draw_image("logo", r"loading.png", [115,0], [365,250])
         delete_item(search_runs[-1])
+        delete_item("pokemon_tab_bar")
         set_value(name = "Input", value = "")
         clear_drawing("logo")
         draw_image("logo", r"PokeDex.png", [115,0], [365,250])
@@ -221,8 +236,12 @@ def Delete_last_result():
     clear_drawing("logo")
     draw_image("logo", r"loading.png", [115,0], [365,250])
     delete_item(search_runs[-1])
+    delete_item("pokemon_tab_bar")
 
 def Start_pokemon_check():
+    global new_value1
+    global new_value2
+    global new_value3
     #main function - handles pokemon search
     input_value = get_value("Input")
     input_value = input_value.lower()
@@ -230,16 +249,36 @@ def Start_pokemon_check():
     #prepaire for output
     if search_runs == []:
         #runs only with the first search (when search_runs[-1] does not exist)
-        add_separator(parent = pokedex_version)
         add_spacing(count = 2, parent = pokedex_version)
+
     else:
         #hide last search result
         clear_drawing("logo")
         draw_image("logo", r"loading.png", [115,0], [365,250])
         delete_item(search_runs[-1])
+        delete_item("pokemon_tab_bar")
     #get result from search function in pokedexx and set them to a single variable
-    pokemon_name, pokemon_type, pokemon_type2 = Search(input_value)
+    pokemon_name, pokemon_type, pokemon_type2 , pokemon_evolution = Search(input_value)
     search_result = pokemon_name + pokemon_type + pokemon_type2
+    if len(pokemon_evolution) == 1:
+        new_value1 = pokemon_evolution[0]
+        add_tab_bar("pokemon_tab_bar", parent = pokedex_version)
+        add_tab_button(Translator(pokemon_evolution[0]), parent="pokemon_tab_bar", callback = Change_input_value1)
+    if len(pokemon_evolution) == 2:
+        new_value1 = pokemon_evolution[0]
+        new_value2 = pokemon_evolution[1]
+        add_tab_bar("pokemon_tab_bar", parent = pokedex_version)
+        add_tab_button(Translator(pokemon_evolution[0]), parent="pokemon_tab_bar", callback = Change_input_value1)
+        add_tab_button(Translator(pokemon_evolution[1]), parent="pokemon_tab_bar", callback = Change_input_value2)
+    if len(pokemon_evolution) == 3:
+        new_value1 = pokemon_evolution[0]
+        new_value2 = pokemon_evolution[1]
+        new_value3 = pokemon_evolution[2]
+        add_tab_bar("pokemon_tab_bar", parent = pokedex_version)
+        add_tab_button(Translator(pokemon_evolution[0]), parent="pokemon_tab_bar", callback = Change_input_value1)
+        add_tab_button(Translator(pokemon_evolution[1]), parent="pokemon_tab_bar", callback = Change_input_value2)
+        add_tab_button(Translator(pokemon_evolution[2]), parent="pokemon_tab_bar", callback = Change_input_value3)
+
     #append search_result to the search_runs array and display it
     search_runs.append(search_result)
     clear_drawing("logo")
@@ -292,18 +331,18 @@ def Start_pokemon_uranium_check():
     if resulted_pokemon != None:
         add_tab_bar("pokemon_tab_bar", parent = "uranium")
         new_value1 = resulted_pokemon.get_name()
-        add_tab_button(resulted_pokemon.get_name(), parent="pokemon_tab_bar", callback = Change_input_value)
+        add_tab_button(resulted_pokemon.get_name(), parent="pokemon_tab_bar", callback = Change_uranium_input_value1)
         if resulted_pokemon.get_type()[1] == []:
             search_result = f"Eng: {resulted_pokemon.get_name()}  -  IndexNr: {resulted_pokemon.get_indexnr()}\n{resulted_pokemon.get_type()[0][0]}\n{resulted_pokemon.get_type()[0][1]}\n{resulted_pokemon.get_type()[0][2]}\n{resulted_pokemon.get_type()[0][3]}\n{resulted_pokemon.get_type()[0][4]}"
         if resulted_pokemon.get_type()[1] != []:
             search_result = f"Eng: {resulted_pokemon.get_name()}  -  IndexNr: {resulted_pokemon.get_indexnr()}\n{resulted_pokemon.get_type()[0][0]}\n{resulted_pokemon.get_type()[0][1]}\n{resulted_pokemon.get_type()[0][2]}\n{resulted_pokemon.get_type()[0][3]}\n{resulted_pokemon.get_type()[0][4]}\n###################################################\n{resulted_pokemon.get_type()[1][0]}\n{resulted_pokemon.get_type()[1][1]}\n{resulted_pokemon.get_type()[1][2]}\n{resulted_pokemon.get_type()[1][3]}\n{resulted_pokemon.get_type()[1][4]}"
     if resulted_pokemon2 != None:
         new_value2 = resulted_pokemon2.get_name()
-        add_tab_button(resulted_pokemon2.get_name(), parent="pokemon_tab_bar", callback = Change_input_value2)
+        add_tab_button(resulted_pokemon2.get_name(), parent="pokemon_tab_bar", callback = Change_uranium_input_value2)
         #add_tab("test3", parent="pokemon_tab_bar")
     if resulted_pokemon3 != None:
         new_value3 = resulted_pokemon3.get_name()
-        add_tab_button(resulted_pokemon3.get_name(), parent="pokemon_tab_bar", callback = Change_input_value3)
+        add_tab_button(resulted_pokemon3.get_name(), parent="pokemon_tab_bar", callback = Change_uranium_input_value3)
         #search_result += ", " + resulted_pokemon3.get_name()
     error_text = f"Pokémon '{input_value}' konnte nicht gefunden werden!"
     if resulted_pokemon == None:
