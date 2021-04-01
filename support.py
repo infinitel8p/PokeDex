@@ -70,8 +70,8 @@ def Browser():
         os.system("start iexplore https://github.com/infinitel8p/PokeDex/")
 
 def Build_menu():
-    english_menu_language = ["Home", "More", "Go to project page", "See the logs", "Beta functions", "Not working yet", "Information", "Uranium", "Reset", "Help", "Settings", "Language", "German", "English"]
-    german_menu_language = ["Home", "Mehr", "Projekt Seite", "Logs anzeigen", "Beta Funktionen", "Noch nicht fertig", "Informationen", "Uranium", "Reset", "Hilfe", "Einstellungen", "Sprache", "Deutsch", "Englisch"]
+    english_menu_language = ["Home", "More", "Go to project page", "See the logs", "Beta functions", "Not working yet", "Credits", "Uranium", "Reset", "Help", "Settings", "Language", "German", "English"]
+    german_menu_language = ["Home", "Mehr", "Projekt Seite", "Logs anzeigen", "Beta Funktionen", "Noch nicht fertig", "Credits", "Uranium", "Reset", "Hilfe", "Einstellungen", "Sprache", "Deutsch", "Englisch"]
     if current_languge == "english":
         language = english_menu_language
     if current_languge == "german":
@@ -85,13 +85,25 @@ def Build_menu():
             add_menu_item(language[2], callback = Browser, parent = language[1])
             add_menu_item(language[3], callback = show_logger, parent = language[1])
             with menu(language[4], label = language[5], parent = language[1]):
-                add_menu_item(language[6], callback = Build_more_information, parent = language[4])
+                add_menu_item(language[6], callback = Build_credits, parent = language[4])
         with menu(language[10], parent = "Menu Bar"):
             add_menu_item(language[8], callback = Build_app, parent = language[10])
             with  menu(language[11], parent = language[10]):
                 add_menu_item(language[12], callback = Change_language_to_german, parent = language[11])
                 add_menu_item(language[13], callback = Change_language_to_english, parent = language[11])
                 #add_menu_item("Test", label = "  ", enabled = False)
+
+def Build_credits():
+    english_help_language = ["Credits\nAll information for Uranium: https://pokemon-uranium.fandom.com", "Nothing you can\nreally do here yet.", "Go back to Search"]
+    german_help_language = ["Dies ist das 'Mehr Informationen' Fenster.\nEs gehört zum Teil der App, an welchem momentan\nnoch gearbeitet wird.", "Hier gibt es noch nichts", "Zurück zur Suche"]
+    if current_languge == "english":
+        language = english_help_language
+    if current_languge == "german":
+        language = german_help_language
+    Clear_app()
+    add_text(language[0], parent = pokedex_version, tip = language[1])
+    add_spacing(count = 5, parent = pokedex_version)
+    add_button(language[2], callback = Build_app, parent = pokedex_version)
 
 def Build_help():
     #!!!WORKS WITH CHILDS - STILL NOT FULLY TESTED
@@ -109,18 +121,6 @@ def Build_help():
     add_text(language[0], parent = "help window")
     add_spacing(count = 5, parent = "help window")
     add_button(language[1], callback = Build_app, parent = "help window")
-
-def Build_more_information():
-    english_help_language = ["This is the 'more information' window.\nIt is part of the app that has yet to be finished.", "Nothing you can\nreally do here yet.", "Go back to Search"]
-    german_help_language = ["Dies ist das 'Mehr Informationen' Fenster.\nEs gehört zum Teil der App, an welchem momentan\nnoch gearbeitet wird.", "Hier gibt es noch nichts", "Zurück zur Suche"]
-    if current_languge == "english":
-        language = english_help_language
-    if current_languge == "german":
-        language = german_help_language
-    Clear_app()
-    add_text(language[0], parent = pokedex_version, tip = language[1])
-    add_spacing(count = 5, parent = pokedex_version)
-    add_button(language[2], callback = Build_app, parent = pokedex_version)
 
 def Build_uranium():
     #!!!WORKS WITH CHILDS - STILL NOT FULLY TESTED

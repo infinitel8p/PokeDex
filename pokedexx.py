@@ -15,7 +15,6 @@ def Translator(suchbegriff):
             if suchbegriff in lines:
                 full_english_names.close()
                 pokemon_id = lines.rstrip(suchbegriff)
-
     with open(german_poke_list, 'r') as full_german_names:
         german_lines = full_german_names.read().splitlines()
         for lines in german_lines:
