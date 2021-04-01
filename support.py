@@ -94,16 +94,18 @@ def Build_menu():
                 #add_menu_item("Test", label = "  ", enabled = False)
 
 def Build_credits():
-    english_help_language = ["Credits\nAll information for Uranium: https://pokemon-uranium.fandom.com", "Nothing you can\nreally do here yet.", "Go back to Search"]
-    german_help_language = ["Dies ist das 'Mehr Informationen' Fenster.\nEs gehört zum Teil der App, an welchem momentan\nnoch gearbeitet wird.", "Hier gibt es noch nichts", "Zurück zur Suche"]
+    english_help_language = ["Credits\n\nSource for information, pictures and sprites\nto Pokémon Uranium:\nhttps://pokemon-uranium.fandom.com\n", "Source for information to all other Pokémon:\nhttps://pypi.org/project/pokedex.py/", "Nothing you can\nreally do here yet.", "Go back to Search"]
+    german_help_language = ["Credits\n\nQuelle der Informationen, Bilder und Sprites\nzu Pokémon Uranium:\nhttps://pokemon-uranium.fandom.com\n", "Quelle zu Informationen für alle anderen Pokémon:\nhttps://pypi.org/project/pokedex.py/", "Hier gibt es noch nichts.", "Zurück zur Suche"]
     if current_languge == "english":
         language = english_help_language
     if current_languge == "german":
         language = german_help_language
     Clear_app()
-    add_text(language[0], parent = pokedex_version, tip = language[1])
+    add_text(language[0], parent = pokedex_version, tip = language[2])
     add_spacing(count = 5, parent = pokedex_version)
-    add_button(language[2], callback = Build_app, parent = pokedex_version)
+    add_text(language[1], parent = pokedex_version, tip = language[2])
+    add_spacing(count = 5, parent = pokedex_version)
+    add_button(language[3], callback = Build_app, parent = pokedex_version)
 
 def Build_help():
     #!!!WORKS WITH CHILDS - STILL NOT FULLY TESTED
