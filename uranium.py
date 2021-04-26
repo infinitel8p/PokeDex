@@ -242,7 +242,7 @@ Spritzee = Pokemon("Spritzee", "#123", "https://raw.githubusercontent.com/infini
 Aromatisse = Pokemon("Aromatisse", "#124", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Sprites/Icon124.gif", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Pokemon/124Popkas.png", "Fairy", None)
 Miasmedic = Pokemon("Miasmedic", "#125", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Sprites/Icon125.gif", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Pokemon/125Popkas.png", "Fairy", "Poison")
 Winotinger = Pokemon("Winotinger", "#126", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Sprites/Icon126.gif", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Pokemon/126Popkas.png", "Fairy", "Fighting")
-Titanice = Pokemon("Titanice", "#127", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Sprites/Icon127.gif", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Pokemon/127Popkas.png", "Fairy", "Fighting")
+Winotinger = Pokemon("Winotinger", "#127", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Sprites/Icon127.gif", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Pokemon/127Popkas.png", "Fairy", "Fighting")
 Duplicat = Pokemon("Duplicat", "#128", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Sprites/Icon128.gif", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Pokemon/128Popkas.png", "Normal", None)
 Eevee = Pokemon("Eevee", "#129", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Sprites/Icon129.gif", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Pokemon/129Popkas.png", "Normal", None)
 Vaporeon = Pokemon("Vaporeon", "#130", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Sprites/Icon130.gif", "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium/Pokemon/130Popkas.png", "Water", None)
@@ -345,7 +345,7 @@ Pokédex_Uranium =   [Orchynx, Mega_Metalynx, Metalynx, Raptorch, Mega_Archilles
                     Mega_Whimsicott, Whimsicott, Misdreavus, Mismagius, Nuclear_Barand, Barand, Glaslug, Glavinug, S_fifty_one, Mega_S_fity_one_A, S_fifty_one_A, Nuclear_Paraudio, Paraudio, Nuclear_Paraboom, Paraboom, #091-#100
                     Flager, Mega_Inflagetah, Inflagetah, Chimical, Chimaconda, Tikiki, Frikitiki, Unymph, Harptera, Chicoatl, Quetzoral, #101-#110
                     Coatlith, Tracton, Snopach, Dermafrost, Slothohm, Theriamp, Titanice, Frynai, Saidine, Daikatuna, #111-#120
-                    Selkid, Mega_Syrentide, Syrentide, Spritzee, Aromatisse, Miasmedic, Winotinger, Titanice, Duplicat, Eevee, Vaporeon, #121-#130
+                    Selkid, Mega_Syrentide, Syrentide, Spritzee, Aromatisse, Miasmedic, Winotinger, Duplicat, Eevee, Vaporeon, #121-#130
                     Jolteon, Flareon, Espeon, Umbreon, Leafeon, Glaceon, Sylveon, Nucleon, Ratsy, Raffiti, #131-#140
                     Gargryph, Masking, Mega_Dramsama, Dramsama, Antarki, Nuclear_Chupacho, Chupacho, Nuclear_Luchabra, Luchabra, Linkite, Chainite, Pufluff, Alpico, #141-#150
                     Anderind, Colarva, Frosulo, Frosthra, Fafurr, Fafninter, Shrimputy, Krilvolver, Lavent, Swabone, #151-#160
