@@ -11,7 +11,7 @@
 ### This PokeDex helps you pick the best possible attack against most Pokémon
 Ever found yourself in a fight against a Pokémon and wondering which attack would be the most effective? Check exactly that with this specialized version of the Pokedex!
 
-#### Contents:  
+#### Contents:
  - [Update logs](https://github.com/infinitel8p/PokeDex#update-logs)
  - [How to setup](https://github.com/infinitel8p/PokeDex#how-to-setup)
  - [PokeDex.exe is missing](https://github.com/infinitel8p/PokeDex#pokedexexe-is-missing)
@@ -34,7 +34,7 @@ v.3.2 : added option to change language (german & english)
 
 :zzz: v.3.3 : → currently working on "more information" tab for more in detail information to a pokemon  
 
-## How to setup:  
+## How to setup:
 
 1. Click ```clone or download``` and choose to download the ZIP file
 2. Extract the folder from the ZIP file
@@ -48,18 +48,18 @@ I will leave the original files in the folder in case you want to start the Poke
 1. open a command prompt (just search for ```cmd``` in the windows start menu)
 2. navigate to the PokeDex folder. In my case I would use following command and press enter:
 ```shell
-cd C:\Users\Ludo\Desktop\PokeDex 
-```  
+cd C:\Users\Ludo\Desktop\PokeDex
+```
 3. start the ```PokeDex.pyw``` from within the command prompt with:
 ```shell
 python app.pyw
-```  
+```
 
-## PokeDex.exe is missing  
+## PokeDex.exe is missing
 In case of the ```PokeDex.exe``` missing on your pc you have to tell your Antivirus that these files are fine.
 Check this post for further information: [My Antivirus Detected the exe as a Virus](https://github.com/pyinstaller/pyinstaller/issues/2501#issuecomment-286230354)  
 
-## Used libraries: 
+## Used libraries:
 - [beautifulsoup4 4.9.3](https://pypi.org/project/beautifulsoup4/)
 - [pokedex.py 1.1.2](https://pypi.org/project/pokedex.py/)
 - [dearpygui 0.6.221](https://pypi.org/project/dearpygui/)
