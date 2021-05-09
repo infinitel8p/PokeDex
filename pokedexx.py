@@ -50,8 +50,9 @@ def Search(pokemon_search_input):
         document_lines = myfile.read().splitlines()
         for lines in document_lines:
             if pokemon_search_input in lines:
-                indexNr = int(lines.rstrip(pokemon_search_input))
-                continuing = True
+                if pokemon_search_input == (lines.lstrip(lines.rstrip(pokemon_search_input))):
+                    indexNr = int(lines.rstrip(pokemon_search_input))
+                    continuing = True
 
     #If Name has been found set valuable information to variable
     if continuing == True:
