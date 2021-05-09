@@ -20,7 +20,7 @@ Ever found yourself in a fight against a Pokémon and wondering which attack wou
 
 ## How to setup:
 
-1. Click ```clone or download``` and choose to download the ZIP file (You can also download the ```PokeDex.zip``` from the [Releases](https://github.com/infinitel8p/PokeDex/releases))
+1. Click ```clone or download``` and choose to download the ZIP file (If you only want the ```.exe``` and the necessary files download the ```PokeDex.zip``` from the [Releases](https://github.com/infinitel8p/PokeDex/releases))
 2. Extract the folder from the ZIP file
 3. Run the ```PokeDex.exe``` (you may have to check [PokeDex.exe is missing](https://github.com/infinitel8p/PokeDex#pokedexexe-is-missing))
 
