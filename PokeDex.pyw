@@ -3,14 +3,14 @@ from dearpygui.core import *
 from dearpygui.simple import *
 from support import *
 
+#create log.txt
 log_output = open("log.txt", "a")
 logging.basicConfig(level=logging.DEBUG)
 
-#MAIN PROGRAM
+# ---MAIN PROGRAM---
 #window object settings
 set_main_window_size(536, 925)
 set_global_font_scale(1.25)
-set_theme("Red") #Background #161616
 set_style_window_padding(20, 20)
 
 #main window
