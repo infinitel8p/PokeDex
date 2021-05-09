@@ -31,6 +31,7 @@ v.2.1.1 : Added images of searched Pokémon to the search results
 v.3.0.1 : changed project to ```.exe```  
 v.3.1 : moved functions to ```support.py``` and fixed a error which caused the output to add up  
 v.3.2 : added option to change language (german & english)  
+v.4.0.1 : Added [Pokémon Uranium](https://pokemon-uranium.fandom.com/wiki/Main_Page) and fixed the search partially  
 
 :zzz: v.3.3 : → currently working on "more information" tab for more in detail information to a pokemon  
 
