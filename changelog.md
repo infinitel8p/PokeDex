@@ -29,6 +29,6 @@ important files:
 ## v.3.2 08.03.2021
 - added multiple languages (english & german for now)
 
-## v.4.0.1
+## v.4.0.1 09.05.2021
 - added Pokémon Uranium
 - partially fixed the search
