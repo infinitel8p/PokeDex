@@ -1,6 +1,9 @@
 import customtkinter
 import tkinter as tk
+import os
+
 from PIL import Image
+
 import pokedexx
 
 
@@ -8,6 +11,8 @@ class Home(customtkinter.CTkFrame):
     def __init__(self, parent):
         super().__init__(master=parent)
         self.configure(fg_color="transparent")
+        customtkinter.set_default_color_theme(
+            os.path.join("themes", "red.json"))
 
         # Content
         # Image
