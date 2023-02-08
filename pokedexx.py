@@ -26,7 +26,7 @@ def Translator(suchbegriff):
                 return german_name
 
 
-def Search(pokemon_search_input):
+def search(pokemon_search_input):
     # Check selected language (gets written in support.py to settings.txt)
     last_language = open("src/settings.txt", "r")
     if last_language.read() == "english":
