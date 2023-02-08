@@ -32,8 +32,8 @@ class Home(customtkinter.CTkFrame):
 
         # Search Bar
         search_label = customtkinter.CTkLabel(
-            self, text="Search for a Pokémon to get information!")
-        search_label.pack(pady=10)
+            self, text="Search for a Pokémon to get information!", anchor="w", justify="left", width=450, wraplength=450)
+        search_label.pack(pady=10, anchor="w", padx=20)
 
         self.search_bar = customtkinter.CTkEntry(
             self, width=450, placeholder_text="Insert Pokémon name")
@@ -58,13 +58,21 @@ class Home(customtkinter.CTkFrame):
         separator.pack(fill="x", padx=5, pady=(15))
 
         # Results
-
-        self.results = customtkinter.CTkLabel(self, text="")
+        # TODO: Pack this inside of scrollable frame
+        self.results = customtkinter.CTkLabel(
+            self, text="", anchor="w", justify="left", width=450, wraplength=450)
         self.results.pack(pady=10)
 
     def search(self, event):
         print("Searching...")
-        self.results.configure(text=pokedexx.search(self.search_bar.get()))
+        pokemon_name, pokemon_type, pokemon_type2, pokemon_evolution = pokedexx.search(
+            self.search_bar.get())
+        self.results.configure(text=pokemon_name)
+        self.results.configure(text=self.results.cget("text") + pokemon_type)
+        self.results.configure(text=self.results.cget("text") + pokemon_type2)
+        self.results.configure(
+            text=self.results.cget("text") + pokemon_evolution)
+        print("Done searching")
 
     def clear(self, event):
         self.search_bar.delete(0, "end")

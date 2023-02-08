@@ -9,13 +9,16 @@ class Root(customtkinter.CTk):
         customtkinter.CTk.__init__(self)
         self.title("PokeDex")
 
+        # set window properties
         self.wm_iconbitmap(os.path.join("images", "icon.ico"))
         self.geometry("500x900")
         self.resizable(False, False)
 
+        # load custom fonts
         customtkinter.FontManager.load_font(
             os.path.join("fonts", "PixelOperator8.ttf"))
 
+        # set customtkinter properties
         customtkinter.set_widget_scaling(1)
         customtkinter.set_appearance_mode("dark")
         customtkinter.set_default_color_theme(
