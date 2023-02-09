@@ -59,7 +59,7 @@ def sprite_downloader(json_response):
 
 
 # Make a GET request to the API and save the response
-api_response = requests.get("https://pokeapi.co/api/v2/pokemon/ditto").text
+api_response = requests.get("https://pokeapi.co/api/v2/pokemon/charizard").text
 # Check if the pokemon was found
 if api_response != "Not Found":
     # Convert the JSON response to a Python dictionary and save it to a variable

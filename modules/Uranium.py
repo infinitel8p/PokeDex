@@ -58,7 +58,6 @@ class Uranium(customtkinter.CTkFrame):
         separator.pack(fill="x", padx=5, pady=(15))
 
         # Results
-
         self.results = customtkinter.CTkLabel(self, text="")
         self.results.pack(pady=10)
 

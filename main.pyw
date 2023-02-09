@@ -2,6 +2,7 @@ import customtkinter
 import os
 from modules.Home import Home
 from modules.Uranium import Uranium
+from modules.VerticalScrolledFrame import VerticalScrolledFrame
 
 
 class Root(customtkinter.CTk):
