@@ -1,6 +1,6 @@
 import requests
 
-pokemon = "blastoise"
+pokemon = "charizard"
 
 # Make API request to get the species data
 pokemon_search = requests.get(

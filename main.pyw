@@ -12,7 +12,7 @@ class Root(customtkinter.CTk):
 
         # set window properties
         self.wm_iconbitmap(os.path.join("images", "icon.ico"))
-        self.geometry("500x900")
+        self.geometry("525x900")
         self.resizable(False, False)
 
         # load custom fonts

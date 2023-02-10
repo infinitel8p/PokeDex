@@ -92,9 +92,9 @@ class Home(customtkinter.CTkFrame):
         # paste the small image onto the big image
         self.default.alpha_composite(self.shiny, (x, y))
 
+        # place image
         self.image = customtkinter.CTkImage(
             self.default, size=(245, 245))
-
         self.image_label = customtkinter.CTkLabel(
             self.search_frame, image=self.image, text="")
         self.image_label.grid(row=0, column=2, rowspan=10,
@@ -118,23 +118,98 @@ class Home(customtkinter.CTkFrame):
         self.results_pokemon_index.grid(
             row=1, column=1, padx=(0, 10), sticky="ne")
 
+        # add types
         self.results_frame = customtkinter.CTkFrame(
             self.search_frame, width=250, fg_color="transparent")
-        self.results_frame.grid(row=2, column=0, columnspan=2)
+        self.results_frame.grid(row=2, column=0, columnspan=2, pady=5)
 
-        # add type
         self.results_pokemon_type_1 = customtkinter.CTkButton(
             self.results_frame, text="", fg_color="transparent", border_color="white", text_color_disabled="white",
             border_width=1, width=105, height=20, corner_radius=45, state="disabled")
         self.results_pokemon_type_1.grid(
             row=1, column=0, sticky="w", padx=(0, 10))
 
-        # add type 2
         self.results_pokemon_type_2 = customtkinter.CTkButton(
             self.results_frame, text="", fg_color="transparent", border_color="white", text_color_disabled="white",
             border_width=1, width=105, height=20, corner_radius=45, state="disabled")
         self.results_pokemon_type_2.grid(
             row=1, column=1, sticky="e", padx=(10, 0))
+
+        # add evolutions
+        # topframe
+        self.evolutions_frame = customtkinter.CTkFrame(
+            self.search_frame, width=250, fg_color="transparent")
+        self.evolutions_frame.grid(row=3, column=0, columnspan=2)
+
+        # evolution 1
+        self.evoltion_1_frame = customtkinter.CTkFrame(self.evolutions_frame, fg_color="transparent", border_color="white",
+                                                       border_width=1, width=75, corner_radius=10)
+        self.evoltion_1_frame.grid(row=0, column=0, rowspan=8)
+
+        self.sprite = customtkinter.CTkImage(Image.open(
+            r"C:\Users\Ludo\Desktop\PokeDex\images\download\front_default_1.png"), size=(50, 50))
+        self.image_label = customtkinter.CTkLabel(
+            self.evoltion_1_frame, image=self.sprite, text="")
+        self.image_label.grid(row=0, pady=(1, 0))
+
+        self.evoltion_1_index = customtkinter.CTkLabel(
+            self.evoltion_1_frame, text="#001", font=("Pixel Operator 8", 7), height=20)
+        self.evoltion_1_index.grid(row=1)
+
+        self.evoltion_1_name = customtkinter.CTkLabel(
+            self.evoltion_1_frame, text="Charmander", font=("Pixel Operator 8", 7), height=20, width=70, wraplength=69)
+        self.evoltion_1_name.grid(row=2, padx=5)
+
+        self.evoltion_1_level = customtkinter.CTkLabel(
+            self.evoltion_1_frame, text="1", font=("Pixel Operator 8", 7), height=20)
+        self.evoltion_1_level.grid(row=3, pady=(0, 2))
+
+        # evolution 2
+        self.evoltion_2_frame = customtkinter.CTkFrame(self.evolutions_frame, fg_color="transparent", border_color="white",
+                                                       border_width=1, width=75, corner_radius=10)
+        self.evoltion_2_frame.grid(
+            row=0, column=1, padx=10, rowspan=8)
+
+        self.sprite = customtkinter.CTkImage(Image.open(
+            r"C:\Users\Ludo\Desktop\PokeDex\images\download\front_default_2.png"), size=(50, 50))
+        self.image_label = customtkinter.CTkLabel(
+            self.evoltion_2_frame, image=self.sprite, text="")
+        self.image_label.grid(row=0, pady=(1, 0))
+
+        self.evoltion_2_index = customtkinter.CTkLabel(
+            self.evoltion_2_frame, text="#002", font=("Pixel Operator 8", 7), height=20)
+        self.evoltion_2_index.grid(row=1)
+
+        self.evoltion_2_name = customtkinter.CTkLabel(
+            self.evoltion_2_frame, text="Charmeleon", font=("Pixel Operator 8", 7), height=20, width=70, wraplength=69)
+        self.evoltion_2_name.grid(row=2, padx=5)
+
+        self.evoltion_2_level = customtkinter.CTkLabel(
+            self.evoltion_2_frame, text="16", font=("Pixel Operator 8", 7), height=20)
+        self.evoltion_2_level.grid(row=3, pady=(0, 2))
+
+        # evolution 3
+        self.evoltion_3_frame = customtkinter.CTkFrame(self.evolutions_frame, fg_color="transparent", border_color="white",
+                                                       border_width=1, width=75, corner_radius=10)
+        self.evoltion_3_frame.grid(row=0, column=2, rowspan=8)
+
+        self.sprite = customtkinter.CTkImage(Image.open(
+            r"C:\Users\Ludo\Desktop\PokeDex\images\download\front_default_3.png"), size=(50, 50))
+        self.image_label = customtkinter.CTkLabel(
+            self.evoltion_3_frame, image=self.sprite, text="")
+        self.image_label.grid(row=0, pady=(1, 0))
+
+        self.evoltion_3_index = customtkinter.CTkLabel(
+            self.evoltion_3_frame, text="#003", font=("Pixel Operator 8", 7), height=20)
+        self.evoltion_3_index.grid(row=1)
+
+        self.evoltion_3_name = customtkinter.CTkLabel(
+            self.evoltion_3_frame, text="Charizard", font=("Pixel Operator 8", 7), height=20, width=70, wraplength=69)
+        self.evoltion_3_name.grid(row=2, padx=5)
+
+        self.evoltion_3_level = customtkinter.CTkLabel(
+            self.evoltion_3_frame, text="36", font=("Pixel Operator 8", 7), height=20)
+        self.evoltion_3_level.grid(row=3, pady=(0, 2))
 
         # add special scroll frame
         self.vertical_scrolled_frame = customtkinter.CTkScrollableFrame(self)
