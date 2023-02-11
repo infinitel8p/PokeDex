@@ -6,6 +6,7 @@
 [![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/infinitel8p/pokedex)](https://github.com/infinitel8p/PokeDex/issues?q=is%3Aissue+is%3Aclosed)
 [![Github license](https://img.shields.io/github/license/infinitel8p/pokedex)](https://github.com/infinitel8p/PokeDex/blob/master/LICENSE)
 ![Discord Widget](https://img.shields.io/discord/751084847555936408)
+![wakatime](https://wakatime.com/badge/user/7eed0dfb-5627-4b61-95d2-5f6ef37cb08b/project/ac0b8883-d827-4c82-b9be-b1e5a05362ae.svg)
 
 ### This PokeDex helps you pick the best possible attack against most Pokémon
 Ever found yourself in a fight against a Pokémon and wondering which attack would be the most effective? Check exactly that with this specialized version of the Pokedex!
