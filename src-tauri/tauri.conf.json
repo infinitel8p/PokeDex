@@ -19,9 +19,9 @@
     },
     "windows": [
       {
-        "title": "pokedex",
-        "width": 800,
-        "height": 600
+        "title": "PokeDex",
+        "width": 550,
+        "height": 950
       }
     ],
     "security": {
