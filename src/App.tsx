@@ -7,16 +7,20 @@ function App() {
     const [pokemonData, setPokemonData] = useState<any>(null);
     const [error, setError] = useState("");
     const [name, setName] = useState("");
+    const [loading, setLoading] = useState(false);
 
     async function searchPokemon() {
+        setLoading(true);
+        setError("");
         try {
             const result = await invoke("search_pokemon", { name });
             const data = JSON.parse(result as string) as any;
             setPokemonData(data);
-            setError("");
         } catch (err) {
             setError("Pokémon not found or an error occurred!");
             setPokemonData(null);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -47,7 +51,13 @@ function App() {
                 </div>
             </form>
             <div>
-                {pokemonData ? (
+                {loading ? (
+                    <img
+                        src="/loading.png"
+                        alt="Loading"
+                        className="h-64 mx-auto"
+                    />
+                ) : pokemonData ? (
                     <div>
                         <h1 className="text-3xl font-bold capitalize">{capitalize(pokemonData?.name)}</h1>
                         <img
@@ -74,19 +84,26 @@ function App() {
                             )}
                         </div>
                     </div>
+                ) : error ? (
+                    <div>
+                        <img
+                            src="/error_404.png"
+                            alt="Error"
+                            className="h-64 mx-auto"
+                        />
+                        <p className="text-red-500">{error}</p>
+                    </div>
                 ) : (
                     <div>
                         <h1 className="text-3xl font-bold capitalize">Welcome to PokeDex!</h1>
                         <img
-                            src="/image.png"
+                            src="/PokeDex.png"
                             alt="Default Pokémon"
                             className="h-64 mx-auto"
                         />
                     </div>
                 )}
             </div>
-
-            {error && <p className="text-red-500">{error}</p>}
         </div>
     );
 }

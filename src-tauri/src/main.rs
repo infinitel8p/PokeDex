@@ -10,11 +10,46 @@ mod weakness_helpers;
 use reqwest::get;
 use serde_json::{Value, json};
 use weakness_helpers::calculate_weaknesses;
+use std::collections::HashMap;
+use std::fs::File;
+use std::io::{BufRead, BufReader};
+
+fn load_translations() -> HashMap<String, String> {
+    let file = File::open("assets/translations.csv").expect("Cannot open CSV file");
+    let reader = BufReader::new(file);
+    let mut translations = HashMap::new();
+
+    for line in reader.lines() {
+        if let Ok(entry) = line {
+            let fields: Vec<&str> = entry.split(',').collect();
+            let english_name = fields[1].to_string();
+            
+            // Add translations for all languages to the HashMap
+            for name in &fields[1..] {
+                translations.insert(name.trim().to_lowercase(), english_name.clone());
+            }
+        }
+    }
+
+    translations
+}
+
+fn translate_to_english(name: &str, translations: &HashMap<String, String>) -> String {
+    let lowercase_name = name.to_lowercase();
+    if let Some(english_name) = translations.get(&lowercase_name) {
+        english_name.clone()
+    } else {
+        name.to_string()  // If the name is already in English or not found, return it as is
+    }
+}
 
 // Fetch input from PokéAPI and include weaknesses
 #[tauri::command]
 async fn search_pokemon(name: &str) -> Result<String, String> {
-    let url = format!("https://pokeapi.co/api/v2/pokemon/{}", name.to_lowercase());
+    let translations = load_translations();
+    let english_name = translate_to_english(name, &translations);
+    
+    let url = format!("https://pokeapi.co/api/v2/pokemon/{}", english_name.to_lowercase());
 
     match get(&url).await {
         Ok(response) => {
@@ -31,12 +66,13 @@ async fn search_pokemon(name: &str) -> Result<String, String> {
 
                 Ok(result.to_string())
             } else {
-                Err(format!("Error: Pokémon {} not found!", name))
+                Err(format!("Error: Pokémon {} not found!", english_name))
             }
         }
         Err(_) => Err("Failed to connect to PokéAPI".to_string()),
     }
 }
+
 
 fn main() {
     tauri::Builder::default()
