@@ -7,8 +7,12 @@
 [![Github license](https://img.shields.io/github/license/infinitel8p/pokedex)](https://github.com/infinitel8p/PokeDex/blob/master/LICENSE)
 ![Discord Widget](https://img.shields.io/discord/751084847555936408)
 
+# ⚠️ This repository is currently undergoing a major overhaul. Please be patient as we work to improve the codebase. ⚠️  
+<b>Check the [Releases](https://github.com/infinitel8p/PokeDex/releases/tag/v.4.0.1) for the last stable version.</b>
+
 ## This PokeDex helps you pick the best possible attack against most Pokémon
 
 Ever found yourself in a fight against a Pokémon and wondering which attack would be the most effective? Check exactly that with this specialized version of the Pokedex!
 
 ## Contents:
+TDB
