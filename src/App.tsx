@@ -25,7 +25,27 @@ function App() {
     }
 
     return (
-        <div className="m-0 pt-[5vh] flex flex-col justify-between h-screen text-center">
+        <div className="text-center">
+            <p className="text-xs my-2"><span className="font-bold italic">Note:</span> Type effectiveness multipliers may vary in other games outside the core series.</p>
+
+            <form
+                className="flex flex-col justify-center mb-10"
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    searchPokemon();
+                }}
+            >
+
+                <div className="flex justify-center gap-3">
+                    <input
+                        id="pokemon-input"
+                        onChange={(e) => setName(e.currentTarget.value.toLowerCase())}
+                        placeholder="Enter a Pokémon name..."
+                        className="cursor-pointer text-lg border-1 rounded-lg py-2 px-4 bg-[#0f0f0f98] focus:outline-none focus:ring-1 focus:ring-red-500"
+                    />
+                    <button type="submit" className="cursor-pointer text-lg border-1 rounded-lg py-2 px-4 bg-[#0f0f0f98] hover:ring-1 hover:ring-red-500">Find</button>
+                </div>
+            </form>
             <div>
                 {pokemonData ? (
                     <div>
@@ -38,7 +58,7 @@ function App() {
                         <p className="mt-2">
                             <strong>Type:</strong> {pokemonData?.types?.map((type: any) => capitalize(type.type.name)).join(", ")}
                         </p>
-                        <div className="mt-10">
+                        <div>
                             {pokemonData?.weaknesses ? (
                                 ['2x', '0.5x', '0x'].map((multiplier) => (
                                     <CollapsibleSection key={multiplier} title={`${multiplier} ${multiplier === '2x' ? 'Weaknesses' : multiplier === '0.5x' ? 'Resistances' : 'Immunities'}`}>
@@ -67,24 +87,6 @@ function App() {
             </div>
 
             {error && <p className="text-red-500">{error}</p>}
-
-            <form
-                className="flex flex-col justify-center gap-2 mt-2"
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    searchPokemon();
-                }}
-            >
-                <div className="flex justify-center gap-2 mt-2">
-                    <input
-                        id="pokemon-input"
-                        onChange={(e) => setName(e.currentTarget.value.toLowerCase())}
-                        placeholder="Enter a Pokémon name..."
-                    />
-                    <button type="submit" className="cursor-pointer">Find</button>
-                </div>
-                <p className="text-xs italic">Note: Type effectiveness multipliers may vary in other games outside the core series.</p>
-            </form>
         </div>
     );
 }
