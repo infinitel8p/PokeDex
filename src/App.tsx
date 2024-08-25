@@ -40,29 +40,15 @@ function App() {
             </p>
             <div className="mt-10">
               {pokemonData?.weaknesses ? (
-                <>
-                  <CollapsibleSection title="2x Weaknesses">
-                    {pokemonData.weaknesses['2x']?.map((weakness: any) => (
-                      <div key={weakness.type} className="inline-block m-2">
-                        <img src={weakness.icon} alt={weakness.type} className="h-8 inline-block mr-2" />
+                ['2x', '0.5x', '0x'].map((multiplier) => (
+                  <CollapsibleSection key={multiplier} title={`${multiplier} ${multiplier === '2x' ? 'Weaknesses' : multiplier === '0.5x' ? 'Resistances' : 'Immunities'}`}>
+                    {pokemonData.weaknesses[multiplier]?.map((entry: any) => (
+                      <div key={entry.type} className="inline-block m-2">
+                        <img src={entry.icon} alt={entry.type} className="h-6 inline-block" />
                       </div>
                     )) || "None"}
                   </CollapsibleSection>
-                  <CollapsibleSection title="0.5x Resistances">
-                    {pokemonData.weaknesses['0.5x']?.map((resistance: any) => (
-                      <div key={resistance.type} className="inline-block m-2">
-                        <img src={resistance.icon} alt={resistance.type} className="h-8 inline-block mr-2" />
-                      </div>
-                    )) || "None"}
-                  </CollapsibleSection>
-                  <CollapsibleSection title="0x Immunities">
-                    {pokemonData.weaknesses['0x']?.map((immunity: any) => (
-                      <div key={immunity.type} className="inline-block m-2">
-                        <img src={immunity.icon} alt={immunity.type} className="h-8 inline-block mr-2" />
-                      </div>
-                    )) || "None"}
-                  </CollapsibleSection>
-                </>
+                ))
               ) : (
                 "No weaknesses found"
               )}
