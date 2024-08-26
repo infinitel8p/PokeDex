@@ -18,6 +18,8 @@ jobs:
             args: "--target aarch64-apple-darwin"
           - platform: "macos-latest" # for Intel based macs.
             args: "--target x86_64-apple-darwin"
+          - platform: "macos-latest" # for Universal binaries.
+            args: "--target universal-apple-darwin"
           - platform: "ubuntu-22.04" # for Tauri v1 you could replace this with ubuntu-20.04.
             args: ""
           - platform: "windows-latest"
@@ -71,6 +73,10 @@ jobs:
             - **For Intel-based Macs:**
               - PokeDex___VERSION___x64.dmg
               - PokeDex_x64.app.tar.gz
+
+            - **Universal binaries:**
+              - PokeDex___VERSION___universal.dmg
+              - PokeDex_universal.app.tar.gz
 
             ## Ubuntu / Linux
             - **For Ubuntu/Debian-based distributions:**
