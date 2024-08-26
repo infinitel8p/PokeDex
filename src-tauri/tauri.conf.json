@@ -28,13 +28,22 @@
         "width": 500,
         "height": 900,
         "resizable": false,
+        "maximizable": false,
         "fullscreen": false,
-        "visible": false
+        "visible": false,
+        "center": true,
+        "transparent": false
       },
       {
         "width": 500,
         "height": 900,
         "decorations": false,
+        "resizable": false,
+        "maximizable": false,
+        "fullscreen": false,
+        "visible": false,
+        "center": true,
+        "transparent": false,
         "url": "splashscreen.html",
         "label": "splashscreen"
       }
