@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/PokeDex.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PokeDex helps you find the most effective attack during a Pokemon battle." />
+    <meta name="author" content="InfiniteL8p" />
+    <title>PokeDex</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a1a1a;
+        }
+
+        img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+
+        .flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* From Uiverse.io by G4b413l */
+        .line-wobble {
+            --uib-size: 80px;
+            --uib-speed: 1.55s;
+            --uib-color: white;
+            --uib-line-weight: 5px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: var(--uib-line-weight);
+            width: var(--uib-size);
+            border-radius: calc(var(--uib-line-weight) / 2);
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .line-wobble::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: var(--uib-color);
+            opacity: 0.1;
+        }
+
+        .line-wobble::after {
+            content: '';
+            height: 100%;
+            width: 100%;
+            border-radius: calc(var(--uib-line-weight) / 2);
+            animation: wobble var(--uib-speed) ease-in-out infinite;
+            transform: translateX(-90%);
+            background-color: var(--uib-color);
+        }
+
+        @keyframes wobble {
+
+            0%,
+            100% {
+                transform: translateX(-90%);
+            }
+
+            50% {
+                transform: translateX(90%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex">
+        <img src="/PokeDex.png" alt="Default Pokémon" />
+        <div class="line-wobble"></div>
+    </div>
+</body>
+
+</html>

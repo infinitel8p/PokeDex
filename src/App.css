@@ -4,5 +4,10 @@
 
 :root {
 	color: #f6f6f6;
-	background-color: #2f2f2f;
+	background-color: #1a1a1a;
+}
+
+/* hide all scrollbars in every browser */
+::-webkit-scrollbar {
+	display: none;
 }

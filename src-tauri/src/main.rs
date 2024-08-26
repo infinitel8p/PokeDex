@@ -6,7 +6,7 @@
 extern crate maplit;
 
 mod weakness_helpers;
-
+use tauri::{Manager, Window};
 use reqwest::get;
 use serde_json::{Value, json};
 use weakness_helpers::calculate_weaknesses;
@@ -43,7 +43,6 @@ fn translate_to_english(name: &str, translations: &HashMap<String, String>) -> S
     }
 }
 
-// Fetch input from PokéAPI and include weaknesses
 #[tauri::command]
 async fn search_pokemon(name: &str) -> Result<String, String> {
     let translations = load_translations();
@@ -73,10 +72,16 @@ async fn search_pokemon(name: &str) -> Result<String, String> {
     }
 }
 
+#[tauri::command]
+async fn close_splashscreen(window: Window) {
+    // Close splashscreen & show main window
+    window.get_window("splashscreen").expect("no window labeled 'splashscreen' found").close().unwrap();
+    window.get_window("main").expect("no window labeled 'main' found").show().unwrap();
+}
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![search_pokemon])
+        .invoke_handler(tauri::generate_handler![close_splashscreen, search_pokemon])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

@@ -20,8 +20,18 @@
     "windows": [
       {
         "title": "PokeDex",
-        "width": 550,
-        "height": 950
+        "width": 500,
+        "height": 900,
+        "resizable": false,
+        "fullscreen": false,
+        "visible": false
+      },
+      {
+        "width": 500,
+        "height": 900,
+        "decorations": false,
+        "url": "splashscreen.html",
+        "label": "splashscreen"
       }
     ],
     "security": {
