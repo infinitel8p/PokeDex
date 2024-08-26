@@ -22,11 +22,12 @@ fn load_translations() -> HashMap<String, String> {
     for line in reader.lines() {
         if let Ok(entry) = line {
             let fields: Vec<&str> = entry.split(',').collect();
-            let english_name = fields[1].to_string();
+            let key = fields[0].to_string();
+            // let english_name = fields[1].to_string();
             
-            // Add translations for all languages to the HashMap
+            // Add translations for all languages to the HashMap, mapping them to the key
             for name in &fields[1..] {
-                translations.insert(name.trim().to_lowercase(), english_name.clone());
+                translations.insert(name.trim().to_lowercase(), key.clone());
             }
         }
     }
@@ -34,10 +35,10 @@ fn load_translations() -> HashMap<String, String> {
     translations
 }
 
-fn translate_to_english(name: &str, translations: &HashMap<String, String>) -> String {
+fn translate_to_key(name: &str, translations: &HashMap<String, String>) -> String {
     let lowercase_name = name.to_lowercase();
-    if let Some(english_name) = translations.get(&lowercase_name) {
-        english_name.clone()
+    if let Some(key) = translations.get(&lowercase_name) {
+        key.clone()
     } else {
         name.to_string()  // If the name is already in English or not found, return it as is
     }
@@ -46,9 +47,9 @@ fn translate_to_english(name: &str, translations: &HashMap<String, String>) -> S
 #[tauri::command]
 async fn search_pokemon(name: &str) -> Result<String, String> {
     let translations = load_translations();
-    let english_name = translate_to_english(name, &translations);
+    let key = translate_to_key(name, &translations);
     
-    let url = format!("https://pokeapi.co/api/v2/pokemon/{}", english_name.to_lowercase());
+    let url = format!("https://pokeapi.co/api/v2/pokemon/{}", key);
 
     match get(&url).await {
         Ok(response) => {
@@ -65,7 +66,7 @@ async fn search_pokemon(name: &str) -> Result<String, String> {
 
                 Ok(result.to_string())
             } else {
-                Err(format!("Error: Pokémon {} not found!", english_name))
+                Err(format!("Error: Pokémon with key {} not found!", key))
             }
         }
         Err(_) => Err("Failed to connect to PokéAPI".to_string()),

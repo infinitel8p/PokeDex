@@ -60,9 +60,32 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
+          tagName: PokeDex-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
           releaseName: "PokeDex v__VERSION__"
-          releaseBody: "See the assets to download this version and install."
+          releaseBody: |
+            ## macOS
+            - **For Apple Silicon (M1 and above):**
+              - PokeDex___VERSION___aarch64.dmg
+              - PokeDex_aarch64.app.tar.gz
+
+            - **For Intel-based Macs:**
+              - PokeDex___VERSION___x64.dmg
+              - PokeDex_x64.app.tar.gz
+
+            ## Ubuntu / Linux
+            - **For Ubuntu/Debian-based distributions:**
+              - poke-dex___VERSION___amd64.deb
+
+            - **For RPM-based distributions (Fedora, CentOS, RHEL):**
+              - poke-dex-__VERSION__-1.x86_64.rpm
+
+            - **AppImage (Universal Linux):**
+              - poke-dex___VERSION___amd64.AppImage
+
+            ## Windows
+            - **Windows Installer:**
+              - PokeDex___VERSION___x64-setup.exe
+              - PokeDex___VERSION___x64_en-US.msi
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
