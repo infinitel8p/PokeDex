@@ -1,7 +1,7 @@
 [package]
-name = "pokedex"
+name = "PokeDex"
 version = "0.1.0"
-description = "A custom PokeDex"
+description = "Custom PokeDex"
 authors = ["InfiniteL8p"]
 edition = "2021"
 

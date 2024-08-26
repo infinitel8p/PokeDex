@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "pokedex",
+    "productName": "PokeDex",
     "version": "0.1.0"
   },
   "tauri": {
@@ -15,6 +15,11 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "fs": {
+        "scope": [
+          "$RESOURCE/*"
+        ]
       }
     },
     "windows": [
@@ -47,6 +52,9 @@
         "icons/128x128@2x.png",
         "icons/icon.icns",
         "icons/icon.ico"
+      ],
+      "resources": [
+        "assets/*"
       ]
     }
   }

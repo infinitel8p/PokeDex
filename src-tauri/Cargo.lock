@@ -3,6 +3,20 @@
 version = 3
 
 [[package]]
+name = "PokeDex"
+version = "0.1.0"
+dependencies = [
+ "csv",
+ "maplit",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tokio",
+]
+
+[[package]]
 name = "addr2line"
 version = "0.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2139,20 +2153,6 @@ dependencies = [
  "fdeflate",
  "flate2",
  "miniz_oxide 0.7.4",
-]
-
-[[package]]
-name = "pokedex"
-version = "0.1.0"
-dependencies = [
- "csv",
- "maplit",
- "reqwest",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tokio",
 ]
 
 [[package]]
