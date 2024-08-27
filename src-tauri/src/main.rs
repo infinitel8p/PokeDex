@@ -14,8 +14,17 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+use tauri::{api::path::resource_dir, Env};
+
 fn load_translations() -> HashMap<String, String> {
-    let file = File::open("assets/translations.csv").expect("Cannot open CSV file");
+    let context = tauri::generate_context!();
+    let package_info = context.package_info();
+    let env = Env::default();
+
+    let mut file_path = resource_dir(package_info, &env).expect("Could not access resource directory");
+    file_path.push("assets/translations.csv");
+
+    let file = File::open(file_path).expect("Cannot open CSV file");
     let reader = BufReader::new(file);
     let mut translations = HashMap::new();
 
@@ -34,6 +43,7 @@ fn load_translations() -> HashMap<String, String> {
 
     translations
 }
+
 
 fn translate_to_key(name: &str, translations: &HashMap<String, String>) -> String {
     let lowercase_name = name.to_lowercase();

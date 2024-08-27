@@ -2,12 +2,11 @@
   "build": {
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist"
+    "devPath": "http://localhost:1420"
   },
   "package": {
     "productName": "PokeDex",
-    "version": "0.1.2"
+    "version": "0.1.3"
   },
   "tauri": {
     "allowlist": {
@@ -35,8 +34,8 @@
         "transparent": false
       },
       {
-        "width": 500,
-        "height": 900,
+        "width": 450,
+        "height": 450,
         "decorations": false,
         "resizable": false,
         "maximizable": false,

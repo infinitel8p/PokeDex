@@ -13,7 +13,8 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
         if (!name.trim()) {
             return;
         }
-        onSearch(name);
+        let submitName = name.replace(/^0+/, "").toLowerCase().trim();
+        onSearch(submitName);
     };
 
     useEffect(() => {
@@ -22,7 +23,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
             if (
                 inputRef.current &&
                 document.activeElement !== inputRef.current &&
-                event.key.length === 1 // This ensures only single characters like letters and numbers trigger the focus
+                event.key.length === 1 // ensure only single characters trigger the focus
             ) {
                 inputRef.current.focus();
             }
