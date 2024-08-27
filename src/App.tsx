@@ -3,6 +3,7 @@ import { invoke } from "@tauri-apps/api/tauri";
 import "./App.css";
 import Accordion from "./components/Accordion";
 import Search from "./components/Search";
+import Tabs from "./components/Tabs";
 
 function App() {
     const [pokemonData, setPokemonData] = useState<any>(null);
@@ -51,11 +52,7 @@ function App() {
         <div className="text-center mt-10">
             <div>
                 {loading ? (
-                    <img
-                        src="/loading.png"
-                        alt="Loading"
-                        className="h-64 mx-auto pt-16"
-                    />
+                    <img src="/loading.png" alt="Loading" className="h-64 mx-auto pt-16" />
                 ) : pokemonData ? (
                     <div>
                         <h1 className="text-3xl font-bold capitalize pt-5 flex justify-center items-baseline gap-2">
@@ -68,34 +65,36 @@ function App() {
                             className="h-64 mx-auto"
                         />
                         <Search onSearch={searchPokemon} />
-                        <div className="mt-2 flex justify-center gap-2">
-                            <p><strong>Type:</strong> {pokemonData?.types?.map((type: any) => capitalize(type.type.name)).join(", ")}</p>
-                        </div>
-                        <div>
-                            {accordionSections.length > 0 ? (
-                                <Accordion sections={accordionSections} />
-                            ) : (
-                                "No weaknesses found"
-                            )}
-                        </div>
+                        <Tabs
+                            tabsContent={[
+                                <div>
+                                    <div className="flex justify-center gap-2">
+                                        <p>
+                                            <strong>Type:</strong>{" "}
+                                            {pokemonData?.types?.map((type: any) => capitalize(type.type.name)).join(", ")}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        {accordionSections.length > 0 ? (
+                                            <Accordion sections={accordionSections} />
+                                        ) : (
+                                            "No weaknesses found"
+                                        )}
+                                    </div>
+                                </div>,
+                                <div>Coming Soon...</div>,
+                            ]}
+                        />
                     </div>
                 ) : error ? (
                     <div>
-                        <img
-                            src="/error_404.png"
-                            alt="Error"
-                            className="h-64 mx-auto pt-16"
-                        />
+                        <img src="/error_404.png" alt="Error" className="h-64 mx-auto pt-16" />
                         <Search onSearch={searchPokemon} />
                         <p className="text-red-500">{error}</p>
                     </div>
                 ) : (
                     <div>
-                        <img
-                            src="/PokeDex.png"
-                            alt="Default Pokémon"
-                            className="h-64 mx-auto pt-16"
-                        />
+                        <img src="/PokeDex.png" alt="Default Pokémon" className="h-64 mx-auto pt-16" />
                         <Search onSearch={searchPokemon} />
                     </div>
                 )}

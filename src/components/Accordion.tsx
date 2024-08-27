@@ -22,7 +22,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({ title, isOpen, onTo
     return (
         <div className="overflow-hidden border-b border-[#0a0a0a98]">
             <button
-                className="text-lg font-bold w-full text-left px-4 py-2 hover:bg-[#0f0f0f98] transition-all duration-300"
+                className="text-lg font-bold w-full text-left py-2 transition-all duration-300"
                 onClick={onToggle}
             >
                 <div className="flex justify-between items-center">
@@ -54,7 +54,7 @@ const Accordion: React.FC<{ sections: { title: string, content: React.ReactNode 
     };
 
     return (
-        <div className="w-96 mx-auto">
+        <div className="w-[calc(100%-5rem)] mx-auto">
             {sections.map((section, index) => (
                 <AccordionSection
                     key={index}

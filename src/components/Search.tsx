@@ -55,8 +55,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
                     <button type="submit" className="cursor-pointer text-lg border-1 rounded-lg px-3 bg-[#0f0f0f98] hover:ring-1 hover:ring-red-500">Find</button>
                 </div>
             </form>
-            <p className="text-xs mt-1 italic">Type effectiveness multipliers may vary in other games outside the core series.</p>
-            <hr className="m-10 border-red-900" />
+            <p className="text-xs mt-1 italic text-gray-400">Type effectiveness multipliers may vary in other games outside the core series.</p>
         </div>
     );
 };
