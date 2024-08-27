@@ -38,12 +38,13 @@ function App() {
             title: `${multiplier} ${multiplier === '2x' ? 'Weaknesses' : multiplier === '0.5x' ? 'Resistances' : 'Immunities'}`,
             content: (
                 <div>
-                    {pokemonData.weaknesses[multiplier]?.map((entry: any) => (
+                    {pokemonData.weaknesses[multiplier]?.sort((a: any, b: any) => a.type.localeCompare(b.type)).map((entry: any) => (
                         <div key={entry.type} className="inline-block m-2">
                             <img src={entry.icon} alt={entry.type} className="h-6 inline-block" />
                         </div>
                     )) || "None"}
                 </div>
+
             ),
         }))
         : [];
