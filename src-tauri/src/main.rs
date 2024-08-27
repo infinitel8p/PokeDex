@@ -17,17 +17,12 @@ use std::io::{BufRead, BufReader};
 use tauri::{api::path::resource_dir, Env};
 
 fn load_translations() -> HashMap<String, String> {
-    let current_dir = std::env::current_dir().unwrap();
-    println!("Current directory: {:?}", current_dir);
-
     let context = tauri::generate_context!();
     let package_info = context.package_info();
     let env = Env::default();
 
     let mut file_path = resource_dir(package_info, &env).expect("Could not access resource directory");
     file_path.push("assets/translations.csv");
-
-    println!("File path: {:?}", file_path);
 
     let file = File::open(file_path).expect("Cannot open CSV file");
     let reader = BufReader::new(file);
