@@ -30,7 +30,9 @@ function App() {
     }
 
     useEffect(() => {
-        invoke('close_splashscreen');
+        setTimeout(() => {
+            invoke('close_splashscreen');
+        }, 2000);
     }, []);
 
     const accordionSections = pokemonData?.weaknesses

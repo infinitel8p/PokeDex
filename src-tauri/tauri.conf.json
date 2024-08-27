@@ -35,8 +35,8 @@
         "transparent": false
       },
       {
-        "width": 500,
-        "height": 900,
+        "width": 450,
+        "height": 450,
         "decorations": false,
         "resizable": false,
         "maximizable": false,
