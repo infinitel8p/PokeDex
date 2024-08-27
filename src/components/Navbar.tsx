@@ -20,13 +20,13 @@ const Navbar = () => {
     return (
         <div className={bgColor} style={{ position: "fixed", top: 0, left: 0, right: 0 }}>
             <nav>
-                <ul className="px-2 py-0.5 flex justify-between">
-                    <li className={`flex gap-4 ${txtColor}`}>
+                <ul className={`px-2 py-0.5 flex justify-between ${txtColor}`}>
+                    <li className="flex gap-4">
                         <a href="/" className={hoverColor}>Home</a>
                         <a href="/uranium" className={hoverColor}>Uranium</a>
                         <a href="/insurgence" className={hoverColor}>Insurgence</a>
                     </li>
-                    <a href="/settings">Settings</a>
+                    <a href="/settings" className={hoverColor}>Settings</a>
                 </ul >
             </nav >
         </div >
