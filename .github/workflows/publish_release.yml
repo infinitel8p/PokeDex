@@ -67,31 +67,32 @@ jobs:
           releaseBody: |
             ## macOS
             - **For Apple Silicon (M1 and above):**
-              - PokeDex___VERSION___aarch64.dmg
-              - PokeDex_aarch64.app.tar.gz
+              - [PokeDex___VERSION___aarch64.dmg](https://github.com/infinitel8p/PokeDex/releases/download/__VERSION__/PokeDex___VERSION___aarch64.dmg)
+              - [PokeDex_aarch64.app.tar.gz](https://github.com/infinitel8p/PokeDex/releases/download/__VERSION__/PokeDex_aarch64.app.tar.gz)
 
             - **For Intel-based Macs:**
-              - PokeDex___VERSION___x64.dmg
-              - PokeDex_x64.app.tar.gz
+              - [PokeDex___VERSION___x64.dmg](https://github.com/infinitel8p/PokeDex/releases/download/__VERSION__/PokeDex___VERSION___x64.dmg)
+              - [PokeDex_x64.app.tar.gz](https://github.com/infinitel8p/PokeDex/releases/download/__VERSION__/PokeDex_x64.app.tar.gz)
 
             - **Universal binaries:**
-              - PokeDex___VERSION___universal.dmg
-              - PokeDex_universal.app.tar.gz
+              - [PokeDex___VERSION___universal.dmg](https://github.com/infinitel8p/PokeDex/releases/download/__VERSION__/PokeDex___VERSION___universal.dmg)
+              - [PokeDex_universal.app.tar.gz](https://github.com/infinitel8p/PokeDex/releases/download/__VERSION__/PokeDex_universal.app.tar.gz)
 
             ## Ubuntu / Linux
             - **For Ubuntu/Debian-based distributions:**
-              - poke-dex___VERSION___amd64.deb
+              - [poke-dex___VERSION___amd64.deb](https://github.com/infinitel8p/PokeDex/releases/download/__VERSION__/poke-dex___VERSION___amd64.deb)
 
             - **For RPM-based distributions (Fedora, CentOS, RHEL):**
-              - poke-dex-__VERSION__-1.x86_64.rpm
+              - [poke-dex-__VERSION__-1.x86_64.rpm](https://github.com/infinitel8p/PokeDex/releases/download/__VERSION__/poke-dex-__VERSION__-1.x86_64.rpm)
 
             - **AppImage (Universal Linux):**
-              - poke-dex___VERSION___amd64.AppImage
+              - [poke-dex___VERSION___amd64.AppImage](https://github.com/infinitel8p/PokeDex/releases/download/__VERSION__/poke-dex___VERSION___amd64.AppImage)
 
             ## Windows
             - **Windows Installer:**
-              - PokeDex___VERSION___x64-setup.exe
-              - PokeDex___VERSION___x64_en-US.msi
+              - [PokeDex___VERSION___x64-setup.exe](https://github.com/infinitel8p/PokeDex/releases/download/__VERSION__/PokeDex___VERSION___x64-setup.exe)
+              - [PokeDex___VERSION___x64_en-US.msi](https://github.com/infinitel8p/PokeDex/releases/download/__VERSION__/PokeDex___VERSION___x64_en-US.msi)
+
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
