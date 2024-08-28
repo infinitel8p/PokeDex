@@ -15,3 +15,5 @@ Ever found yourself in a fight against a Pokémon and wondering which attack wou
 
 ## Contents:
 TDB
+
+## Installation:
