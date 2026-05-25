@@ -3,9 +3,13 @@ import { flushSync } from "react-dom";
 import { invoke } from "@tauri-apps/api/core";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import "./App.css";
+import EvolutionStrip from "./components/EvolutionStrip";
 import HoloArtwork from "./components/HoloArtwork";
 import Search from "./components/Search";
+import StatBars from "./components/StatBars";
 import StatusBar from "./components/StatusBar";
+import { getRecentSearches, pushRecentSearch, RECENT_CHANGE_EVENT } from "./lib/recent";
+import { getShinyPreference, SHINY_CHANGE_EVENT, ShinyPreference } from "./lib/shiny";
 import {
     classifySearchError,
     getTypeColor,
@@ -13,6 +17,8 @@ import {
     WeaknessMultiplier,
     WeaknessEntry,
 } from "./types/pokemon";
+
+const MAX_POKEMON_ID = 1025;
 
 const SECTION_META: Record<
     WeaknessMultiplier,
@@ -104,8 +110,28 @@ function App() {
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState(false);
     const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+    const [recent, setRecent] = useState<string[]>(() => getRecentSearches());
+    const [shiny, setShiny] = useState<ShinyPreference>(() => getShinyPreference());
     const requestIdRef = useRef(0);
     const examples = useMemo(() => pickRandomExamples(EXAMPLE_POKEMON, 3), []);
+
+    // React to preference changes from Settings
+    useEffect(() => {
+        const onRecent = (e: Event) => {
+            const d = (e as CustomEvent<string[]>).detail;
+            setRecent(d);
+        };
+        const onShiny = (e: Event) => {
+            const d = (e as CustomEvent<ShinyPreference>).detail;
+            setShiny(d);
+        };
+        window.addEventListener(RECENT_CHANGE_EVENT, onRecent);
+        window.addEventListener(SHINY_CHANGE_EVENT, onShiny);
+        return () => {
+            window.removeEventListener(RECENT_CHANGE_EVENT, onRecent);
+            window.removeEventListener(SHINY_CHANGE_EVENT, onShiny);
+        };
+    }, []);
 
     useEffect(() => {
         if (!loading) return;
@@ -124,6 +150,7 @@ function App() {
             const result = await invoke<string>("search_pokemon", { name });
             if (myId !== requestIdRef.current) return;
             const data = JSON.parse(result) as Pokemon;
+            pushRecentSearch(data.name);
             const doc = document as Document & {
                 startViewTransition?: (cb: () => void) => unknown;
             };
@@ -157,6 +184,22 @@ function App() {
             if (myId === requestIdRef.current) {
                 setLoading(false);
             }
+        }
+    }
+
+    function randomSearch() {
+        const id = Math.floor(Math.random() * MAX_POKEMON_ID) + 1;
+        searchPokemon(String(id));
+    }
+
+    function playCry(url: string | undefined) {
+        if (!url) return;
+        try {
+            const audio = new Audio(url);
+            audio.volume = 0.5;
+            void audio.play();
+        } catch {
+            // ignore
         }
     }
 
@@ -263,7 +306,12 @@ function App() {
                         </motion.div>
                     )}
 
-                    {viewKey === "result" && pokemonData && (
+                    {viewKey === "result" && pokemonData && (() => {
+                        const artwork = pokemonData.sprites?.other?.["official-artwork"];
+                        const artworkUrl = (shiny === "on" && artwork?.front_shiny)
+                            ? artwork.front_shiny
+                            : artwork?.front_default;
+                        return (
                         <motion.div key="result" {...stateTransition}>
                             <header className="px-4 pt-4">
                                 <div className="flex items-start justify-between gap-3 border-2 border-red-500 px-4 py-3">
@@ -271,12 +319,37 @@ function App() {
                                         <p className="font-display text-xs text-red-500 tabular-nums tracking-[0.18em] uppercase">
                                             № {pokemonData.id.toString().padStart(4, "0")}
                                         </p>
-                                        <h1
-                                            className="font-display text-4xl font-bold capitalize mt-1 leading-[0.95] break-words tracking-tight"
-                                            style={{ viewTransitionName: "pokemon-name" }}
-                                        >
-                                            {capitalize(pokemonData.name)}
-                                        </h1>
+                                        <div className="flex items-baseline gap-2 mt-1">
+                                            <h1
+                                                className="font-display text-4xl font-bold capitalize leading-[0.95] break-words tracking-tight min-w-0"
+                                                style={{ viewTransitionName: "pokemon-name" }}
+                                            >
+                                                {capitalize(pokemonData.name)}
+                                            </h1>
+                                            {(pokemonData.cries?.latest || pokemonData.cries?.legacy) && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => playCry(pokemonData.cries?.latest ?? pokemonData.cries?.legacy)}
+                                                    className="shrink-0 inline-flex items-center justify-center h-6 w-6 text-muted hover:text-red-500 transition-all duration-150 active:scale-90 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                                                    aria-label={`Play ${capitalize(pokemonData.name)} cry`}
+                                                >
+                                                    <svg
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        className="h-4 w-4"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                                                        <path d="M15.54 8.46a5 5 0 010 7.07" />
+                                                        <path d="M19.07 4.93a10 10 0 010 14.14" />
+                                                    </svg>
+                                                </button>
+                                            )}
+                                        </div>
                                         <div className="mt-3 flex flex-wrap gap-1.5">
                                             <span className="sr-only">Type: </span>
                                             {pokemonData.types.map((t) => {
@@ -297,11 +370,11 @@ function App() {
                                             })}
                                         </div>
                                     </div>
-                                    {pokemonData.sprites?.other?.["official-artwork"]?.front_default ? (
+                                    {artworkUrl ? (
                                         <div className="scan-sweep h-32 w-32 flex-shrink-0 -mt-2 -mr-2">
                                             <HoloArtwork
-                                                src={pokemonData.sprites.other["official-artwork"].front_default}
-                                                alt={`${capitalize(pokemonData.name)} official artwork`}
+                                                src={artworkUrl}
+                                                alt={`${capitalize(pokemonData.name)} official artwork${shiny === "on" ? " (shiny)" : ""}`}
                                             />
                                         </div>
                                     ) : (
@@ -376,12 +449,18 @@ function App() {
                                         </motion.section>
                                     ))
                                 )}
+                                <StatBars stats={pokemonData.stats} />
+                                <EvolutionStrip
+                                    chain={pokemonData.evolution}
+                                    onPick={(name) => searchPokemon(name.toLowerCase())}
+                                />
                                 <p className="text-[0.625rem] text-faint italic text-center px-6 pt-2 pb-1">
                                     Based on core-series type effectiveness.
                                 </p>
                             </div>
                         </motion.div>
-                    )}
+                        );
+                    })()}
 
                     {viewKey === "error" && (
                         <motion.div
@@ -433,9 +512,20 @@ function App() {
                                     initial="hidden"
                                     animate="show"
                                     transition={{ delay: 0.2, duration: 0.4, ease: EASE_OUT_QUINT }}
-                                    className="mt-10"
+                                    className="mt-10 flex items-stretch gap-1.5"
                                 >
-                                    <Search onSearch={searchPokemon} autoFocus />
+                                    <div className="flex-1 min-w-0">
+                                        <Search onSearch={searchPokemon} autoFocus />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={randomSearch}
+                                        aria-label="Random Pokémon"
+                                        title="Random Pokémon"
+                                        className="shrink-0 border-2 border-divider/70 hover:border-red-500 px-3 text-fg hover:text-red-500 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas font-display text-lg leading-none"
+                                    >
+                                        🎲
+                                    </button>
                                 </motion.div>
 
                                 <motion.div
@@ -446,10 +536,10 @@ function App() {
                                     className="mt-5"
                                 >
                                     <p className="font-display text-[0.625rem] text-faint tabular-nums tracking-[0.28em] uppercase text-center mb-2">
-                                        Try one
+                                        {recent.length > 0 ? "Recent" : "Try one"}
                                     </p>
                                     <div className="grid grid-cols-3 gap-1.5">
-                                        {examples.map((ex) => (
+                                        {(recent.length > 0 ? recent : examples).slice(0, 3).map((ex) => (
                                             <button
                                                 key={ex}
                                                 type="button"

@@ -15,6 +15,7 @@ import "@fontsource/vt323/400.css";
 
 import CRTOverlay from "./components/CRTOverlay";
 import Navbar from "./components/Navbar";
+import ShortcutsModal from "./components/ShortcutsModal";
 import { applyCRTClass, getCRTPreference } from "./lib/crt";
 import { applyFontClass, getFontPreference } from "./lib/font";
 import { applyTheme, getInitialTheme } from "./lib/theme";
@@ -45,6 +46,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <Router>
       <Navbar />
       <CRTOverlay />
+      <ShortcutsModal />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/uranium" element={<Uranium />} />

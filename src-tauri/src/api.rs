@@ -22,6 +22,11 @@ pub struct NamedRef {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct UrlRef {
+    pub url: String,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct TypeSlot {
     pub slot: u32,
     #[serde(rename = "type")]
@@ -52,14 +57,49 @@ pub struct Cries {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct StatEntry {
+    pub base_stat: u32,
+    pub stat: NamedRef,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Pokemon {
     pub id: u32,
     pub name: String,
     pub types: Vec<TypeSlot>,
     #[serde(default)]
+    pub stats: Vec<StatEntry>,
+    pub species: NamedRef,
+    #[serde(default)]
     pub sprites: Sprites,
     #[serde(default)]
     pub cries: Cries,
+}
+
+// ── Evolution chain types ─────────────────────────────────────────────────
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct Species {
+    pub evolution_chain: UrlRef,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct EvolutionNode {
+    pub species: NamedRef,
+    #[serde(default)]
+    pub evolves_to: Vec<EvolutionNode>,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct EvolutionChain {
+    pub chain: EvolutionNode,
+}
+
+#[derive(Serialize, Clone, Debug)]
+pub struct EvolutionEntry {
+    pub name: String,
+    pub sprite: String,
+    pub is_current: bool,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default)]
@@ -89,6 +129,10 @@ struct ApiCache {
     pokemon: HashMap<String, Pokemon>,
     #[serde(default)]
     types: HashMap<String, PokeType>,
+    #[serde(default)]
+    species: HashMap<String, Species>,
+    #[serde(default)]
+    evolution_chains: HashMap<String, EvolutionChain>,
 }
 
 static CACHE: OnceLock<Mutex<ApiCache>> = OnceLock::new();
@@ -225,6 +269,94 @@ fn extract_type_key(name_or_url: &str) -> String {
     } else {
         name_or_url.to_lowercase()
     }
+}
+
+fn extract_id_from_url(url: &str) -> Option<String> {
+    url.trim_end_matches('/')
+        .rsplit('/')
+        .next()
+        .map(|s| s.to_string())
+}
+
+pub async fn get_species(app: &AppHandle, url: &str) -> Result<Species, String> {
+    let key = extract_id_from_url(url).unwrap_or_else(|| url.to_string());
+    let lock = cache(app).await;
+
+    {
+        let c = lock.lock().await;
+        if let Some(s) = c.species.get(&key) {
+            return Ok(s.clone());
+        }
+    }
+
+    let resp = http_client()
+        .get(url)
+        .send()
+        .await
+        .map_err(|e| format!("network: {}", e))?;
+    if !resp.status().is_success() {
+        return Err(format!("species_not_found: {}", key));
+    }
+    let species: Species = resp.json().await.map_err(|e| format!("parse: {}", e))?;
+
+    {
+        let mut c = lock.lock().await;
+        c.species.insert(key, species.clone());
+        save_cache_to_disk(app, &c);
+    }
+
+    Ok(species)
+}
+
+pub async fn get_evolution_chain(app: &AppHandle, url: &str) -> Result<EvolutionChain, String> {
+    let key = extract_id_from_url(url).unwrap_or_else(|| url.to_string());
+    let lock = cache(app).await;
+
+    {
+        let c = lock.lock().await;
+        if let Some(e) = c.evolution_chains.get(&key) {
+            return Ok(e.clone());
+        }
+    }
+
+    let resp = http_client()
+        .get(url)
+        .send()
+        .await
+        .map_err(|e| format!("network: {}", e))?;
+    if !resp.status().is_success() {
+        return Err(format!("chain_not_found: {}", key));
+    }
+    let chain: EvolutionChain = resp.json().await.map_err(|e| format!("parse: {}", e))?;
+
+    {
+        let mut c = lock.lock().await;
+        c.evolution_chains.insert(key, chain.clone());
+        save_cache_to_disk(app, &c);
+    }
+
+    Ok(chain)
+}
+
+const POKEMON_SPRITE_BASE: &str =
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork";
+
+fn walk_chain(node: &EvolutionNode, current: &str, out: &mut Vec<EvolutionEntry>) {
+    let id = extract_id_from_url(&node.species.url).unwrap_or_default();
+    out.push(EvolutionEntry {
+        name: node.species.name.clone(),
+        sprite: format!("{}/{}.png", POKEMON_SPRITE_BASE, id),
+        is_current: node.species.name.to_lowercase() == current.to_lowercase(),
+    });
+    for child in &node.evolves_to {
+        walk_chain(child, current, out);
+    }
+}
+
+pub fn flatten_chain(chain: &EvolutionChain, current_name: &str) -> Vec<EvolutionEntry> {
+    let mut out = Vec::new();
+    walk_chain(&chain.chain, current_name, &mut out);
+    out
 }
 
 // ── Weakness computation ─────────────────────────────────────────────────────

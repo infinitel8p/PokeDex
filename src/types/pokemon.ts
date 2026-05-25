@@ -13,16 +13,36 @@ export interface PokemonSprites {
     other?: {
         "official-artwork"?: {
             front_default?: string;
+            front_shiny?: string;
         };
     };
+}
+
+export interface PokemonStat {
+    base_stat: number;
+    stat: { name: string; url: string };
+}
+
+export interface PokemonCries {
+    latest?: string;
+    legacy?: string;
+}
+
+export interface EvolutionEntry {
+    name: string;
+    sprite: string;
+    is_current: boolean;
 }
 
 export interface Pokemon {
     id: number;
     name: string;
     types: PokemonTypeRef[];
+    stats: PokemonStat[];
     sprites: PokemonSprites;
+    cries?: PokemonCries;
     weaknesses: Partial<Record<WeaknessMultiplier, WeaknessEntry[]>>;
+    evolution: EvolutionEntry[];
 }
 
 export const TYPE_COLORS: Record<string, { bg: string; fg: string }> = {

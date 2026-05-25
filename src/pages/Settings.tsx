@@ -2,6 +2,8 @@ import { useState } from "react";
 import StatusBar from "../components/StatusBar";
 import { CRTPreference, getCRTPreference, setCRTPreference } from "../lib/crt";
 import { FontPreference, FONT_OPTIONS, getFontPreference, setFontPreference } from "../lib/font";
+import { clearRecentSearches } from "../lib/recent";
+import { ShinyPreference, getShinyPreference, setShinyPreference } from "../lib/shiny";
 import { getInitialTheme, setTheme, Theme } from "../lib/theme";
 
 const UPCOMING_SETTINGS = [
@@ -16,18 +18,6 @@ const UPCOMING_SETTINGS = [
     {
         label: "Saved teams",
         hint: "Build a team and see combined weaknesses",
-    },
-    {
-        label: "Recent searches",
-        hint: "Quick access to your last lookups",
-    },
-    {
-        label: "Pokémon cries",
-        hint: "Play the species cry when a result loads",
-    },
-    {
-        label: "Shiny artwork",
-        hint: "Prefer shiny artwork when available",
     },
 ];
 
@@ -98,6 +88,41 @@ const FontControl = () => {
                         }`}
                     >
                         {label}
+                    </button>
+                );
+            })}
+        </div>
+    );
+};
+
+const ShinyControl = () => {
+    const [current, setCurrent] = useState<ShinyPreference>(() => getShinyPreference());
+
+    const select = (value: ShinyPreference) => {
+        setShinyPreference(value);
+        setCurrent(value);
+    };
+
+    return (
+        <div
+            role="radiogroup"
+            aria-label="Shiny artwork"
+            className="shrink-0 inline-flex border-2 border-divider/60"
+        >
+            {(["off", "on"] as const).map((option) => {
+                const active = current === option;
+                return (
+                    <button
+                        key={option}
+                        type="button"
+                        role="radio"
+                        aria-checked={active}
+                        onClick={() => select(option)}
+                        className={`font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
+                            active ? "bg-red-500 text-white" : "text-muted hover:text-fg"
+                        }`}
+                    >
+                        {option}
                     </button>
                 );
             })}
@@ -187,6 +212,34 @@ const Settings = () => {
                             </p>
                         </div>
                         <FontControl />
+                    </li>
+                    <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
+                        <div className="min-w-0">
+                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
+                                Shiny artwork
+                            </p>
+                            <p className="text-xs text-muted mt-0.5">
+                                Prefer shiny sprites when available
+                            </p>
+                        </div>
+                        <ShinyControl />
+                    </li>
+                    <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
+                        <div className="min-w-0">
+                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
+                                Recent searches
+                            </p>
+                            <p className="text-xs text-muted mt-0.5">
+                                Quick access to your last lookups
+                            </p>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => clearRecentSearches()}
+                            className="shrink-0 font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 border-2 border-divider/60 text-muted hover:text-fg hover:border-red-500 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                        >
+                            Clear
+                        </button>
                     </li>
                     {UPCOMING_SETTINGS.map((item) => (
                         <li

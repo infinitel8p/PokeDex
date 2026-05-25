@@ -10,7 +10,10 @@ use std::io::{BufRead, BufReader};
 use std::sync::OnceLock;
 use tauri::{AppHandle, Manager, WebviewWindow};
 
-use api::{calculate_weaknesses, get_pokemon, Pokemon, Sprites, TypeSlot, Cries, WeaknessEntry};
+use api::{
+    calculate_weaknesses, flatten_chain, get_evolution_chain, get_pokemon, get_species, Cries,
+    EvolutionEntry, Pokemon, Sprites, StatEntry, TypeSlot, WeaknessEntry,
+};
 
 static TRANSLATIONS: OnceLock<HashMap<String, String>> = OnceLock::new();
 
@@ -51,15 +54,16 @@ fn translate_to_key(name: &str, translations: &HashMap<String, String>) -> Strin
     translations.get(&lower).cloned().unwrap_or(name.to_string())
 }
 
-// Frontend wire format: Pokemon fields flat + a `weaknesses` map on top.
 #[derive(Serialize)]
 struct SearchResponse<'a> {
     id: u32,
     name: &'a str,
     types: &'a [TypeSlot],
+    stats: &'a [StatEntry],
     sprites: &'a Sprites,
     cries: &'a Cries,
     weaknesses: HashMap<String, Vec<WeaknessEntry>>,
+    evolution: Vec<EvolutionEntry>,
 }
 
 #[tauri::command]
@@ -67,29 +71,47 @@ async fn search_pokemon(name: &str, app: AppHandle) -> Result<String, String> {
     let translations = get_translations(&app);
     let key = translate_to_key(name, translations);
 
-    let pokemon: Pokemon = get_pokemon(&app, &key)
-        .await
-        .map_err(|e| {
-            // Normalize the error code so the frontend can classify it
-            if e.starts_with("not_found") {
-                format!("Error: Pokémon with key {} not found!", key)
-            } else if e.starts_with("network") {
-                "Failed to connect to PokéAPI".to_string()
-            } else {
-                e
-            }
-        })?;
+    let pokemon: Pokemon = get_pokemon(&app, &key).await.map_err(|e| {
+        if e.starts_with("not_found") {
+            format!("Error: Pokémon with key {} not found!", key)
+        } else if e.starts_with("network") {
+            "Failed to connect to PokéAPI".to_string()
+        } else {
+            e
+        }
+    })?;
 
-    let defender_types: Vec<String> = pokemon.types.iter().map(|t| t.type_.name.clone()).collect();
+    let defender_types: Vec<String> = pokemon
+        .types
+        .iter()
+        .map(|t| t.type_.name.clone())
+        .collect();
     let weaknesses = calculate_weaknesses(&app, &defender_types).await?;
+
+    // Evolution chain — best-effort, failures are non-fatal so a result still renders.
+    let evolution = match get_species(&app, &pokemon.species.url).await {
+        Ok(species) => match get_evolution_chain(&app, &species.evolution_chain.url).await {
+            Ok(chain) => flatten_chain(&chain, &pokemon.name),
+            Err(e) => {
+                eprintln!("evolution chain fetch failed: {}", e);
+                Vec::new()
+            }
+        },
+        Err(e) => {
+            eprintln!("species fetch failed: {}", e);
+            Vec::new()
+        }
+    };
 
     let response = SearchResponse {
         id: pokemon.id,
         name: &pokemon.name,
         types: &pokemon.types,
+        stats: &pokemon.stats,
         sprites: &pokemon.sprites,
         cries: &pokemon.cries,
         weaknesses,
+        evolution,
     };
 
     serde_json::to_string(&response).map_err(|e| format!("serialize: {}", e))
