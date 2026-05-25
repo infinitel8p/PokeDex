@@ -12,7 +12,7 @@ use tauri::{AppHandle, Manager, WebviewWindow};
 
 use api::{
     calculate_weaknesses, flatten_chain, get_evolution_chain, get_pokemon, get_species, Cries,
-    EvolutionEntry, Pokemon, Sprites, StatEntry, TypeSlot, WeaknessEntry,
+    EvolutionEntry, Pokemon, StatEntry, TypeSlot, WeaknessEntry,
 };
 
 static TRANSLATIONS: OnceLock<HashMap<String, String>> = OnceLock::new();
@@ -60,7 +60,7 @@ struct SearchResponse<'a> {
     name: &'a str,
     types: &'a [TypeSlot],
     stats: &'a [StatEntry],
-    sprites: &'a Sprites,
+    sprites: &'a serde_json::Value,
     cries: &'a Cries,
     weaknesses: HashMap<String, Vec<WeaknessEntry>>,
     evolution: Vec<EvolutionEntry>,
@@ -127,9 +127,19 @@ async fn close_splashscreen(window: WebviewWindow) {
     }
 }
 
+#[tauri::command]
+async fn clear_cache(app: AppHandle) -> Result<(), String> {
+    api::clear_cache(&app).await;
+    Ok(())
+}
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![close_splashscreen, search_pokemon])
+        .invoke_handler(tauri::generate_handler![
+            close_splashscreen,
+            search_pokemon,
+            clear_cache
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

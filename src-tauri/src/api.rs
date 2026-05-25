@@ -14,6 +14,7 @@ const SPRITE_BASE: &str =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield";
 const CACHE_FILE: &str = "pokeapi-cache.json";
 const HTTP_TIMEOUT_SECS: u64 = 10;
+const CACHE_SCHEMA_VERSION: u32 = 2;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct NamedRef {
@@ -31,23 +32,6 @@ pub struct TypeSlot {
     pub slot: u32,
     #[serde(rename = "type")]
     pub type_: NamedRef,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default)]
-pub struct OfficialArtwork {
-    pub front_default: Option<String>,
-    pub front_shiny: Option<String>,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default)]
-pub struct OtherSprites {
-    #[serde(rename = "official-artwork")]
-    pub official_artwork: Option<OfficialArtwork>,
-}
-
-#[derive(Serialize, Deserialize, Clone, Debug, Default)]
-pub struct Sprites {
-    pub other: Option<OtherSprites>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default)]
@@ -71,7 +55,7 @@ pub struct Pokemon {
     pub stats: Vec<StatEntry>,
     pub species: NamedRef,
     #[serde(default)]
-    pub sprites: Sprites,
+    pub sprites: serde_json::Value,
     #[serde(default)]
     pub cries: Cries,
 }
@@ -123,8 +107,10 @@ pub struct WeaknessEntry {
 
 // ── Cache layer ──────────────────────────────────────────────────────────────
 
-#[derive(Serialize, Deserialize, Default, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 struct ApiCache {
+    #[serde(default)]
+    version: u32,
     #[serde(default)]
     pokemon: HashMap<String, Pokemon>,
     #[serde(default)]
@@ -133,6 +119,18 @@ struct ApiCache {
     species: HashMap<String, Species>,
     #[serde(default)]
     evolution_chains: HashMap<String, EvolutionChain>,
+}
+
+impl Default for ApiCache {
+    fn default() -> Self {
+        Self {
+            version: CACHE_SCHEMA_VERSION,
+            pokemon: HashMap::new(),
+            types: HashMap::new(),
+            species: HashMap::new(),
+            evolution_chains: HashMap::new(),
+        }
+    }
 }
 
 static CACHE: OnceLock<Mutex<ApiCache>> = OnceLock::new();
@@ -161,10 +159,18 @@ fn cache_path(app: &AppHandle) -> Option<PathBuf> {
 }
 
 fn load_cache_from_disk(app: &AppHandle) -> ApiCache {
-    cache_path(app)
+    let loaded: ApiCache = cache_path(app)
         .and_then(|p| fs::read_to_string(p).ok())
-        .and_then(|s| serde_json::from_str::<ApiCache>(&s).ok())
-        .unwrap_or_default()
+        .and_then(|s| serde_json::from_str(&s).ok())
+        .unwrap_or_default();
+    if loaded.version != CACHE_SCHEMA_VERSION {
+        eprintln!(
+            "cache schema mismatch (got v{}, want v{}); discarding old entries",
+            loaded.version, CACHE_SCHEMA_VERSION
+        );
+        return ApiCache::default();
+    }
+    loaded
 }
 
 fn save_cache_to_disk(app: &AppHandle, cache: &ApiCache) {
@@ -178,6 +184,17 @@ fn save_cache_to_disk(app: &AppHandle, cache: &ApiCache) {
 async fn cache(app: &AppHandle) -> &'static Mutex<ApiCache> {
     // OnceLock initialization is sync; we do the disk read inside it once.
     CACHE.get_or_init(|| Mutex::new(load_cache_from_disk(app)))
+}
+
+pub async fn clear_cache(app: &AppHandle) {
+    let lock = cache(app).await;
+    let mut c = lock.lock().await;
+    c.pokemon.clear();
+    c.types.clear();
+    c.species.clear();
+    c.evolution_chains.clear();
+    c.version = CACHE_SCHEMA_VERSION;
+    save_cache_to_disk(app, &c);
 }
 
 // ── Fetchers ─────────────────────────────────────────────────────────────────

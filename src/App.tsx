@@ -8,8 +8,10 @@ import HoloArtwork from "./components/HoloArtwork";
 import Search from "./components/Search";
 import StatBars from "./components/StatBars";
 import StatusBar from "./components/StatusBar";
+import { CRY_CHANGE_EVENT, CrySource, getCrySource, pickCryUrl } from "./lib/cry-source";
 import { getRecentSearches, pushRecentSearch, RECENT_CHANGE_EVENT } from "./lib/recent";
 import { getShinyPreference, SHINY_CHANGE_EVENT, ShinyPreference } from "./lib/shiny";
+import { getSpriteStyle, getSpriteUrl, SPRITE_CHANGE_EVENT, SpriteStyle } from "./lib/sprite-style";
 import {
     classifySearchError,
     getTypeColor,
@@ -112,24 +114,26 @@ function App() {
     const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
     const [recent, setRecent] = useState<string[]>(() => getRecentSearches());
     const [shiny, setShiny] = useState<ShinyPreference>(() => getShinyPreference());
+    const [crySource, setCrySourceState] = useState<CrySource>(() => getCrySource());
+    const [spriteStyle, setSpriteStyleState] = useState<SpriteStyle>(() => getSpriteStyle());
     const requestIdRef = useRef(0);
     const examples = useMemo(() => pickRandomExamples(EXAMPLE_POKEMON, 3), []);
 
     // React to preference changes from Settings
     useEffect(() => {
-        const onRecent = (e: Event) => {
-            const d = (e as CustomEvent<string[]>).detail;
-            setRecent(d);
-        };
-        const onShiny = (e: Event) => {
-            const d = (e as CustomEvent<ShinyPreference>).detail;
-            setShiny(d);
-        };
+        const onRecent = (e: Event) => setRecent((e as CustomEvent<string[]>).detail);
+        const onShiny = (e: Event) => setShiny((e as CustomEvent<ShinyPreference>).detail);
+        const onCry = (e: Event) => setCrySourceState((e as CustomEvent<CrySource>).detail);
+        const onSprite = (e: Event) => setSpriteStyleState((e as CustomEvent<SpriteStyle>).detail);
         window.addEventListener(RECENT_CHANGE_EVENT, onRecent);
         window.addEventListener(SHINY_CHANGE_EVENT, onShiny);
+        window.addEventListener(CRY_CHANGE_EVENT, onCry);
+        window.addEventListener(SPRITE_CHANGE_EVENT, onSprite);
         return () => {
             window.removeEventListener(RECENT_CHANGE_EVENT, onRecent);
             window.removeEventListener(SHINY_CHANGE_EVENT, onShiny);
+            window.removeEventListener(CRY_CHANGE_EVENT, onCry);
+            window.removeEventListener(SPRITE_CHANGE_EVENT, onSprite);
         };
     }, []);
 
@@ -192,7 +196,8 @@ function App() {
         searchPokemon(String(id));
     }
 
-    function playCry(url: string | undefined) {
+    function playCry(cries: { latest?: string; legacy?: string } | undefined) {
+        const url = pickCryUrl(cries, crySource);
         if (!url) return;
         try {
             const audio = new Audio(url);
@@ -307,10 +312,11 @@ function App() {
                     )}
 
                     {viewKey === "result" && pokemonData && (() => {
-                        const artwork = pokemonData.sprites?.other?.["official-artwork"];
-                        const artworkUrl = (shiny === "on" && artwork?.front_shiny)
-                            ? artwork.front_shiny
-                            : artwork?.front_default;
+                        const artworkUrl = getSpriteUrl(
+                            pokemonData.sprites,
+                            spriteStyle,
+                            shiny === "on"
+                        );
                         return (
                         <motion.div key="result" {...stateTransition}>
                             <header className="px-4 pt-4">
@@ -329,7 +335,7 @@ function App() {
                                             {(pokemonData.cries?.latest || pokemonData.cries?.legacy) && (
                                                 <button
                                                     type="button"
-                                                    onClick={() => playCry(pokemonData.cries?.latest ?? pokemonData.cries?.legacy)}
+                                                    onClick={() => playCry(pokemonData.cries)}
                                                     className="shrink-0 inline-flex items-center justify-center h-6 w-6 text-muted hover:text-red-500 transition-all duration-150 active:scale-90 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                                                     aria-label={`Play ${capitalize(pokemonData.name)} cry`}
                                                 >

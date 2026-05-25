@@ -9,14 +9,7 @@ export interface WeaknessEntry {
     icon: string;
 }
 
-export interface PokemonSprites {
-    other?: {
-        "official-artwork"?: {
-            front_default?: string;
-            front_shiny?: string;
-        };
-    };
-}
+export type PokemonSprites = Record<string, unknown>;
 
 export interface PokemonStat {
     base_stat: number;

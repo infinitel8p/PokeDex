@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { invoke } from "@tauri-apps/api/core";
 import StatusBar from "../components/StatusBar";
 import { CRTPreference, getCRTPreference, setCRTPreference } from "../lib/crt";
+import { CrySource, getCrySource, setCrySource } from "../lib/cry-source";
 import { FontPreference, FONT_OPTIONS, getFontPreference, setFontPreference } from "../lib/font";
 import { clearRecentSearches } from "../lib/recent";
 import { ShinyPreference, getShinyPreference, setShinyPreference } from "../lib/shiny";
+import { SpriteStyle, SPRITE_STYLE_OPTIONS, getSpriteStyle, setSpriteStyle } from "../lib/sprite-style";
 import { getInitialTheme, setTheme, Theme } from "../lib/theme";
 
 const UPCOMING_SETTINGS = [
@@ -85,6 +88,78 @@ const FontControl = () => {
                             active
                                 ? "bg-red-500 text-white"
                                 : "text-muted hover:text-fg"
+                        }`}
+                    >
+                        {label}
+                    </button>
+                );
+            })}
+        </div>
+    );
+};
+
+const CrySourceControl = () => {
+    const [current, setCurrent] = useState<CrySource>(() => getCrySource());
+
+    const select = (value: CrySource) => {
+        setCrySource(value);
+        setCurrent(value);
+    };
+
+    return (
+        <div
+            role="radiogroup"
+            aria-label="Cry source"
+            className="shrink-0 inline-flex border-2 border-divider/60"
+        >
+            {(["latest", "legacy"] as const).map((option) => {
+                const active = current === option;
+                return (
+                    <button
+                        key={option}
+                        type="button"
+                        role="radio"
+                        aria-checked={active}
+                        onClick={() => select(option)}
+                        className={`font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
+                            active ? "bg-red-500 text-white" : "text-muted hover:text-fg"
+                        }`}
+                    >
+                        {option}
+                    </button>
+                );
+            })}
+        </div>
+    );
+};
+
+const SpriteStyleControl = () => {
+    const [current, setCurrent] = useState<SpriteStyle>(() => getSpriteStyle());
+
+    const select = (value: SpriteStyle) => {
+        setSpriteStyle(value);
+        setCurrent(value);
+    };
+
+    return (
+        <div
+            role="radiogroup"
+            aria-label="Sprite style"
+            className="grid grid-cols-3 gap-1.5 w-full"
+        >
+            {SPRITE_STYLE_OPTIONS.map(({ value, label }) => {
+                const active = current === value;
+                return (
+                    <button
+                        key={value}
+                        type="button"
+                        role="radio"
+                        aria-checked={active}
+                        onClick={() => select(value)}
+                        className={`font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-2 py-1.5 border-2 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
+                            active
+                                ? "bg-red-500 text-white border-red-500"
+                                : "text-muted hover:text-fg border-divider/60"
                         }`}
                     >
                         {label}
@@ -224,6 +299,28 @@ const Settings = () => {
                         </div>
                         <ShinyControl />
                     </li>
+                    <li className="border-2 border-divider/60 px-3 py-3 space-y-2.5">
+                        <div className="min-w-0">
+                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
+                                Sprite style
+                            </p>
+                            <p className="text-xs text-muted mt-0.5">
+                                Which sprite source to show
+                            </p>
+                        </div>
+                        <SpriteStyleControl />
+                    </li>
+                    <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
+                        <div className="min-w-0">
+                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
+                                Cry source
+                            </p>
+                            <p className="text-xs text-muted mt-0.5">
+                                Latest game cry vs Gen 1-5 legacy beep
+                            </p>
+                        </div>
+                        <CrySourceControl />
+                    </li>
                     <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
                         <div className="min-w-0">
                             <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
@@ -236,6 +333,23 @@ const Settings = () => {
                         <button
                             type="button"
                             onClick={() => clearRecentSearches()}
+                            className="shrink-0 font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 border-2 border-divider/60 text-muted hover:text-fg hover:border-red-500 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                        >
+                            Clear
+                        </button>
+                    </li>
+                    <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
+                        <div className="min-w-0">
+                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
+                                API cache
+                            </p>
+                            <p className="text-xs text-muted mt-0.5">
+                                Clear cached PokéAPI responses (forces re-fetch)
+                            </p>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => { void invoke("clear_cache"); }}
                             className="shrink-0 font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 border-2 border-divider/60 text-muted hover:text-fg hover:border-red-500 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                         >
                             Clear
