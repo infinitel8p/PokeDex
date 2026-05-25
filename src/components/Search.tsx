@@ -1,81 +1,116 @@
 import React, { useState, useRef, useEffect } from "react";
 
+type AccentVariant = "red" | "lime";
+
 interface SearchProps {
     onSearch: (name: string) => void;
+    autoFocus?: boolean;
+    /** Normalize input before submit. Defaults to PokéAPI-style kebab-case. */
+    transform?: (input: string) => string;
+    placeholder?: string;
+    /** Focus accent color — matches the page's brand tint. */
+    accent?: AccentVariant;
 }
 
-const Search: React.FC<SearchProps> = ({ onSearch }) => {
+const defaultTransform = (s: string): string =>
+    s
+        .toLowerCase()
+        .replace(/^0+(\d)/, "$1")
+        .replace(/[.'’]/g, "")
+        .replace(/\s+/g, "-");
+
+const ACCENT_CLASSES: Record<AccentVariant, { input: string; button: string }> = {
+    red: {
+        input: "focus:border-red-500",
+        button: "focus-visible:ring-red-500",
+    },
+    lime: {
+        input: "focus:border-lime-500",
+        button: "focus-visible:ring-lime-500",
+    },
+};
+
+const Search: React.FC<SearchProps> = ({
+    onSearch,
+    autoFocus = false,
+    transform = defaultTransform,
+    placeholder = "Type a Pokémon name or number",
+    accent = "red",
+}) => {
     const [name, setName] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (!name.trim()) {
-            return;
-        }
-        let submitName = name.replace(/^0+/, "").toLowerCase().trim();
+        const trimmed = name.trim();
+        if (!trimmed) return;
+        const submitName = transform(trimmed);
+        if (!submitName) return;
         onSearch(submitName);
     };
 
     useEffect(() => {
         const handleKeydown = (event: KeyboardEvent) => {
-            // Check if the input is not focused and if a key is alphanumeric
+            if (!inputRef.current) return;
+            if (event.ctrlKey || event.metaKey || event.altKey) return;
+            if (event.key.length !== 1 || event.key === " ") return;
+
+            const active = document.activeElement;
             if (
-                inputRef.current &&
-                document.activeElement !== inputRef.current &&
-                event.key.length === 1 // ensure only single characters trigger the focus
+                active &&
+                active !== document.body &&
+                active !== document.documentElement
             ) {
-                inputRef.current.focus();
+                return;
             }
+
+            inputRef.current.focus();
         };
 
         document.addEventListener("keydown", handleKeydown);
-
-        // Clean up the event listener when the component unmounts
         return () => {
             document.removeEventListener("keydown", handleKeydown);
         };
     }, []);
 
     return (
-        <div>
-            <hr className="m-10 border-red-900" />
-            <form onSubmit={handleSubmit} className="relative w-[calc(100%-5rem)] mx-auto">
-                <label htmlFor="pokemon-input" className="sr-only">Search for...</label>
-                <input
-                    ref={inputRef}
-                    id="pokemon-input"
-                    onChange={(e) => setName(e.currentTarget.value.toLowerCase())}
-                    placeholder="Type a Pokémon name and press Enter"
-                    autoComplete="off"
-                    className="w-full rounded-md py-1 shadow-sm text-center cursor-pointer bg-[#0f0f0f98] focus:outline-none focus:ring-1 focus:ring-red-900"
-                />
-                <span className="absolute inset-y-0 right-0 grid w-10 place-content-center">
-                    <button
-                        type="button"
-                        className="text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+        <form onSubmit={handleSubmit} className="relative w-full">
+            <label htmlFor="pokemon-input" className="sr-only">Search for a Pokémon</label>
+            <input
+                ref={inputRef}
+                id="pokemon-input"
+                autoFocus={autoFocus}
+                onChange={(e) => setName(e.currentTarget.value)}
+                placeholder={placeholder}
+                autoComplete="off"
+                spellCheck={false}
+                maxLength={48}
+                className={`w-full rounded-none py-3 pl-4 pr-12 text-base font-display tracking-wide bg-canvas text-fg placeholder:text-faint border-2 border-divider/70 focus:outline-none transition-colors ${ACCENT_CLASSES[accent].input}`}
+            />
+            <span className="absolute inset-y-0 right-0 grid w-10 place-content-center">
+                <button
+                    type="submit"
+                    className={`text-muted hover:text-fg transition-all duration-150 active:scale-90 rounded-sm focus-visible:outline-none focus-visible:ring-2 ${ACCENT_CLASSES[accent].button} focus-visible:ring-offset-2 focus-visible:ring-offset-canvas`}
+                >
+                    <span className="sr-only">Search</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                        aria-hidden="true"
                     >
-                        <span className="sr-only">Search</span>
-
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-5 h-5"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                            />
-                        </svg>
-                    </button>
-                </span>
-            </form>
-            <p className="text-xs mt-1 italic text-gray-400">Type effectiveness multipliers may vary in other games outside the core series.</p>
-        </div>
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                        />
+                    </svg>
+                </button>
+            </span>
+        </form>
     );
 };
 

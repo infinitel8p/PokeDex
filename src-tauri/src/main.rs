@@ -6,23 +6,23 @@
 extern crate maplit;
 
 mod weakness_helpers;
-use tauri::{Manager, Window};
+use tauri::{AppHandle, Manager, WebviewWindow};
 use reqwest::get;
 use serde_json::{Value, json};
 use weakness_helpers::calculate_weaknesses;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+use std::sync::OnceLock;
 
-use tauri::{api::path::resource_dir, Env};
+static TRANSLATIONS: OnceLock<HashMap<String, String>> = OnceLock::new();
 
-fn load_translations() -> HashMap<String, String> {
-    let context = tauri::generate_context!();
-    let package_info = context.package_info();
-    let env = Env::default();
-
-    let mut file_path = resource_dir(package_info, &env).expect("Could not access resource directory");
-    file_path.push("assets/translations.csv");
+fn load_translations(app: &AppHandle) -> HashMap<String, String> {
+    let resource_dir = app
+        .path()
+        .resource_dir()
+        .expect("Could not access resource directory");
+    let file_path = resource_dir.join("assets/translations.csv");
 
     let file = File::open(file_path).expect("Cannot open CSV file");
     let reader = BufReader::new(file);
@@ -32,9 +32,7 @@ fn load_translations() -> HashMap<String, String> {
         if let Ok(entry) = line {
             let fields: Vec<&str> = entry.split(',').collect();
             let key = fields[0].to_string();
-            // let english_name = fields[1].to_string();
-            
-            // Add translations for all languages to the HashMap, mapping them to the key
+
             for name in &fields[1..] {
                 translations.insert(name.trim().to_lowercase(), key.clone());
             }
@@ -44,21 +42,24 @@ fn load_translations() -> HashMap<String, String> {
     translations
 }
 
+fn get_translations(app: &AppHandle) -> &'static HashMap<String, String> {
+    TRANSLATIONS.get_or_init(|| load_translations(app))
+}
 
 fn translate_to_key(name: &str, translations: &HashMap<String, String>) -> String {
     let lowercase_name = name.to_lowercase();
     if let Some(key) = translations.get(&lowercase_name) {
         key.clone()
     } else {
-        name.to_string()  // If the name is already in English or not found, return it as is
+        name.to_string()
     }
 }
 
 #[tauri::command]
-async fn search_pokemon(name: &str) -> Result<String, String> {
-    let translations = load_translations();
-    let key = translate_to_key(name, &translations);
-    
+async fn search_pokemon(name: &str, app: AppHandle) -> Result<String, String> {
+    let translations = get_translations(&app);
+    let key = translate_to_key(name, translations);
+
     let url = format!("https://pokeapi.co/api/v2/pokemon/{}", key);
 
     match get(&url).await {
@@ -67,10 +68,8 @@ async fn search_pokemon(name: &str) -> Result<String, String> {
                 let json: Value = response.json().await.unwrap();
                 let types = json["types"].as_array().unwrap();
 
-                // Calculate weaknesses
                 let weaknesses = calculate_weaknesses(types).await?;
 
-                // Add weaknesses to the Pokémon data
                 let mut result = json.clone();
                 result["weaknesses"] = json!(weaknesses);
 
@@ -84,10 +83,13 @@ async fn search_pokemon(name: &str) -> Result<String, String> {
 }
 
 #[tauri::command]
-async fn close_splashscreen(window: Window) {
-    // Close splashscreen & show main window
-    window.get_window("splashscreen").expect("no window labeled 'splashscreen' found").close().unwrap();
-    window.get_window("main").expect("no window labeled 'main' found").show().unwrap();
+async fn close_splashscreen(window: WebviewWindow) {
+    if let Some(splash) = window.get_webview_window("splashscreen") {
+        let _ = splash.close();
+    }
+    if let Some(main) = window.get_webview_window("main") {
+        let _ = main.show();
+    }
 }
 
 fn main() {

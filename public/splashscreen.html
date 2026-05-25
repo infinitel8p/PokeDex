@@ -5,95 +5,420 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/PokeDex.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="PokeDex helps you find the most effective attack during a Pokemon battle." />
+    <meta name="description" content="PokéDex" />
     <meta name="author" content="InfiniteL8p" />
-    <title>PokeDex</title>
+    <title>PokéDex</title>
     <style>
+        @font-face {
+            font-family: "Pixelify Sans";
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url("/fonts/pixelify-sans-latin-600-normal.woff2") format("woff2");
+        }
+        @font-face {
+            font-family: "Pixelify Sans";
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url("/fonts/pixelify-sans-latin-700-normal.woff2") format("woff2");
+        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html,
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #1a1a1a;
-        }
-
-        img {
             width: 100%;
-            max-width: 300px;
-            height: auto;
-
+            height: 100%;
+            overflow: hidden;
+            user-select: none;
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif;
+            color: #f5f0e9;
+            background:
+                radial-gradient(ellipse 70% 60% at 30% 18%, #c52127 0%, #a01419 55%, #7e0d12 100%);
         }
 
-        .flex {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 2rem;
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 22% 12%, rgba(255, 255, 255, 0.12) 0%, transparent 38%),
+                radial-gradient(circle at 85% 88%, rgba(0, 0, 0, 0.35) 0%, transparent 50%);
+            pointer-events: none;
         }
 
-        /* From Uiverse.io by G4b413l */
-        .line-wobble {
-            --uib-size: 80px;
-            --uib-speed: 1.55s;
-            --uib-color: white;
-            --uib-line-weight: 5px;
+        .device {
             position: relative;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            height: var(--uib-line-weight);
-            width: var(--uib-size);
-            border-radius: calc(var(--uib-line-weight) / 2);
-            overflow: hidden;
-            transform: translate3d(0, 0, 0);
+            flex-direction: column;
+            height: 100%;
+            padding: 56px 40px 40px;
+            z-index: 1;
         }
 
-        .line-wobble::before {
+        /* ── TOP: blue lens (iconic) + tri-LED indicators ── */
+        .device-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: fadeUp 0.5s ease-out 0.05s backwards;
+        }
+
+        .lens {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 32% 28%, #ffffff 0%, #bfdbfe 8%, #60a5fa 35%, #1d4ed8 75%, #0f1f4d 100%);
+            box-shadow:
+                inset 0 -4px 12px rgba(0, 0, 0, 0.45),
+                inset 0 0 0 5px #ffffff,
+                inset 0 0 0 7px #5b1010,
+                0 6px 14px rgba(0, 0, 0, 0.4),
+                0 0 22px rgba(96, 165, 250, 0.25);
+            position: relative;
+            animation: lens-glow 2.6s ease-in-out infinite;
+        }
+
+        .lens::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background-color: var(--uib-color);
-            opacity: 0.1;
+            top: 14%;
+            left: 20%;
+            width: 16px;
+            height: 11px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            filter: blur(2px);
         }
 
-        .line-wobble::after {
-            content: '';
-            height: 100%;
-            width: 100%;
-            border-radius: calc(var(--uib-line-weight) / 2);
-            animation: wobble var(--uib-speed) ease-in-out infinite;
-            transform: translateX(-90%);
-            background-color: var(--uib-color);
-        }
-
-        @keyframes wobble {
+        @keyframes lens-glow {
 
             0%,
             100% {
-                transform: translateX(-90%);
+                box-shadow:
+                    inset 0 -4px 12px rgba(0, 0, 0, 0.45),
+                    inset 0 0 0 5px #ffffff,
+                    inset 0 0 0 7px #5b1010,
+                    0 6px 14px rgba(0, 0, 0, 0.4),
+                    0 0 18px rgba(96, 165, 250, 0.2);
             }
 
             50% {
-                transform: translateX(90%);
+                box-shadow:
+                    inset 0 -4px 12px rgba(0, 0, 0, 0.45),
+                    inset 0 0 0 5px #ffffff,
+                    inset 0 0 0 7px #5b1010,
+                    0 6px 14px rgba(0, 0, 0, 0.4),
+                    0 0 42px rgba(96, 165, 250, 0.55);
+            }
+        }
+
+        .indicators {
+            display: flex;
+            gap: 12px;
+        }
+
+        .indicator {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            box-shadow:
+                inset 0 -2px 3px rgba(0, 0, 0, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.4),
+                0 0 8px var(--glow);
+        }
+
+        .indicator-red {
+            background: #f87171;
+            --glow: rgba(248, 113, 113, 0.7);
+            animation: blink-red 1.7s infinite;
+        }
+
+        .indicator-yellow {
+            background: #facc15;
+            --glow: rgba(250, 204, 21, 0.55);
+        }
+
+        .indicator-green {
+            background: #22c55e;
+            --glow: rgba(34, 197, 94, 0.55);
+        }
+
+        @keyframes blink-red {
+
+            0%,
+            78%,
+            100% {
+                opacity: 1;
+            }
+
+            83%,
+            93% {
+                opacity: 0.35;
+            }
+        }
+
+        /* ── CENTER: the screen ── */
+        .screen-frame {
+            margin: 44px auto 0;
+            width: 100%;
+            max-width: 360px;
+            background: linear-gradient(180deg, #5b1010 0%, #2d0707 100%);
+            border-radius: 12px;
+            padding: 7px;
+            box-shadow:
+                inset 0 1px 2px rgba(255, 255, 255, 0.08),
+                0 10px 28px rgba(0, 0, 0, 0.5);
+            animation: fadeUp 0.5s ease-out 0.25s backwards;
+        }
+
+        .screen {
+            background: #0d1218;
+            border-radius: 6px;
+            padding: 36px 26px 32px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .screen::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(to bottom,
+                    rgba(255, 255, 255, 0.025) 0,
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px,
+                    transparent 3px);
+            pointer-events: none;
+        }
+
+        .screen-eyebrow {
+            font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 0.42em;
+            color: #ef4444;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .wordmark {
+            font-family: "Pixelify Sans", "Segoe UI", "Helvetica Neue", system-ui, sans-serif;
+            font-weight: 700;
+            font-size: 52px;
+            line-height: 0.95;
+            letter-spacing: 0.005em;
+            color: #f5f0e9;
+            text-shadow:
+                0 0 1px rgba(245, 240, 233, 0.5),
+                0 0 14px rgba(245, 240, 233, 0.12);
+        }
+
+        .wordmark-accent {
+            color: #ef4444;
+            text-shadow:
+                0 0 8px rgba(239, 68, 68, 0.35);
+        }
+
+        .screen-tagline {
+            font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            color: rgba(245, 240, 233, 0.5);
+            text-transform: uppercase;
+            margin-top: 12px;
+        }
+
+        .progress {
+            margin-top: 30px;
+            height: 6px;
+            background: rgba(127, 29, 29, 0.55);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 35%;
+            left: -35%;
+            background: linear-gradient(90deg, rgba(252, 165, 165, 0) 0%, #fca5a5 35%, #ef4444 70%, rgba(239, 68, 68, 0) 100%);
+            border-radius: 3px;
+            animation: progress-sweep 1.55s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+        }
+
+        @keyframes progress-sweep {
+            0% {
+                left: -35%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .status {
+            margin-top: 16px;
+            font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+            font-size: 10px;
+            letter-spacing: 0.32em;
+            color: rgba(245, 240, 233, 0.55);
+            text-transform: uppercase;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 6px;
+            height: 11px;
+            background: #ef4444;
+            margin-left: 3px;
+            vertical-align: -1px;
+            animation: blink-cursor 1s steps(2) infinite;
+            box-shadow: 0 0 4px rgba(239, 68, 68, 0.6);
+        }
+
+        @keyframes blink-cursor {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* ── BOTTOM: A/B buttons + speaker grille + version ── */
+        .spacer {
+            flex: 1;
+        }
+
+        .device-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            animation: fadeUp 0.5s ease-out 0.4s backwards;
+        }
+
+        .controls-cluster {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .control {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 30% 25%, #fecaca 0%, #f87171 25%, #b91c1c 65%, #5b1010 100%);
+            box-shadow:
+                inset 0 1px 2px rgba(255, 255, 255, 0.5),
+                inset 0 -4px 5px rgba(0, 0, 0, 0.4),
+                0 3px 6px rgba(0, 0, 0, 0.35);
+        }
+
+        .speaker {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 88px;
+        }
+
+        .speaker>span {
+            height: 3px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.35));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .version {
+            font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+            font-size: 9px;
+            letter-spacing: 0.32em;
+            color: rgba(0, 0, 0, 0.42);
+            text-transform: uppercase;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .lens,
+            .indicator-red,
+            .cursor,
+            .device-top,
+            .screen-frame,
+            .device-bottom {
+                animation: none;
+            }
+
+            .progress::after {
+                animation: none;
+                left: 0;
+                width: 60%;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="flex">
-        <img src="/PokeDex.png" alt="Default Pokémon" />
-        <div class="line-wobble"></div>
-    </div>
+    <main class="device" aria-label="PokéDex loading">
+        <div class="device-top">
+            <div class="lens" aria-hidden="true"></div>
+            <div class="indicators" aria-hidden="true">
+                <span class="indicator indicator-red"></span>
+                <span class="indicator indicator-yellow"></span>
+                <span class="indicator indicator-green"></span>
+            </div>
+        </div>
+
+        <div class="screen-frame">
+            <div class="screen">
+                <p class="screen-eyebrow">No. 0001</p>
+                <h1 class="wordmark">Poké<span class="wordmark-accent">Dex</span></h1>
+                <p class="screen-tagline">type analyzer</p>
+                <div class="progress" role="progressbar" aria-label="Loading PokéDex"></div>
+                <p class="status">Initializing<span class="cursor" aria-hidden="true"></span></p>
+            </div>
+        </div>
+
+        <div class="spacer" aria-hidden="true"></div>
+
+        <div class="device-bottom">
+            <div class="controls-cluster" aria-hidden="true">
+                <span class="control"></span>
+                <span class="control"></span>
+                <div class="speaker">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+            <div class="version">v 0.2.0</div>
+        </div>
+    </main>
 </body>
 
 </html>
