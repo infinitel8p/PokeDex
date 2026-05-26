@@ -23,7 +23,7 @@ export function setCRTPreference(value: CRTPreference) {
     try {
         window.localStorage.setItem(STORAGE_KEY, value);
     } catch {
-        // Storage unavailable — pref applies in-memory only this session
+        // Storage unavailable - pref applies in-memory only this session
     }
     applyCRTClass(value);
     window.dispatchEvent(new CustomEvent<CRTPreference>(CRT_CHANGE_EVENT, { detail: value }));

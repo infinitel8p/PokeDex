@@ -18,7 +18,7 @@ precision mediump float;
 
 uniform vec2 u_resolution;
 
-// Per-effect on/off knobs — set from React state via the Settings → Advanced
+// Per-effect on/off knobs - set from React state via the Settings → Advanced
 // accordion. 1.0 = enabled, 0.0 = disabled. Multiplied into each effect's
 // contribution so the user can mix and match.
 uniform float u_scanlines;
@@ -33,19 +33,19 @@ void main() {
     vec2 centered = uv - 0.5;
     float dist = length(centered);
 
-    // Strong tight scanlines — every other physical pixel row darker
+    // Strong tight scanlines - every other physical pixel row darker
     // (modulo 2.0 on absolute fragment-y, dark band on even rows)
     float scanlineDark = (1.0 - step(1.0, mod(px.y, 2.0))) * 0.22 * u_scanlines;
 
-    // Vignette — corners noticeably darker, classic CRT bulge
+    // Vignette - corners noticeably darker, classic CRT bulge
     float vignette = smoothstep(0.42, 0.95, dist) * 0.55 * u_vignette;
 
-    // Slight curvature shading — pretends the screen bulges by darkening edges along a curve
+    // Slight curvature shading - pretends the screen bulges by darkening edges along a curve
     float curvature = pow(max(abs(centered.x) - 0.34, 0.0) * 3.0, 2.0)
                     + pow(max(abs(centered.y) - 0.42, 0.0) * 3.0, 2.0);
     float curvDarken = clamp(curvature, 0.0, 1.0) * 0.45 * u_vignette;
 
-    // Chromatic aberration — strong red phosphor on left edge, cyan on right
+    // Chromatic aberration - strong red phosphor on left edge, cyan on right
     float edgeMaskX = smoothstep(0.32, 0.5, abs(centered.x));
     float edgeMaskY = smoothstep(0.38, 0.5, abs(centered.y));
     float edgeMask = max(edgeMaskX, edgeMaskY) * u_chromatic;
@@ -56,7 +56,7 @@ void main() {
         chroma = vec3(0.20, 0.62, 1.0) * edgeMask * 0.30;
     }
 
-    // Flicker is handled in CSS now (text-shadow jitter on body text — see App.css),
+    // Flicker is handled in CSS now (text-shadow jitter on body text - see App.css),
     // because the shader was modulating screen-wide brightness which either read as
     // invisible or as a strobe pulse. Per-glyph chromatic jitter feels more like CRT.
 
@@ -68,7 +68,7 @@ void main() {
     vec3 outRgb = vec3(0.0);
     float alpha = darken;
 
-    // Mix in chromatic — overlay-style brighten via colored alpha
+    // Mix in chromatic - overlay-style brighten via colored alpha
     outRgb = mix(outRgb, chroma, clamp(edgeMask * 0.65, 0.0, 1.0));
     alpha = max(alpha, edgeMask * 0.22);
 

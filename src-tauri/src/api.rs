@@ -431,7 +431,7 @@ const STANDARD_TYPES: &[(&str, u32)] = &[
     ("dark", 17), ("fairy", 18),
 ];
 
-/// Combined multiplicative dual-type effectiveness — for each attacker type,
+/// Combined multiplicative dual-type effectiveness - for each attacker type,
 /// multiply the per-defender factor across the defender's types and bucket
 /// the result. This fixes the v0.1 bug where Rock would appear in 2× twice
 /// for a Fire/Flying Pokémon (should be once, since the *combined* effect is 4×

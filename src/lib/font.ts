@@ -1,8 +1,8 @@
 export type FontPreference = "pixelify" | "crisp" | "arcade";
 
 export const FONT_OPTIONS: ReadonlyArray<{ value: FontPreference; label: string; hint: string }> = [
-    { value: "pixelify", label: "Pixelify", hint: "Chunky pixel — the default" },
-    { value: "crisp", label: "Crisp", hint: "Modern sans — most readable" },
+    { value: "pixelify", label: "Pixelify", hint: "Chunky pixel - the default" },
+    { value: "crisp", label: "Crisp", hint: "Modern sans - most readable" },
     { value: "arcade", label: "Arcade", hint: "Retro CRT terminal" },
 ];
 

@@ -1,10 +1,10 @@
 /** Platform / input-mode detection for cross-platform UX gating.
  *
  *  Conventions:
- *  - `isMobileOS`: based on userAgent — used for Tauri-runtime decisions like
+ *  - `isMobileOS`: based on userAgent - used for Tauri-runtime decisions like
  *    whether to call `close_splashscreen` (the splashscreen window only exists
  *    on desktop targets).
- *  - `isTouchPrimary`: based on `(pointer: coarse)` media query — used for UX
+ *  - `isTouchPrimary`: based on `(pointer: coarse)` media query - used for UX
  *    decisions like skipping keyboard shortcuts or autofocus that would pop the
  *    on-screen keyboard. A desktop with a touchscreen reports `pointer: fine`
  *    (the mouse is primary) so this correctly returns false there. */

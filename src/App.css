@@ -16,7 +16,7 @@
 
 	--navbar-pad: 2.25rem;
 
-	/* Default font set — "Pixelify" preset */
+	/* Default font set - "Pixelify" preset */
 	--font-display: "Pixelify Sans", "DM Sans", var(--font-cjk), system-ui, sans-serif;
 	--font-sans: "DM Sans", var(--font-cjk), system-ui, sans-serif;
 
@@ -219,7 +219,7 @@ main {
 	}
 }
 
-/* Theme cross-fade — only active during the theme switch itself */
+/* Theme cross-fade - only active during the theme switch itself */
 .theme-transitioning,
 .theme-transitioning *,
 .theme-transitioning *::before,

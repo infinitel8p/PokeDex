@@ -75,7 +75,7 @@ export function getSpriteUrl(
             url = pickShiny(versions["generation-iv"]?.["diamond-pearl"]);
             break;
         case "gen1":
-            // Gen 1 has no shiny — always default
+            // Gen 1 has no shiny - always default
             url = versions["generation-i"]?.["red-blue"]?.front_default;
             break;
     }
