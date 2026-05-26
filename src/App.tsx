@@ -9,7 +9,7 @@ import Search from "./components/Search";
 import StatBars from "./components/StatBars";
 import StatusBar from "./components/StatusBar";
 import { CRY_CHANGE_EVENT, CrySource, getCrySource, pickCryUrl } from "./lib/cry-source";
-import { pickSpeciesName, useLanguage } from "./lib/i18n";
+import { pickFlavorText, pickSpeciesName, useLanguage } from "./lib/i18n";
 import {
     getRecentNamesMap,
     getRecentSearches,
@@ -269,6 +269,7 @@ function App() {
     const displayName = pokemonData
         ? pickSpeciesName(pokemonData.names, lang, capitalize(pokemonData.name))
         : "";
+    const flavorText = pokemonData ? pickFlavorText(pokemonData.flavor_text, lang) : null;
 
     let viewKey: "loading" | "result" | "error" | "empty";
     if (loading) viewKey = "loading";
@@ -284,11 +285,11 @@ function App() {
             <div className="relative flex-1 min-h-0">
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 top-0 z-10 h-3 bg-gradient-to-b from-canvas to-transparent"
+                    className="pointer-events-none absolute inset-x-0 top-0 z-10 h-3 bg-linear-to-b from-canvas to-transparent"
                 />
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-4 bg-gradient-to-t from-canvas to-transparent"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-4 bg-linear-to-t from-canvas to-transparent"
                 />
                 <section
                     className="h-full overflow-y-auto"
@@ -341,7 +342,8 @@ function App() {
                         return (
                         <motion.div key="result" {...stateTransition}>
                             <header className="px-4 pt-4">
-                                <div className="flex items-start justify-between gap-3 border-2 border-red-500 px-4 py-3">
+                                <div className="border-2 border-red-500 px-4 py-3">
+                                    <div className="flex items-start justify-between gap-3">
                                     <div className="flex-1 min-w-0">
                                         <p className="font-display text-xs text-red-500 tabular-nums tracking-[0.18em] uppercase">
                                             № {pokemonData.id.toString().padStart(4, "0")}
@@ -411,6 +413,12 @@ function App() {
                                         >
                                             ?
                                         </div>
+                                    )}
+                                    </div>
+                                    {flavorText && (
+                                        <p className="mt-3 pt-3 border-t border-red-500/30 text-xs text-muted italic leading-relaxed">
+                                            {flavorText}
+                                        </p>
                                     )}
                                 </div>
                             </header>

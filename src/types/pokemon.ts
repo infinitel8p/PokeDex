@@ -26,6 +26,12 @@ export interface LocalizedName {
     language: { name: string; url?: string };
 }
 
+export interface FlavorTextEntry {
+    flavor_text: string;
+    language: { name: string; url?: string };
+    version: { name: string; url?: string };
+}
+
 export interface EvolutionEntry {
     name: string;
     sprite: string;
@@ -43,6 +49,7 @@ export interface Pokemon {
     weaknesses: Partial<Record<WeaknessMultiplier, WeaknessEntry[]>>;
     evolution: EvolutionEntry[];
     names?: LocalizedName[];
+    flavor_text?: FlavorTextEntry[];
 }
 
 export const TYPE_COLORS: Record<string, { bg: string; fg: string }> = {

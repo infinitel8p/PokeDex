@@ -14,7 +14,7 @@ const SPRITE_BASE: &str =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield";
 const CACHE_FILE: &str = "pokeapi-cache.json";
 const HTTP_TIMEOUT_SECS: u64 = 10;
-const CACHE_SCHEMA_VERSION: u32 = 3;
+const CACHE_SCHEMA_VERSION: u32 = 4;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct NamedRef {
@@ -69,10 +69,30 @@ pub struct LocalizedName {
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct FlavorTextEntry {
+    pub flavor_text: String,
+    pub language: NamedRef,
+    pub version: NamedRef,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Species {
     pub evolution_chain: UrlRef,
     #[serde(default)]
     pub names: Vec<LocalizedName>,
+    #[serde(default)]
+    pub flavor_text_entries: Vec<FlavorTextEntry>,
+}
+
+pub fn dedupe_flavor_texts(entries: &[FlavorTextEntry]) -> Vec<FlavorTextEntry> {
+    let mut seen: std::collections::HashSet<String> = std::collections::HashSet::new();
+    let mut out: Vec<FlavorTextEntry> = Vec::new();
+    for entry in entries {
+        if seen.insert(entry.language.name.clone()) {
+            out.push(entry.clone());
+        }
+    }
+    out
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]

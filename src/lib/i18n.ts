@@ -155,3 +155,24 @@ export function pickSpeciesName(
     const en = names.find((n) => n?.language?.name === "en");
     return en?.name || fallback;
 }
+
+function normalizeFlavorText(s: string): string {
+    return s.replace(/[\n\r\f­]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+export function pickFlavorText(
+    entries:
+        | ReadonlyArray<{ flavor_text?: string; language?: { name?: string } | null } | null | undefined>
+        | undefined,
+    lang: Language
+): string | null {
+    if (!entries || entries.length === 0) return null;
+    const option = LANGUAGE_OPTIONS.find((o) => o.value === lang);
+    const codes = option?.apiCodes ?? ["en"];
+    for (const code of codes) {
+        const hit = entries.find((e) => e?.language?.name === code);
+        if (hit?.flavor_text) return normalizeFlavorText(hit.flavor_text);
+    }
+    const en = entries.find((e) => e?.language?.name === "en");
+    return en?.flavor_text ? normalizeFlavorText(en.flavor_text) : null;
+}

@@ -11,8 +11,9 @@ use std::sync::OnceLock;
 use tauri::{AppHandle, Manager, WebviewWindow};
 
 use api::{
-    calculate_weaknesses, flatten_chain, get_evolution_chain, get_pokemon, get_species, Cries,
-    EvolutionEntry, LocalizedName, Pokemon, StatEntry, TypeSlot, WeaknessEntry,
+    calculate_weaknesses, dedupe_flavor_texts, flatten_chain, get_evolution_chain, get_pokemon,
+    get_species, Cries, EvolutionEntry, FlavorTextEntry, LocalizedName, Pokemon, StatEntry,
+    TypeSlot, WeaknessEntry,
 };
 
 static TRANSLATIONS: OnceLock<HashMap<String, String>> = OnceLock::new();
@@ -65,6 +66,7 @@ struct SearchResponse<'a> {
     weaknesses: HashMap<String, Vec<WeaknessEntry>>,
     evolution: Vec<EvolutionEntry>,
     names: Vec<LocalizedName>,
+    flavor_text: Vec<FlavorTextEntry>,
 }
 
 #[tauri::command]
@@ -89,9 +91,9 @@ async fn search_pokemon(name: &str, app: AppHandle) -> Result<String, String> {
         .collect();
     let weaknesses = calculate_weaknesses(&app, &defender_types).await?;
 
-    // Species fetch carries both localized names and the evolution chain URL.
+    // Species fetch carries localized names, flavor text, and the evolution chain URL.
     // Failures are non-fatal so a result still renders with English-only data.
-    let (names, evolution) = match get_species(&app, &pokemon.species.url).await {
+    let (names, flavor_text, evolution) = match get_species(&app, &pokemon.species.url).await {
         Ok(species) => {
             let evo = match get_evolution_chain(&app, &species.evolution_chain.url).await {
                 Ok(chain) => flatten_chain(&app, &chain, &pokemon.name).await,
@@ -100,11 +102,12 @@ async fn search_pokemon(name: &str, app: AppHandle) -> Result<String, String> {
                     Vec::new()
                 }
             };
-            (species.names, evo)
+            let flavor = dedupe_flavor_texts(&species.flavor_text_entries);
+            (species.names, flavor, evo)
         }
         Err(e) => {
             eprintln!("species fetch failed: {}", e);
-            (Vec::new(), Vec::new())
+            (Vec::new(), Vec::new(), Vec::new())
         }
     };
 
@@ -118,6 +121,7 @@ async fn search_pokemon(name: &str, app: AppHandle) -> Result<String, String> {
         weaknesses,
         evolution,
         names,
+        flavor_text,
     };
 
     serde_json::to_string(&response).map_err(|e| format!("serialize: {}", e))
