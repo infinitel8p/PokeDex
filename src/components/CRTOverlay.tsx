@@ -17,8 +17,6 @@ const FRAGMENT_SHADER = `#version 300 es
 precision mediump float;
 
 uniform vec2 u_resolution;
-uniform float u_time;
-uniform float u_reduced;
 
 // Per-effect on/off knobs — set from React state via the Settings → Advanced
 // accordion. 1.0 = enabled, 0.0 = disabled. Multiplied into each effect's
@@ -143,49 +141,37 @@ const CRTOverlay = () => {
         gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
 
         const uResLoc = gl.getUniformLocation(program, "u_resolution");
-        const uTimeLoc = gl.getUniformLocation(program, "u_time");
-        const uReducedLoc = gl.getUniformLocation(program, "u_reduced");
         const uScanlinesLoc = gl.getUniformLocation(program, "u_scanlines");
         const uVignetteLoc = gl.getUniformLocation(program, "u_vignette");
         const uChromaticLoc = gl.getUniformLocation(program, "u_chromatic");
 
-        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        gl.uniform1f(uReducedLoc, reducedMotion ? 1.0 : 0.0);
         gl.uniform1f(uScanlinesLoc, effects.scanlines === "on" ? 1.0 : 0.0);
         gl.uniform1f(uVignetteLoc, effects.vignette === "on" ? 1.0 : 0.0);
         gl.uniform1f(uChromaticLoc, effects.chromatic === "on" ? 1.0 : 0.0);
 
+        const draw = () => {
+            gl.clearColor(0, 0, 0, 0);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+        };
+
         const resize = () => {
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
-            const width = window.innerWidth * dpr;
-            const height = window.innerHeight * dpr;
+            const width = Math.round(window.innerWidth * dpr);
+            const height = Math.round(window.innerHeight * dpr);
             if (canvas.width !== width || canvas.height !== height) {
                 canvas.width = width;
                 canvas.height = height;
             }
             gl.viewport(0, 0, width, height);
             gl.uniform2f(uResLoc, width, height);
+            draw();
         };
         resize();
         window.addEventListener("resize", resize);
 
-        let rafId = 0;
-        const start = performance.now();
-        const render = (now: number) => {
-            const t = (now - start) / 1000;
-            gl.uniform1f(uTimeLoc, t);
-            gl.clearColor(0, 0, 0, 0);
-            gl.clear(gl.COLOR_BUFFER_BIT);
-            gl.drawArrays(gl.TRIANGLES, 0, 6);
-            if (!reducedMotion) {
-                rafId = requestAnimationFrame(render);
-            }
-        };
-        rafId = requestAnimationFrame(render);
-
         return () => {
             window.removeEventListener("resize", resize);
-            cancelAnimationFrame(rafId);
             gl.deleteProgram(program);
             gl.deleteShader(vs);
             gl.deleteShader(fs);

@@ -173,7 +173,7 @@ const Uranium = () => {
     else viewKey = "empty";
 
     return (
-        <main className="h-screen flex flex-col pt-9">
+        <main className="h-dvh flex flex-col pt-[calc(var(--navbar-pad)+env(safe-area-inset-top))]">
             <div className="px-4 pt-3">
                 <StatusBar />
             </div>
@@ -390,7 +390,7 @@ const Uranium = () => {
             </div>
 
             {viewKey !== "empty" && (
-                <section className="shrink-0 px-6 pb-4">
+                <section className="shrink-0 px-6 pb-[max(1rem,env(safe-area-inset-bottom))]">
                     <hr className="mb-6 border-divider/40" />
                     <Search
                         onSearch={submit}

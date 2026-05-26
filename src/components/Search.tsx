@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLanguage } from "../lib/i18n";
+import { isTouchPrimary } from "../lib/platform";
 
 type AccentVariant = "red" | "lime";
 
@@ -51,6 +52,8 @@ const Search: React.FC<SearchProps> = ({
     };
 
     useEffect(() => {
+        if (isTouchPrimary()) return;
+
         const handleKeydown = (event: KeyboardEvent) => {
             if (!inputRef.current) return;
             if (event.ctrlKey || event.metaKey || event.altKey) return;
@@ -80,15 +83,17 @@ const Search: React.FC<SearchProps> = ({
             <input
                 ref={inputRef}
                 id="pokemon-input"
-                autoFocus={autoFocus}
+                autoFocus={autoFocus && !isTouchPrimary()}
                 onChange={(e) => setName(e.currentTarget.value)}
                 placeholder={resolvedPlaceholder}
                 autoComplete="off"
                 spellCheck={false}
+                inputMode="search"
+                enterKeyHint="search"
                 maxLength={48}
                 className={`w-full rounded-none py-3 pl-4 pr-12 text-base font-display tracking-wide bg-canvas text-fg placeholder:text-faint border-2 border-divider/70 focus:outline-none transition-colors ${ACCENT_CLASSES[accent].input}`}
             />
-            <span className="absolute inset-y-0 right-0 grid w-10 place-content-center">
+            <span className="absolute inset-y-0 right-0 grid w-10 pointer-coarse:w-11 place-content-center">
                 <button
                     type="submit"
                     className={`text-muted hover:text-fg transition-all duration-150 active:scale-90 rounded-sm focus-visible:outline-none focus-visible:ring-2 ${ACCENT_CLASSES[accent].button} focus-visible:ring-offset-2 focus-visible:ring-offset-canvas`}

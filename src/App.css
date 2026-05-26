@@ -14,12 +14,20 @@
 		"Microsoft JhengHei UI", "Malgun Gothic", "Apple SD Gothic Neo",
 		"Noto Sans CJK JP", "Noto Sans CJK SC", "Noto Sans CJK TC", "Noto Sans CJK KR";
 
+	--navbar-pad: 2.25rem;
+
 	/* Default font set — "Pixelify" preset */
 	--font-display: "Pixelify Sans", "DM Sans", var(--font-cjk), system-ui, sans-serif;
 	--font-sans: "DM Sans", var(--font-cjk), system-ui, sans-serif;
 
 	color: rgb(var(--fg));
 	background-color: rgb(var(--canvas));
+}
+
+@media (pointer: coarse) {
+	:root {
+		--navbar-pad: 3.5rem;
+	}
 }
 
 :root.font-pixelify {
@@ -67,6 +75,7 @@
 
 html {
 	font-family: var(--font-sans);
+	overscroll-behavior: none;
 }
 
 body {
@@ -75,6 +84,20 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 	position: relative;
+	min-height: 100dvh;
+}
+
+@media (pointer: coarse) {
+	button,
+	[role="button"],
+	[role="radio"],
+	a[href] {
+		min-height: 44px;
+		min-width: 44px;
+	}
+	nav a {
+		min-width: 0;
+	}
 }
 
 @keyframes crt-text-flicker {

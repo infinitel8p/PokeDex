@@ -10,6 +10,7 @@ import StatBars from "./components/StatBars";
 import StatusBar from "./components/StatusBar";
 import { CRY_CHANGE_EVENT, CrySource, getCrySource, pickCryUrl } from "./lib/cry-source";
 import { pickFlavorText, pickSpeciesName, useLanguage } from "./lib/i18n";
+import { isMobileOS } from "./lib/platform";
 import {
     getRecentNamesMap,
     getRecentSearches,
@@ -229,6 +230,8 @@ function App() {
     }, []);
 
     useEffect(() => {
+        if (isMobileOS()) return;
+
         const startedAt = performance.now();
         const MIN_DISPLAY_MS = 600;
         const MAX_DISPLAY_MS = 3000;
@@ -237,7 +240,8 @@ function App() {
             const elapsed = performance.now() - startedAt;
             const remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
             window.setTimeout(() => {
-                invoke("close_splashscreen");
+                invoke("close_splashscreen").catch(() => {
+                });
             }, remaining);
         };
 
@@ -278,7 +282,7 @@ function App() {
     else viewKey = "empty";
 
     return (
-        <main className="h-screen flex flex-col pt-9">
+        <main className="h-dvh flex flex-col pt-[calc(var(--navbar-pad)+env(safe-area-inset-top))]">
             <div className="px-4 pt-3">
                 <StatusBar />
             </div>
@@ -348,9 +352,9 @@ function App() {
                                         <p className="font-display text-xs text-red-500 tabular-nums tracking-[0.18em] uppercase">
                                             № {pokemonData.id.toString().padStart(4, "0")}
                                         </p>
-                                        <div className="flex items-baseline gap-2 mt-1">
+                                        <div className="flex items-baseline pointer-coarse:items-center gap-2 mt-1">
                                             <h1
-                                                className="font-display text-4xl font-bold leading-[0.95] break-words tracking-tight min-w-0"
+                                                className="font-display text-4xl font-bold leading-[0.95] wrap-break-word tracking-tight min-w-0"
                                                 style={{ viewTransitionName: "pokemon-name" }}
                                             >
                                                 {displayName}
@@ -369,7 +373,7 @@ function App() {
                                                         strokeWidth="2"
                                                         strokeLinecap="round"
                                                         strokeLinejoin="round"
-                                                        className="h-4 w-4"
+                                                        className="h-4 w-4 pointer-coarse:h-5 pointer-coarse:w-5"
                                                         aria-hidden="true"
                                                     >
                                                         <path d="M11 5L6 9H2v6h4l5 4V5z" />
@@ -557,7 +561,7 @@ function App() {
                                         onClick={randomSearch}
                                         aria-label={t("home.randomAria")}
                                         title={t("home.randomAria")}
-                                        className="shrink-0 border-2 border-divider/70 hover:border-red-500 px-3 text-fg hover:text-red-500 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas font-display text-lg leading-none"
+                                        className="shrink-0 border-2 border-divider/70 hover:border-red-500 px-3 text-fg hover:text-red-500 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas font-display text-lg pointer-coarse:text-2xl leading-none"
                                     >
                                         🎲
                                     </button>
@@ -601,7 +605,7 @@ function App() {
             </div>
 
             {viewKey !== "empty" && (
-                <section className="shrink-0 px-6 pb-4">
+                <section className="shrink-0 px-6 pb-[max(1rem,env(safe-area-inset-bottom))]">
                     <hr className="mb-6 border-divider/40" />
                     <Search onSearch={searchPokemon} />
                 </section>

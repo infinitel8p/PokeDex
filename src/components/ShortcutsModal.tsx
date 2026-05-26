@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "../lib/i18n";
+import { isTouchPrimary } from "../lib/platform";
 import type { TranslationKey } from "../data/translations";
 
 const SHORTCUTS: ReadonlyArray<{ keys: TranslationKey[]; descKey: TranslationKey }> = [
@@ -15,8 +16,10 @@ const SHORTCUTS: ReadonlyArray<{ keys: TranslationKey[]; descKey: TranslationKey
 const ShortcutsModal = () => {
     const [open, setOpen] = useState(false);
     const { t } = useLanguage();
+    const touchOnly = isTouchPrimary();
 
     useEffect(() => {
+        if (touchOnly) return;
         const handler = (e: KeyboardEvent) => {
             if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
             if (e.key === "?" && !e.ctrlKey && !e.metaKey && !e.altKey) {
@@ -30,7 +33,9 @@ const ShortcutsModal = () => {
         };
         window.addEventListener("keydown", handler);
         return () => window.removeEventListener("keydown", handler);
-    }, [open]);
+    }, [open, touchOnly]);
+
+    if (touchOnly) return null;
 
     return (
         <AnimatePresence>

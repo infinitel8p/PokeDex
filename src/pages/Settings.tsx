@@ -87,7 +87,7 @@ const CLEAR_BUTTON_CLASS =
 const Settings = () => {
     const { t } = useLanguage();
     return (
-        <main className="h-screen flex flex-col pt-9 px-4 pb-4">
+        <main className="h-dvh flex flex-col pt-[calc(var(--navbar-pad)+env(safe-area-inset-top))] px-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
             <div className="pt-3">
                 <StatusBar />
             </div>

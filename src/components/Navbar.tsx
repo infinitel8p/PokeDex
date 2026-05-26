@@ -22,7 +22,7 @@ const Navbar = () => {
 
     return (
         <header
-            className="fixed top-0 left-0 right-0 z-10 bg-red-600 border-b-2 border-red-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]"
+            className="fixed top-0 left-0 right-0 z-10 bg-red-600 border-b-2 border-red-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] pt-[env(safe-area-inset-top)]"
             style={{
                 backgroundImage:
                     "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0.12) 100%)",
