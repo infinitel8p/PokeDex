@@ -1,13 +1,246 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-	color: #f6f6f6;
-	background-color: #1a1a1a;
+	--canvas: 13 18 24;
+	--fg: 232 234 238;
+	--muted: 178 184 196;
+	--faint: 130 138 154;
+	--surface: 25 32 44;
+	--divider: 60 70 88;
+
+	--font-cjk: "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Microsoft YaHei UI",
+		"Microsoft JhengHei UI", "Malgun Gothic", "Apple SD Gothic Neo",
+		"Noto Sans CJK JP", "Noto Sans CJK SC", "Noto Sans CJK TC", "Noto Sans CJK KR";
+
+	--navbar-pad: 2.25rem;
+
+	/* Default font set - "Pixelify" preset */
+	--font-display: "Pixelify Sans", "DM Sans", var(--font-cjk), system-ui, sans-serif;
+	--font-sans: "DM Sans", var(--font-cjk), system-ui, sans-serif;
+
+	color: rgb(var(--fg));
+	background-color: rgb(var(--canvas));
+}
+
+@media (pointer: coarse) {
+	:root {
+		--navbar-pad: 3.5rem;
+	}
+}
+
+:root.font-pixelify {
+	--font-display: "Pixelify Sans", "DM Sans", var(--font-cjk), system-ui, sans-serif;
+	--font-sans: "DM Sans", var(--font-cjk), system-ui, sans-serif;
+}
+
+:root.font-crisp {
+	--font-display: "Geist", "Geist Sans", var(--font-cjk), system-ui, sans-serif;
+	--font-sans: "Geist", "Geist Sans", var(--font-cjk), system-ui, sans-serif;
+}
+
+:root.font-arcade {
+	--font-display: "VT323", "DM Sans", var(--font-cjk), monospace;
+	--font-sans: "DM Sans", var(--font-cjk), system-ui, sans-serif;
+}
+
+:root:lang(ja) .tracking-\[0\.28em\],
+:root:lang(ko) .tracking-\[0\.28em\],
+:root:lang(zh-Hans) .tracking-\[0\.28em\],
+:root:lang(zh-Hant) .tracking-\[0\.28em\] {
+	letter-spacing: 0.08em;
+}
+:root:lang(ja) .tracking-\[0\.18em\],
+:root:lang(ko) .tracking-\[0\.18em\],
+:root:lang(zh-Hans) .tracking-\[0\.18em\],
+:root:lang(zh-Hant) .tracking-\[0\.18em\] {
+	letter-spacing: 0.05em;
+}
+:root:lang(ja) .tracking-\[0\.15em\],
+:root:lang(ko) .tracking-\[0\.15em\],
+:root:lang(zh-Hans) .tracking-\[0\.15em\],
+:root:lang(zh-Hant) .tracking-\[0\.15em\] {
+	letter-spacing: 0.04em;
+}
+
+:root.light {
+	--canvas: 248 249 251;
+	--fg: 28 35 48;
+	--muted: 61 70 92;
+	--faint: 103 112 136;
+	--surface: 232 236 242;
+	--divider: 170 178 192;
+}
+
+html {
+	font-family: var(--font-sans);
+	overscroll-behavior: none;
+}
+
+body {
+	font-feature-settings: "kern" 1, "ss01";
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	position: relative;
+	min-height: 100dvh;
+}
+
+@media (pointer: coarse) {
+	button,
+	[role="button"],
+	[role="radio"],
+	a[href] {
+		min-height: 44px;
+		min-width: 44px;
+	}
+	nav a {
+		min-width: 0;
+	}
+}
+
+@keyframes crt-text-flicker {
+	from {
+		text-shadow:
+			1.1px 0 0 rgba(239, 68, 68, 0.32),
+			-1.1px 0 0 rgba(80, 220, 220, 0.22);
+	}
+	to {
+		text-shadow:
+			-1.1px 0.3px 0.6px rgba(239, 68, 68, 0.26),
+			1.1px -0.3px 0.6px rgba(80, 220, 220, 0.18);
+	}
+}
+
+@keyframes crt-text-flicker-dark {
+	from {
+		text-shadow:
+			1.1px 0 0 rgba(255, 120, 120, 0.55),
+			-1.1px 0 0 rgba(130, 240, 240, 0.45);
+	}
+	to {
+		text-shadow:
+			-1.1px 0.3px 0.6px rgba(255, 120, 120, 0.45),
+			1.1px -0.3px 0.6px rgba(130, 240, 240, 0.36);
+	}
+}
+
+:root.crt-on.crt-flicker-on,
+:root.crt-on.crt-flicker-on body {
+	animation: crt-text-flicker 0.12s infinite alternate;
+}
+
+:root.dark.crt-on.crt-flicker-on,
+:root.dark.crt-on.crt-flicker-on body {
+	animation-name: crt-text-flicker-dark;
+}
+
+/* Pixel-dot matrix overlay */
+:root.crt-on:not(.crt-no-dots) body::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1.1px);
+	background-size: 5px 5px;
+	pointer-events: none;
+	z-index: 52;
+}
+
+:root.crt-on.light:not(.crt-no-dots) body::before {
+	background-image: radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1.1px);
 }
 
 /* hide all scrollbars in every browser */
 ::-webkit-scrollbar {
 	display: none;
+}
+
+/* Smooth fade between routes */
+main {
+	animation: route-enter 0.28s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* Scan-line sweep over the result artwork on mount */
+.scan-sweep {
+	position: relative;
+	overflow: hidden;
+}
+.scan-sweep::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		to bottom,
+		transparent 0%,
+		rgba(74, 222, 128, 0.0) 35%,
+		rgba(74, 222, 128, 0.65) 50%,
+		rgba(74, 222, 128, 0.0) 65%,
+		transparent 100%
+	);
+	transform: translateY(-100%);
+	animation: scan-sweep 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+	pointer-events: none;
+	mix-blend-mode: screen;
+}
+@keyframes scan-sweep {
+	0% { transform: translateY(-100%); opacity: 0; }
+	15% { opacity: 1; }
+	85% { opacity: 1; }
+	100% { transform: translateY(100%); opacity: 0; }
+}
+
+/* View Transition tuning (Chromium / Tauri webview) */
+::view-transition-group(*) {
+	animation-duration: 0.32s;
+	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+::view-transition-old(root) {
+	animation: vt-out 0.22s cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(root) {
+	animation: vt-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes vt-out {
+	to { opacity: 0; transform: translateY(-4px); }
+}
+@keyframes vt-in {
+	from { opacity: 0; transform: translateY(6px); }
+}
+
+@keyframes route-enter {
+	from {
+		opacity: 0;
+		transform: translateY(4px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Theme cross-fade - only active during the theme switch itself */
+.theme-transitioning,
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+	transition:
+		background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+		color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+		border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+		box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	main {
+		animation: none;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }

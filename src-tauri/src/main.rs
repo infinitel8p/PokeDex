@@ -1,98 +1,155 @@
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-#[macro_use]
-extern crate maplit;
+mod api;
 
-mod weakness_helpers;
-use tauri::{Manager, Window};
-use reqwest::get;
-use serde_json::{Value, json};
-use weakness_helpers::calculate_weaknesses;
+use serde::Serialize;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+use std::sync::OnceLock;
+use tauri::{AppHandle, Manager, WebviewWindow};
 
-use tauri::{api::path::resource_dir, Env};
+use api::{
+    calculate_weaknesses, dedupe_flavor_texts, flatten_chain, get_evolution_chain, get_pokemon,
+    get_species, Cries, EvolutionEntry, FlavorTextEntry, LocalizedName, Pokemon, StatEntry,
+    TypeSlot, WeaknessEntry,
+};
 
-fn load_translations() -> HashMap<String, String> {
-    let context = tauri::generate_context!();
-    let package_info = context.package_info();
-    let env = Env::default();
+static TRANSLATIONS: OnceLock<HashMap<String, String>> = OnceLock::new();
 
-    let mut file_path = resource_dir(package_info, &env).expect("Could not access resource directory");
-    file_path.push("assets/translations.csv");
+fn load_translations(app: &AppHandle) -> HashMap<String, String> {
+    let resource_dir = app
+        .path()
+        .resource_dir()
+        .expect("Could not access resource directory");
+    let file_path = resource_dir.join("assets/translations.csv");
 
-    let file = File::open(file_path).expect("Cannot open CSV file");
+    let file = match File::open(&file_path) {
+        Ok(f) => f,
+        Err(_) => return HashMap::new(),
+    };
     let reader = BufReader::new(file);
     let mut translations = HashMap::new();
 
-    for line in reader.lines() {
-        if let Ok(entry) = line {
-            let fields: Vec<&str> = entry.split(',').collect();
-            let key = fields[0].to_string();
-            // let english_name = fields[1].to_string();
-            
-            // Add translations for all languages to the HashMap, mapping them to the key
-            for name in &fields[1..] {
-                translations.insert(name.trim().to_lowercase(), key.clone());
-            }
+    for line in reader.lines().flatten() {
+        let fields: Vec<&str> = line.split(',').collect();
+        if fields.is_empty() {
+            continue;
+        }
+        let key = fields[0].to_string();
+        for name in &fields[1..] {
+            translations.insert(name.trim().to_lowercase(), key.clone());
         }
     }
 
     translations
 }
 
+fn get_translations(app: &AppHandle) -> &'static HashMap<String, String> {
+    TRANSLATIONS.get_or_init(|| load_translations(app))
+}
 
 fn translate_to_key(name: &str, translations: &HashMap<String, String>) -> String {
-    let lowercase_name = name.to_lowercase();
-    if let Some(key) = translations.get(&lowercase_name) {
-        key.clone()
-    } else {
-        name.to_string()  // If the name is already in English or not found, return it as is
-    }
+    let lower = name.to_lowercase();
+    translations.get(&lower).cloned().unwrap_or(name.to_string())
+}
+
+#[derive(Serialize)]
+struct SearchResponse<'a> {
+    id: u32,
+    name: &'a str,
+    types: &'a [TypeSlot],
+    stats: &'a [StatEntry],
+    sprites: &'a serde_json::Value,
+    cries: &'a Cries,
+    weaknesses: HashMap<String, Vec<WeaknessEntry>>,
+    evolution: Vec<EvolutionEntry>,
+    names: Vec<LocalizedName>,
+    flavor_text: Vec<FlavorTextEntry>,
 }
 
 #[tauri::command]
-async fn search_pokemon(name: &str) -> Result<String, String> {
-    let translations = load_translations();
-    let key = translate_to_key(name, &translations);
-    
-    let url = format!("https://pokeapi.co/api/v2/pokemon/{}", key);
+async fn search_pokemon(name: &str, app: AppHandle) -> Result<String, String> {
+    let translations = get_translations(&app);
+    let key = translate_to_key(name, translations);
 
-    match get(&url).await {
-        Ok(response) => {
-            if response.status().is_success() {
-                let json: Value = response.json().await.unwrap();
-                let types = json["types"].as_array().unwrap();
-
-                // Calculate weaknesses
-                let weaknesses = calculate_weaknesses(types).await?;
-
-                // Add weaknesses to the Pokémon data
-                let mut result = json.clone();
-                result["weaknesses"] = json!(weaknesses);
-
-                Ok(result.to_string())
-            } else {
-                Err(format!("Error: Pokémon with key {} not found!", key))
-            }
+    let pokemon: Pokemon = get_pokemon(&app, &key).await.map_err(|e| {
+        if e.starts_with("not_found") {
+            format!("Error: Pokémon with key {} not found!", key)
+        } else if e.starts_with("network") {
+            "Failed to connect to PokéAPI".to_string()
+        } else {
+            e
         }
-        Err(_) => Err("Failed to connect to PokéAPI".to_string()),
+    })?;
+
+    let defender_types: Vec<String> = pokemon
+        .types
+        .iter()
+        .map(|t| t.type_.name.clone())
+        .collect();
+    let weaknesses = calculate_weaknesses(&app, &defender_types).await?;
+
+    // Species fetch carries localized names, flavor text, and the evolution chain URL.
+    // Failures are non-fatal so a result still renders with English-only data.
+    let (names, flavor_text, evolution) = match get_species(&app, &pokemon.species.url).await {
+        Ok(species) => {
+            let evo = match get_evolution_chain(&app, &species.evolution_chain.url).await {
+                Ok(chain) => flatten_chain(&app, &chain, &pokemon.name).await,
+                Err(e) => {
+                    eprintln!("evolution chain fetch failed: {}", e);
+                    Vec::new()
+                }
+            };
+            let flavor = dedupe_flavor_texts(&species.flavor_text_entries);
+            (species.names, flavor, evo)
+        }
+        Err(e) => {
+            eprintln!("species fetch failed: {}", e);
+            (Vec::new(), Vec::new(), Vec::new())
+        }
+    };
+
+    let response = SearchResponse {
+        id: pokemon.id,
+        name: &pokemon.name,
+        types: &pokemon.types,
+        stats: &pokemon.stats,
+        sprites: &pokemon.sprites,
+        cries: &pokemon.cries,
+        weaknesses,
+        evolution,
+        names,
+        flavor_text,
+    };
+
+    serde_json::to_string(&response).map_err(|e| format!("serialize: {}", e))
+}
+
+#[tauri::command]
+async fn close_splashscreen(window: WebviewWindow) {
+    if let Some(splash) = window.get_webview_window("splashscreen") {
+        let _ = splash.close();
+    }
+    if let Some(main) = window.get_webview_window("main") {
+        let _ = main.show();
     }
 }
 
 #[tauri::command]
-async fn close_splashscreen(window: Window) {
-    // Close splashscreen & show main window
-    window.get_window("splashscreen").expect("no window labeled 'splashscreen' found").close().unwrap();
-    window.get_window("main").expect("no window labeled 'main' found").show().unwrap();
+async fn clear_cache(app: AppHandle) -> Result<(), String> {
+    api::clear_cache(&app).await;
+    Ok(())
 }
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![close_splashscreen, search_pokemon])
+        .invoke_handler(tauri::generate_handler![
+            close_splashscreen,
+            search_pokemon,
+            clear_cache
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
