@@ -77,21 +77,55 @@ body {
 	position: relative;
 }
 
+@keyframes crt-text-flicker {
+	from {
+		text-shadow:
+			1.1px 0 0 rgba(239, 68, 68, 0.32),
+			-1.1px 0 0 rgba(80, 220, 220, 0.22);
+	}
+	to {
+		text-shadow:
+			-1.1px 0.3px 0.6px rgba(239, 68, 68, 0.26),
+			1.1px -0.3px 0.6px rgba(80, 220, 220, 0.18);
+	}
+}
+
+@keyframes crt-text-flicker-dark {
+	from {
+		text-shadow:
+			1.1px 0 0 rgba(255, 120, 120, 0.55),
+			-1.1px 0 0 rgba(130, 240, 240, 0.45);
+	}
+	to {
+		text-shadow:
+			-1.1px 0.3px 0.6px rgba(255, 120, 120, 0.45),
+			1.1px -0.3px 0.6px rgba(130, 240, 240, 0.36);
+	}
+}
+
+:root.crt-on.crt-flicker-on,
+:root.crt-on.crt-flicker-on body {
+	animation: crt-text-flicker 0.12s infinite alternate;
+}
+
+:root.dark.crt-on.crt-flicker-on,
+:root.dark.crt-on.crt-flicker-on body {
+	animation-name: crt-text-flicker-dark;
+}
+
 /* Pixel-dot matrix overlay */
-:root.crt-on body::before {
+:root.crt-on:not(.crt-no-dots) body::before {
 	content: '';
 	position: fixed;
 	inset: 0;
-	background-image: radial-gradient(rgba(255, 255, 255, 0.025) 0.5px, transparent 0.5px);
+	background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1.1px);
 	background-size: 5px 5px;
 	pointer-events: none;
-	z-index: 49;
-	mix-blend-mode: overlay;
+	z-index: 52;
 }
 
-:root.crt-on.light body::before {
-	background-image: radial-gradient(rgba(0, 0, 0, 0.04) 0.5px, transparent 0.5px);
-	mix-blend-mode: multiply;
+:root.crt-on.light:not(.crt-no-dots) body::before {
+	background-image: radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1.1px);
 }
 
 /* hide all scrollbars in every browser */

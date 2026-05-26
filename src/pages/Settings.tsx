@@ -4,6 +4,12 @@ import { PreferenceToggle } from "../components/PreferenceToggle";
 import StatusBar from "../components/StatusBar";
 import type { TranslationKey } from "../data/translations";
 import { CRTPreference, getCRTPreference, setCRTPreference } from "../lib/crt";
+import {
+    CrtEffectKey,
+    CrtEffectToggle,
+    getCrtEffects,
+    setCrtEffect,
+} from "../lib/crt-effects";
 import { CrySource, getCrySource, setCrySource } from "../lib/cry-source";
 import { FontPreference, FONT_OPTIONS, getFontPreference, setFontPreference } from "../lib/font";
 import {
@@ -36,6 +42,18 @@ const SPRITE_LABEL_KEY: Record<SpriteStyle, TranslationKey> = {
 const UPCOMING_KEYS: ReadonlyArray<{ labelKey: TranslationKey; hintKey: TranslationKey }> = [
     { labelKey: "settings.upcomingGen", hintKey: "settings.upcomingGenHint" },
     { labelKey: "settings.upcomingTeams", hintKey: "settings.upcomingTeamsHint" },
+];
+
+const CRT_EFFECT_ROWS: ReadonlyArray<{
+    key: CrtEffectKey;
+    labelKey: TranslationKey;
+    hintKey: TranslationKey;
+}> = [
+    { key: "scanlines", labelKey: "settings.crtScanlines", hintKey: "settings.crtScanlinesHint" },
+    { key: "vignette", labelKey: "settings.crtVignette", hintKey: "settings.crtVignetteHint" },
+    { key: "chromatic", labelKey: "settings.crtChromatic", hintKey: "settings.crtChromaticHint" },
+    { key: "flicker", labelKey: "settings.crtFlicker", hintKey: "settings.crtFlickerHint" },
+    { key: "dotMatrix", labelKey: "settings.crtDotMatrix", hintKey: "settings.crtDotMatrixHint" },
 ];
 
 interface SettingsRowProps {
@@ -118,6 +136,37 @@ const Settings = () => {
                             ]}
                         />
                     </SettingsRow>
+
+                    <li className="border-2 border-divider/60 group">
+                        <details className="group">
+                            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden flex items-center justify-between gap-3 px-3 py-3 transition-colors hover:bg-divider/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas">
+                                <p className="font-display text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                                    {t("settings.crtAdvanced")}
+                                </p>
+                                <span
+                                    aria-hidden="true"
+                                    className="font-display text-xs text-muted transition-transform group-open:rotate-180"
+                                >
+                                    ▾
+                                </span>
+                            </summary>
+                            <ul className="border-t-2 border-divider/40 p-2 space-y-1.5">
+                                {CRT_EFFECT_ROWS.map(({ key, labelKey, hintKey }) => (
+                                    <SettingsRow key={key} labelKey={labelKey} hintKey={hintKey}>
+                                        <PreferenceToggle<CrtEffectToggle>
+                                            initialValue={getCrtEffects()[key]}
+                                            onSelect={(next) => setCrtEffect(key, next)}
+                                            ariaLabelKey={labelKey}
+                                            options={[
+                                                { value: "on", labelKey: "settings.crtOn" },
+                                                { value: "off", labelKey: "settings.crtOff" },
+                                            ]}
+                                        />
+                                    </SettingsRow>
+                                ))}
+                            </ul>
+                        </details>
+                    </li>
 
                     <SettingsRow labelKey="settings.font" hintKey="settings.fontHint">
                         <PreferenceToggle<FontPreference>

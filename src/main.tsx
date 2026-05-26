@@ -17,6 +17,7 @@ import CRTOverlay from "./components/CRTOverlay";
 import Navbar from "./components/Navbar";
 import ShortcutsModal from "./components/ShortcutsModal";
 import { applyCRTClass, getCRTPreference } from "./lib/crt";
+import { applyCrtEffectsCss, getCrtEffects } from "./lib/crt-effects";
 import { applyFontClass, getFontPreference } from "./lib/font";
 import { applyLanguageAttr, getLanguagePreference } from "./lib/i18n";
 import { applyTheme, getInitialTheme } from "./lib/theme";
@@ -28,6 +29,7 @@ import Settings from "./pages/Settings";
 
 applyTheme(getInitialTheme());
 applyCRTClass(getCRTPreference());
+applyCrtEffectsCss(getCrtEffects());
 applyFontClass(getFontPreference());
 applyLanguageAttr(getLanguagePreference());
 
