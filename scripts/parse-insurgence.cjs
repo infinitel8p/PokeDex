@@ -409,7 +409,7 @@ async function main() {
             const flavor = extractFlavor(wt);
             const evolution = extractEvolution(wt);
             const learnset = extractLearnset(wt);
-            const spriteUrl = spriteMap.get(info.ndex) || "";
+            const spriteUrl = `https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/${parseInt(info.ndex, 10)}.png`;
 
             entries.push({
                 id: info.ndex,

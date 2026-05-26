@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
+import EvolutionStrip from "../components/EvolutionStrip";
 import HoloArtwork from "../components/HoloArtwork";
 import Search from "../components/Search";
+import StatBars from "../components/StatBars";
 import StatusBar from "../components/StatusBar";
 import { URANIUM_POKEMON, UraniumPokemon } from "../data/uranium-pokemon";
 import {
@@ -179,6 +181,14 @@ const Uranium = () => {
             </div>
 
             <div className="relative flex-1 min-h-0">
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 top-0 z-10 h-3 bg-linear-to-b from-canvas to-transparent"
+                />
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-4 bg-linear-to-t from-canvas to-transparent"
+                />
                 <section className="h-full overflow-y-auto">
                     <AnimatePresence mode="wait" initial={false}>
                         {viewKey === "loading" && (
@@ -205,15 +215,15 @@ const Uranium = () => {
                                             <p className="font-display text-xs text-lime-700 dark:text-lime-400 tabular-nums tracking-[0.18em] uppercase">
                                                 № {submitted.id.padStart(3, "0")}
                                             </p>
-                                            <h2 className="font-display text-4xl font-bold capitalize mt-1 leading-[0.95] break-words tracking-tight">
+                                            <h1 className="font-display text-4xl font-bold mt-1 leading-[0.95] break-words tracking-tight min-w-0">
                                                 {submitted.name}
-                                            </h2>
+                                            </h1>
                                             <div className="mt-3 flex flex-wrap gap-1.5">
-                                                {submitted.types.map((t) => {
-                                                    const c = URANIUM_TYPE_COLORS[t as UraniumType];
+                                                {submitted.types.map((typeName) => {
+                                                    const c = URANIUM_TYPE_COLORS[typeName as UraniumType];
                                                     return (
                                                         <span
-                                                            key={t}
+                                                            key={typeName}
                                                             className="inline-flex items-center font-display text-[0.625rem] font-bold uppercase tracking-[0.28em] px-2 py-0.5 border-2"
                                                             style={{
                                                                 background: c?.bg ?? "#666",
@@ -221,7 +231,7 @@ const Uranium = () => {
                                                                 borderColor: c?.fg ?? "#fff",
                                                             }}
                                                         >
-                                                            {t}
+                                                            {typeName}
                                                         </span>
                                                     );
                                                 })}
@@ -232,13 +242,18 @@ const Uranium = () => {
                                                 </p>
                                             )}
                                         </div>
-                                        <div className="h-28 w-28 shrink-0 -mt-2 -mr-2">
+                                        <div className="h-32 w-32 shrink-0 -mt-2 -mr-2">
                                             <HoloArtwork
                                                 src={submitted.artwork}
                                                 alt={`${submitted.name} artwork`}
                                             />
                                         </div>
                                     </div>
+                                    {submitted.flavorText && (
+                                        <p className="mt-3 pt-3 border-t border-lime-700/30 dark:border-lime-400/30 text-xs text-muted italic leading-relaxed">
+                                            {submitted.flavorText}
+                                        </p>
+                                    )}
                                 </header>
 
                                 <div className="mt-4 space-y-2.5">
@@ -269,15 +284,15 @@ const Uranium = () => {
                                                     <p className="text-xs text-faint italic text-center py-1">{t("result.none")}</p>
                                                 ) : (
                                                     <div className="flex flex-wrap gap-1.5">
-                                                        {section.entries.map((t) => {
-                                                            const c = URANIUM_TYPE_COLORS[t];
+                                                        {section.entries.map((typeName) => {
+                                                            const c = URANIUM_TYPE_COLORS[typeName];
                                                             return (
                                                                 <span
-                                                                    key={t}
+                                                                    key={typeName}
                                                                     className="inline-flex items-center font-display text-[0.625rem] font-bold uppercase tracking-[0.28em] px-2 py-0.5 border-2"
                                                                     style={{ background: c.bg, color: c.fg, borderColor: c.fg }}
                                                                 >
-                                                                    {t}
+                                                                    {typeName}
                                                                 </span>
                                                             );
                                                         })}
@@ -286,6 +301,28 @@ const Uranium = () => {
                                             </div>
                                         </motion.section>
                                     ))}
+                                    {submitted.stats && (
+                                        <StatBars
+                                            stats={[
+                                                { base_stat: submitted.stats.hp, stat: { name: "hp", url: "" } },
+                                                { base_stat: submitted.stats.attack, stat: { name: "attack", url: "" } },
+                                                { base_stat: submitted.stats.defense, stat: { name: "defense", url: "" } },
+                                                { base_stat: submitted.stats.spAtk, stat: { name: "special-attack", url: "" } },
+                                                { base_stat: submitted.stats.spDef, stat: { name: "special-defense", url: "" } },
+                                                { base_stat: submitted.stats.speed, stat: { name: "speed", url: "" } },
+                                            ]}
+                                        />
+                                    )}
+                                    {submitted.evolution && submitted.evolution.length > 1 && (
+                                        <EvolutionStrip
+                                            chain={submitted.evolution.map((stage) => ({
+                                                name: stage.name,
+                                                sprite: stage.sprite,
+                                                is_current: stage.name === submitted.name,
+                                            }))}
+                                            onPick={(name) => submit(name)}
+                                        />
+                                    )}
                                     <p className="text-[0.625rem] text-faint italic text-center px-6 pt-2 pb-1">
                                         {t("uranium.disclaimer")}
                                     </p>
@@ -366,7 +403,7 @@ const Uranium = () => {
                                         className="mt-5"
                                     >
                                         <p className="font-display text-[0.625rem] text-faint tabular-nums tracking-[0.28em] uppercase text-center mb-2">
-                                            {t("uranium.tryOne")}
+                                            {t("home.tryOne")}
                                         </p>
                                         <div className="grid grid-cols-3 gap-1.5">
                                             {examples.map((ex) => (
@@ -374,10 +411,11 @@ const Uranium = () => {
                                                     key={ex}
                                                     type="button"
                                                     onClick={() => submit(ex)}
-                                                    className="group inline-flex items-center justify-center gap-1 py-1.5 px-2 font-display text-[0.625rem] font-bold uppercase tracking-[0.15em] text-fg border-2 border-divider/60 hover:border-lime-500 hover:bg-lime-500 hover:text-stone-900 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                                                    className="group inline-flex items-center justify-center gap-1 py-1.5 px-2 font-display text-xs font-bold uppercase tracking-[0.18em] text-fg border-2 border-divider/60 hover:border-lime-500 hover:bg-lime-500 hover:text-stone-900 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas overflow-hidden"
+                                                    title={ex}
                                                 >
-                                                    <span aria-hidden="true" className="opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 -ml-2 transition-opacity">▸</span>
-                                                    {ex}
+                                                    <span aria-hidden="true" className="opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 -ml-3 transition-opacity shrink-0">▸</span>
+                                                    <span className="truncate min-w-0">{ex}</span>
                                                 </button>
                                             ))}
                                         </div>

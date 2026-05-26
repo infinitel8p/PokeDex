@@ -385,11 +385,11 @@ function App() {
                                         </div>
                                         <div className="mt-3 flex flex-wrap gap-1.5">
                                             <span className="sr-only">{t("result.typeSrLabel")} </span>
-                                            {pokemonData.types.map((t) => {
-                                                const color = getTypeColor(t.type.name);
+                                            {pokemonData.types.map((slot) => {
+                                                const color = getTypeColor(slot.type.name);
                                                 return (
                                                     <span
-                                                        key={t.type.name}
+                                                        key={slot.type.name}
                                                         className="inline-flex items-center font-display text-[0.625rem] font-bold uppercase tracking-[0.28em] px-2 py-0.5 border-2"
                                                         style={{
                                                             background: color.bg,
@@ -397,7 +397,7 @@ function App() {
                                                             borderColor: color.fg,
                                                         }}
                                                     >
-                                                        {t.type.name}
+                                                        {slot.type.name}
                                                     </span>
                                                 );
                                             })}

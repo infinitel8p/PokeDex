@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useLanguage } from "../lib/i18n";
 import { isTouchPrimary } from "../lib/platform";
 
-type AccentVariant = "red" | "lime";
+type AccentVariant = "red" | "lime" | "neutral";
 
 interface SearchProps {
     onSearch: (name: string) => void;
@@ -27,6 +27,10 @@ const ACCENT_CLASSES: Record<AccentVariant, { input: string; button: string }> =
     lime: {
         input: "focus:border-lime-500",
         button: "focus-visible:ring-lime-500",
+    },
+    neutral: {
+        input: "focus:border-fg",
+        button: "focus-visible:ring-fg",
     },
 };
 

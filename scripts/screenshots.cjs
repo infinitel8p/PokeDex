@@ -199,7 +199,6 @@ async function main() {
 
         // ── 3. Uranium result (local data, no mock needed) ───────────────────
         console.log("Capturing Uranium...");
-        // Navbar Home link first to reset the result state, then click Uranium.
         await page.goto(VITE_URL + "uranium", { waitUntil: "domcontentloaded" });
         await settle();
         await page.fill("input#pokemon-input", "Orchynx");
@@ -208,7 +207,17 @@ async function main() {
         await settle();
         await shot("uranium-result.png");
 
-        // ── 4. Settings (language picker visible) ────────────────────────────
+        // ── 4. Insurgence result (also local data) ───────────────────────────
+        console.log("Capturing Insurgence...");
+        await page.goto(VITE_URL + "insurgence", { waitUntil: "domcontentloaded" });
+        await settle();
+        await page.fill("input#pokemon-input", "Delta Charizard");
+        await page.press("input#pokemon-input", "Enter");
+        await page.waitForTimeout(600);
+        await settle();
+        await shot("insurgence-result.png");
+
+        // ── 5. Settings (language picker visible) ────────────────────────────
         console.log("Capturing Settings...");
         await page.goto(VITE_URL + "settings", { waitUntil: "domcontentloaded" });
         await settle();

@@ -10,9 +10,10 @@
 Type a name or number, get the answer in one card: weaknesses, resistances, immunities, base stats, evolution chain, and the original Pokédex flavor text. Built for the seconds-matter moment mid-battle, but pretty enough to browse between matches.
 
 <p align="center">
-  <img src="docs/screenshots/home-empty.png" alt="Home screen showing the PokéDex wordmark, search input, and example chips" width="240" />
-  <img src="docs/screenshots/result-charizard.png" alt="Charizard result card with types, stats, evolution chain, and matchups" width="240" />
-  <img src="docs/screenshots/uranium-result.png" alt="Pokémon Uranium result page showing Nuclear-type matchups" width="240" />
+  <img src="docs/screenshots/home-empty.png" alt="Home screen showing the PokéDex wordmark, search input, and example chips" width="220" />
+  <img src="docs/screenshots/result-charizard.png" alt="Charizard result card with types, stats, evolution chain, and matchups" width="220" />
+  <img src="docs/screenshots/uranium-result.png" alt="Pokémon Uranium result page showing Nuclear-type matchups" width="220" />
+  <img src="docs/screenshots/insurgence-result.png" alt="Pokémon Insurgence result page showing Delta Charizard with Ghost/Dragon typing" width="220" />
 </p>
 
 ## Features

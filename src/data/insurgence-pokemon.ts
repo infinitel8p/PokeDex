@@ -1,4 +1,4 @@
-// Auto-generated from https://wiki.p-insurgence.com.
+// Auto-generated from https://wiki.p-insurgence.com via scripts/parse-insurgence.cjs.
 // Do not edit by hand - re-run the parser to refresh data.
 // Sprite URLs are hotlinked from the wiki; if the wiki migrates images,
 // re-run the parser or swap to self-hosted URLs.
@@ -896,8 +896,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/9d/727.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/9d/727.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/727.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/727.png",
     "altForm": null,
     "isMega": false
   },
@@ -1784,8 +1784,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/f8/728.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/f8/728.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/728.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/728.png",
     "altForm": null,
     "isMega": false
   },
@@ -2779,8 +2779,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/6b/729.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/6b/729.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/729.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/729.png",
     "altForm": null,
     "isMega": false
   },
@@ -3682,8 +3682,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/ae/730.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/ae/730.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/730.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/730.png",
     "altForm": null,
     "isMega": false
   },
@@ -4612,8 +4612,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/b4/731.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/b4/731.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/731.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/731.png",
     "altForm": null,
     "isMega": false
   },
@@ -5682,8 +5682,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/4/46/732.png",
-    "artwork": "https://wiki.p-insurgence.com/images/4/46/732.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/732.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/732.png",
     "altForm": null,
     "isMega": false
   },
@@ -6711,8 +6711,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/e/e7/733.png",
-    "artwork": "https://wiki.p-insurgence.com/images/e/e7/733.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/733.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/733.png",
     "altForm": null,
     "isMega": false
   },
@@ -7785,8 +7785,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/c9/734.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/c9/734.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/734.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/734.png",
     "altForm": null,
     "isMega": false
   },
@@ -8939,8 +8939,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/d8/735.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/d8/735.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/735.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/735.png",
     "altForm": null,
     "isMega": false
   },
@@ -9818,8 +9818,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/4/47/736.png",
-    "artwork": "https://wiki.p-insurgence.com/images/4/47/736.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/736.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/736.png",
     "altForm": null,
     "isMega": false
   },
@@ -10769,8 +10769,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/54/737.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/54/737.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/737.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/737.png",
     "altForm": null,
     "isMega": false
   },
@@ -11438,8 +11438,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/91/738.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/91/738.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/738.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/738.png",
     "altForm": null,
     "isMega": false
   },
@@ -12143,8 +12143,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/a6/739.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/a6/739.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/739.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/739.png",
     "altForm": null,
     "isMega": false
   },
@@ -13042,8 +13042,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/c7/740.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/c7/740.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/740.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/740.png",
     "altForm": null,
     "isMega": false
   },
@@ -13994,8 +13994,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/1/1b/741.png",
-    "artwork": "https://wiki.p-insurgence.com/images/1/1b/741.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/741.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/741.png",
     "altForm": null,
     "isMega": false
   },
@@ -14786,8 +14786,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/dc/742.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/dc/742.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/742.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/742.png",
     "altForm": null,
     "isMega": false
   },
@@ -15666,8 +15666,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/3e/743.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/3e/743.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/743.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/743.png",
     "altForm": null,
     "isMega": false
   },
@@ -16444,8 +16444,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/bc/744.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/bc/744.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/744.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/744.png",
     "altForm": null,
     "isMega": false
   },
@@ -17338,8 +17338,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/f0/745.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/f0/745.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/745.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/745.png",
     "altForm": null,
     "isMega": false
   },
@@ -18211,8 +18211,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/e/ec/746.png",
-    "artwork": "https://wiki.p-insurgence.com/images/e/ec/746.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/746.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/746.png",
     "altForm": null,
     "isMega": false
   },
@@ -19117,8 +19117,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/6c/747.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/6c/747.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/747.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/747.png",
     "altForm": null,
     "isMega": false
   },
@@ -19961,8 +19961,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/f9/748.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/f9/748.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/748.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/748.png",
     "altForm": null,
     "isMega": false
   },
@@ -20894,8 +20894,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/9a/749.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/9a/749.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/749.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/749.png",
     "altForm": null,
     "isMega": false
   },
@@ -21042,8 +21042,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/33/750.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/33/750.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/750.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/750.png",
     "altForm": null,
     "isMega": false
   },
@@ -22054,8 +22054,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/0/09/751.png",
-    "artwork": "https://wiki.p-insurgence.com/images/0/09/751.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/751.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/751.png",
     "altForm": null,
     "isMega": false
   },
@@ -22949,8 +22949,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/cd/752.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/cd/752.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/752.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/752.png",
     "altForm": null,
     "isMega": false
   },
@@ -23871,8 +23871,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/f5/753.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/f5/753.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/753.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/753.png",
     "altForm": null,
     "isMega": false
   },
@@ -24878,8 +24878,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/7c/754.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/7c/754.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/754.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/754.png",
     "altForm": null,
     "isMega": false
   },
@@ -25966,8 +25966,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/5b/755.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/5b/755.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/755.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/755.png",
     "altForm": null,
     "isMega": false
   },
@@ -26758,8 +26758,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/1/13/756.png",
-    "artwork": "https://wiki.p-insurgence.com/images/1/13/756.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/756.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/756.png",
     "altForm": null,
     "isMega": false
   },
@@ -27671,8 +27671,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/d1/757.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/d1/757.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/757.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/757.png",
     "altForm": null,
     "isMega": false
   },
@@ -28287,8 +28287,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/3e/758.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/3e/758.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/758.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/758.png",
     "altForm": null,
     "isMega": false
   },
@@ -29095,8 +29095,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/1/10/759.png",
-    "artwork": "https://wiki.p-insurgence.com/images/1/10/759.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/759.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/759.png",
     "altForm": null,
     "isMega": false
   },
@@ -29867,8 +29867,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/d1/760.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/d1/760.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/760.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/760.png",
     "altForm": null,
     "isMega": false
   },
@@ -30642,8 +30642,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/97/761.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/97/761.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/761.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/761.png",
     "altForm": null,
     "isMega": false
   },
@@ -31435,8 +31435,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/d7/762.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/d7/762.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/762.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/762.png",
     "altForm": null,
     "isMega": false
   },
@@ -32298,8 +32298,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/fc/763.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/fc/763.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/763.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/763.png",
     "altForm": null,
     "isMega": false
   },
@@ -33216,8 +33216,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/c9/764.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/c9/764.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/764.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/764.png",
     "altForm": null,
     "isMega": false
   },
@@ -34295,8 +34295,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/e/e3/765.png",
-    "artwork": "https://wiki.p-insurgence.com/images/e/e3/765.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/765.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/765.png",
     "altForm": null,
     "isMega": false
   },
@@ -35040,8 +35040,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/a6/766.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/a6/766.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/766.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/766.png",
     "altForm": null,
     "isMega": false
   },
@@ -35996,8 +35996,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/1/17/767.png",
-    "artwork": "https://wiki.p-insurgence.com/images/1/17/767.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/767.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/767.png",
     "altForm": null,
     "isMega": false
   },
@@ -37023,8 +37023,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/8/84/768.png",
-    "artwork": "https://wiki.p-insurgence.com/images/8/84/768.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/768.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/768.png",
     "altForm": null,
     "isMega": false
   },
@@ -37829,8 +37829,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/0/06/769.png",
-    "artwork": "https://wiki.p-insurgence.com/images/0/06/769.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/769.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/769.png",
     "altForm": null,
     "isMega": false
   },
@@ -38689,8 +38689,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/0/00/770.png",
-    "artwork": "https://wiki.p-insurgence.com/images/0/00/770.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/770.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/770.png",
     "altForm": null,
     "isMega": false
   },
@@ -39562,8 +39562,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/98/771.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/98/771.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/771.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/771.png",
     "altForm": null,
     "isMega": false
   },
@@ -40507,8 +40507,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/c6/772.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/c6/772.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/772.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/772.png",
     "altForm": null,
     "isMega": false
   },
@@ -41358,8 +41358,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/b9/773.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/b9/773.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/773.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/773.png",
     "altForm": null,
     "isMega": false
   },
@@ -42308,8 +42308,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/2/21/774.png",
-    "artwork": "https://wiki.p-insurgence.com/images/2/21/774.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/774.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/774.png",
     "altForm": null,
     "isMega": false
   },
@@ -43021,8 +43021,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/f3/775.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/f3/775.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/775.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/775.png",
     "altForm": null,
     "isMega": false
   },
@@ -43906,8 +43906,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/2/2d/776.png",
-    "artwork": "https://wiki.p-insurgence.com/images/2/2d/776.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/776.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/776.png",
     "altForm": null,
     "isMega": false
   },
@@ -44731,8 +44731,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/b8/777.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/b8/777.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/777.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/777.png",
     "altForm": null,
     "isMega": false
   },
@@ -45546,8 +45546,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/f9/778.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/f9/778.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/778.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/778.png",
     "altForm": null,
     "isMega": false
   },
@@ -46302,8 +46302,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/8/85/779.png",
-    "artwork": "https://wiki.p-insurgence.com/images/8/85/779.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/779.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/779.png",
     "altForm": null,
     "isMega": false
   },
@@ -47172,8 +47172,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/6e/780.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/6e/780.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/780.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/780.png",
     "altForm": null,
     "isMega": false
   },
@@ -48188,8 +48188,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/31/781.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/31/781.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/781.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/781.png",
     "altForm": null,
     "isMega": false
   },
@@ -48976,8 +48976,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/92/782.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/92/782.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/782.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/782.png",
     "altForm": null,
     "isMega": false
   },
@@ -49876,8 +49876,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/0/08/783.png",
-    "artwork": "https://wiki.p-insurgence.com/images/0/08/783.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/783.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/783.png",
     "altForm": null,
     "isMega": false
   },
@@ -50943,8 +50943,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/a5/784.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/a5/784.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/784.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/784.png",
     "altForm": null,
     "isMega": false
   },
@@ -51806,8 +51806,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/74/785.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/74/785.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/785.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/785.png",
     "altForm": null,
     "isMega": false
   },
@@ -52762,8 +52762,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/6e/786.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/6e/786.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/786.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/786.png",
     "altForm": null,
     "isMega": false
   },
@@ -54101,8 +54101,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/fe/787.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/fe/787.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/787.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/787.png",
     "altForm": null,
     "isMega": false
   },
@@ -54761,8 +54761,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/8/8c/788.png",
-    "artwork": "https://wiki.p-insurgence.com/images/8/8c/788.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/788.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/788.png",
     "altForm": null,
     "isMega": false
   },
@@ -55457,8 +55457,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/76/789.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/76/789.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/789.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/789.png",
     "altForm": null,
     "isMega": false
   },
@@ -56265,8 +56265,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/3d/790.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/3d/790.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/790.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/790.png",
     "altForm": null,
     "isMega": false
   },
@@ -56957,8 +56957,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/b0/791.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/b0/791.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/791.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/791.png",
     "altForm": null,
     "isMega": false
   },
@@ -57720,8 +57720,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/7f/792.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/7f/792.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/792.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/792.png",
     "altForm": null,
     "isMega": false
   },
@@ -58613,8 +58613,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/e/e4/793.png",
-    "artwork": "https://wiki.p-insurgence.com/images/e/e4/793.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/793.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/793.png",
     "altForm": null,
     "isMega": false
   },
@@ -59371,8 +59371,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/df/794.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/df/794.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/794.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/794.png",
     "altForm": null,
     "isMega": false
   },
@@ -60181,8 +60181,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/aa/795.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/aa/795.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/795.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/795.png",
     "altForm": null,
     "isMega": false
   },
@@ -61192,8 +61192,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/7d/796.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/7d/796.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/796.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/796.png",
     "altForm": null,
     "isMega": false
   },
@@ -62236,8 +62236,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/bf/797.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/bf/797.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/797.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/797.png",
     "altForm": null,
     "isMega": false
   },
@@ -63298,8 +63298,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/1/17/798.png",
-    "artwork": "https://wiki.p-insurgence.com/images/1/17/798.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/798.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/798.png",
     "altForm": null,
     "isMega": false
   },
@@ -64458,8 +64458,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/ad/799.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/ad/799.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/799.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/799.png",
     "altForm": null,
     "isMega": false
   },
@@ -65148,8 +65148,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/cf/800.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/cf/800.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/800.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/800.png",
     "altForm": null,
     "isMega": false
   },
@@ -65918,8 +65918,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/61/801.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/61/801.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/801.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/801.png",
     "altForm": null,
     "isMega": false
   },
@@ -66804,8 +66804,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/e/e2/802.png",
-    "artwork": "https://wiki.p-insurgence.com/images/e/e2/802.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/802.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/802.png",
     "altForm": null,
     "isMega": false
   },
@@ -67712,8 +67712,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/4/45/803.png",
-    "artwork": "https://wiki.p-insurgence.com/images/4/45/803.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/803.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/803.png",
     "altForm": null,
     "isMega": false
   },
@@ -68757,8 +68757,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/f9/804.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/f9/804.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/804.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/804.png",
     "altForm": null,
     "isMega": false
   },
@@ -69829,8 +69829,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/b0/805.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/b0/805.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/805.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/805.png",
     "altForm": null,
     "isMega": false
   },
@@ -70945,8 +70945,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/0/03/806.png",
-    "artwork": "https://wiki.p-insurgence.com/images/0/03/806.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/806.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/806.png",
     "altForm": null,
     "isMega": false
   },
@@ -71666,8 +71666,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/75/807.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/75/807.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/807.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/807.png",
     "altForm": null,
     "isMega": false
   },
@@ -72450,8 +72450,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/ba/808.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/ba/808.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/808.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/808.png",
     "altForm": null,
     "isMega": false
   },
@@ -73209,8 +73209,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/35/809.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/35/809.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/809.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/809.png",
     "altForm": null,
     "isMega": false
   },
@@ -74030,8 +74030,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/0/0a/810.png",
-    "artwork": "https://wiki.p-insurgence.com/images/0/0a/810.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/810.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/810.png",
     "altForm": null,
     "isMega": false
   },
@@ -74767,8 +74767,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/df/811.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/df/811.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/811.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/811.png",
     "altForm": null,
     "isMega": false
   },
@@ -75626,8 +75626,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/54/812.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/54/812.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/812.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/812.png",
     "altForm": null,
     "isMega": false
   },
@@ -75767,8 +75767,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/aa/813.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/aa/813.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/813.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/813.png",
     "altForm": null,
     "isMega": false
   },
@@ -76428,8 +76428,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/57/814.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/57/814.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/814.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/814.png",
     "altForm": null,
     "isMega": false
   },
@@ -77274,8 +77274,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/4/4d/815.png",
-    "artwork": "https://wiki.p-insurgence.com/images/4/4d/815.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/815.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/815.png",
     "altForm": null,
     "isMega": false
   },
@@ -78031,8 +78031,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/5e/816.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/5e/816.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/816.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/816.png",
     "altForm": null,
     "isMega": false
   },
@@ -78833,8 +78833,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/37/817.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/37/817.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/817.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/817.png",
     "altForm": null,
     "isMega": false
   },
@@ -79958,8 +79958,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/5b/818.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/5b/818.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/818.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/818.png",
     "altForm": null,
     "isMega": false
   },
@@ -80630,8 +80630,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/ad/819.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/ad/819.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/819.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/819.png",
     "altForm": null,
     "isMega": false
   },
@@ -81347,8 +81347,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/2/22/820.png",
-    "artwork": "https://wiki.p-insurgence.com/images/2/22/820.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/820.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/820.png",
     "altForm": null,
     "isMega": false
   },
@@ -82077,8 +82077,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/1/15/821.png",
-    "artwork": "https://wiki.p-insurgence.com/images/1/15/821.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/821.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/821.png",
     "altForm": null,
     "isMega": false
   },
@@ -82895,8 +82895,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/c7/822.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/c7/822.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/822.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/822.png",
     "altForm": null,
     "isMega": false
   },
@@ -83609,8 +83609,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/8/8a/823.png",
-    "artwork": "https://wiki.p-insurgence.com/images/8/8a/823.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/823.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/823.png",
     "altForm": null,
     "isMega": false
   },
@@ -84523,8 +84523,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/7a/824.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/7a/824.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/824.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/824.png",
     "altForm": null,
     "isMega": false
   },
@@ -85355,8 +85355,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/77/825.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/77/825.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/825.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/825.png",
     "altForm": null,
     "isMega": false
   },
@@ -86485,8 +86485,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/60/826.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/60/826.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/826.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/826.png",
     "altForm": null,
     "isMega": false
   },
@@ -87659,8 +87659,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/51/827.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/51/827.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/827.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/827.png",
     "altForm": null,
     "isMega": false
   },
@@ -88425,8 +88425,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/8/83/828.png",
-    "artwork": "https://wiki.p-insurgence.com/images/8/83/828.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/828.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/828.png",
     "altForm": null,
     "isMega": false
   },
@@ -89298,8 +89298,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/3a/829.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/3a/829.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/829.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/829.png",
     "altForm": null,
     "isMega": false
   },
@@ -90247,8 +90247,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/55/830.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/55/830.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/830.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/830.png",
     "altForm": null,
     "isMega": false
   },
@@ -91151,8 +91151,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/ad/831.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/ad/831.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/831.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/831.png",
     "altForm": null,
     "isMega": false
   },
@@ -92015,8 +92015,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/92/832.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/92/832.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/832.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/832.png",
     "altForm": null,
     "isMega": false
   },
@@ -92701,8 +92701,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/c5/833.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/c5/833.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/833.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/833.png",
     "altForm": null,
     "isMega": false
   },
@@ -93595,8 +93595,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/0/08/834.png",
-    "artwork": "https://wiki.p-insurgence.com/images/0/08/834.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/834.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/834.png",
     "altForm": null,
     "isMega": false
   },
@@ -94419,8 +94419,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/2/28/835.png",
-    "artwork": "https://wiki.p-insurgence.com/images/2/28/835.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/835.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/835.png",
     "altForm": null,
     "isMega": false
   },
@@ -95374,8 +95374,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/5c/836.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/5c/836.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/836.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/836.png",
     "altForm": null,
     "isMega": false
   },
@@ -96574,8 +96574,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/be/837.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/be/837.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/837.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/837.png",
     "altForm": null,
     "isMega": false
   },
@@ -97236,8 +97236,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/2/21/838.png",
-    "artwork": "https://wiki.p-insurgence.com/images/2/21/838.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/838.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/838.png",
     "altForm": null,
     "isMega": false
   },
@@ -97976,8 +97976,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/55/839.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/55/839.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/839.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/839.png",
     "altForm": null,
     "isMega": false
   },
@@ -98952,8 +98952,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/1/15/840.png",
-    "artwork": "https://wiki.p-insurgence.com/images/1/15/840.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/840.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/840.png",
     "altForm": null,
     "isMega": false
   },
@@ -99724,8 +99724,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/e/ea/841.png",
-    "artwork": "https://wiki.p-insurgence.com/images/e/ea/841.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/841.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/841.png",
     "altForm": null,
     "isMega": false
   },
@@ -100563,8 +100563,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/59/842.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/59/842.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/842.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/842.png",
     "altForm": null,
     "isMega": false
   },
@@ -101476,8 +101476,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/bf/843.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/bf/843.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/843.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/843.png",
     "altForm": null,
     "isMega": false
   },
@@ -102002,8 +102002,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/c3/844.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/c3/844.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/844.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/844.png",
     "altForm": null,
     "isMega": false
   },
@@ -102717,8 +102717,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/93/845.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/93/845.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/845.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/845.png",
     "altForm": null,
     "isMega": false
   },
@@ -103517,8 +103517,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/69/846.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/69/846.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/846.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/846.png",
     "altForm": null,
     "isMega": false
   },
@@ -104514,8 +104514,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/1/10/847.png",
-    "artwork": "https://wiki.p-insurgence.com/images/1/10/847.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/847.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/847.png",
     "altForm": null,
     "isMega": false
   },
@@ -105577,8 +105577,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/99/848.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/99/848.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/848.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/848.png",
     "altForm": null,
     "isMega": false
   },
@@ -106361,8 +106361,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/2/2d/849.png",
-    "artwork": "https://wiki.p-insurgence.com/images/2/2d/849.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/849.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/849.png",
     "altForm": null,
     "isMega": false
   },
@@ -107251,8 +107251,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/79/850.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/79/850.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/850.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/850.png",
     "altForm": null,
     "isMega": false
   },
@@ -108269,8 +108269,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/6d/851.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/6d/851.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/851.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/851.png",
     "altForm": null,
     "isMega": false
   },
@@ -109076,8 +109076,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/e/e8/852.png",
-    "artwork": "https://wiki.p-insurgence.com/images/e/e8/852.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/852.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/852.png",
     "altForm": null,
     "isMega": false
   },
@@ -110137,8 +110137,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/5b/853.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/5b/853.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/853.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/853.png",
     "altForm": null,
     "isMega": false
   },
@@ -110732,8 +110732,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/94/854.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/94/854.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/854.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/854.png",
     "altForm": null,
     "isMega": false
   },
@@ -111504,8 +111504,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/bc/855.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/bc/855.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/855.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/855.png",
     "altForm": null,
     "isMega": false
   },
@@ -112361,8 +112361,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/3a/856.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/3a/856.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/856.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/856.png",
     "altForm": null,
     "isMega": false
   },
@@ -113225,8 +113225,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/e/e0/857.png",
-    "artwork": "https://wiki.p-insurgence.com/images/e/e0/857.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/857.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/857.png",
     "altForm": null,
     "isMega": false
   },
@@ -114051,8 +114051,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/1/10/858.png",
-    "artwork": "https://wiki.p-insurgence.com/images/1/10/858.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/858.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/858.png",
     "altForm": null,
     "isMega": false
   },
@@ -114931,8 +114931,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/64/859.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/64/859.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/859.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/859.png",
     "altForm": null,
     "isMega": false
   },
@@ -115388,8 +115388,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/53/860.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/53/860.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/860.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/860.png",
     "altForm": null,
     "isMega": false
   },
@@ -116318,8 +116318,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/8/82/861.png",
-    "artwork": "https://wiki.p-insurgence.com/images/8/82/861.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/861.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/861.png",
     "altForm": null,
     "isMega": false
   },
@@ -116730,8 +116730,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/c7/862.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/c7/862.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/862.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/862.png",
     "altForm": null,
     "isMega": false
   },
@@ -117502,8 +117502,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/6b/863.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/6b/863.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/863.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/863.png",
     "altForm": null,
     "isMega": false
   },
@@ -118290,8 +118290,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/0/0e/864.png",
-    "artwork": "https://wiki.p-insurgence.com/images/0/0e/864.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/864.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/864.png",
     "altForm": null,
     "isMega": false
   },
@@ -118448,8 +118448,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/0/0a/865.png",
-    "artwork": "https://wiki.p-insurgence.com/images/0/0a/865.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/865.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/865.png",
     "altForm": null,
     "isMega": false
   },
@@ -119385,8 +119385,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/1/14/866.png",
-    "artwork": "https://wiki.p-insurgence.com/images/1/14/866.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/866.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/866.png",
     "altForm": null,
     "isMega": false
   },
@@ -120357,8 +120357,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/d5/867.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/d5/867.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/867.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/867.png",
     "altForm": null,
     "isMega": false
   },
@@ -120463,8 +120463,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/c8/868.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/c8/868.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/868.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/868.png",
     "altForm": null,
     "isMega": false
   },
@@ -121323,8 +121323,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/bd/869.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/bd/869.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/869.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/869.png",
     "altForm": null,
     "isMega": false
   },
@@ -122324,8 +122324,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/1/15/870.png",
-    "artwork": "https://wiki.p-insurgence.com/images/1/15/870.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/870.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/870.png",
     "altForm": null,
     "isMega": false
   },
@@ -123490,8 +123490,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/2/21/871.png",
-    "artwork": "https://wiki.p-insurgence.com/images/2/21/871.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/871.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/871.png",
     "altForm": null,
     "isMega": false
   },
@@ -124794,8 +124794,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/7a/872.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/7a/872.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/872.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/872.png",
     "altForm": null,
     "isMega": false
   },
@@ -125632,8 +125632,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/9a/873.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/9a/873.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/873.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/873.png",
     "altForm": null,
     "isMega": false
   },
@@ -126845,8 +126845,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/d4/874.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/d4/874.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/874.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/874.png",
     "altForm": null,
     "isMega": false
   },
@@ -127619,8 +127619,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/d1/875.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/d1/875.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/875.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/875.png",
     "altForm": null,
     "isMega": false
   },
@@ -128552,8 +128552,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/5d/876.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/5d/876.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/876.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/876.png",
     "altForm": null,
     "isMega": false
   },
@@ -129246,8 +129246,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/5/55/877.png",
-    "artwork": "https://wiki.p-insurgence.com/images/5/55/877.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/877.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/877.png",
     "altForm": null,
     "isMega": false
   },
@@ -129976,8 +129976,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/f4/878.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/f4/878.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/878.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/878.png",
     "altForm": null,
     "isMega": false
   },
@@ -130881,8 +130881,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/0/02/879.png",
-    "artwork": "https://wiki.p-insurgence.com/images/0/02/879.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/879.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/879.png",
     "altForm": null,
     "isMega": false
   },
@@ -131559,8 +131559,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/76/880.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/76/880.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/880.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/880.png",
     "altForm": null,
     "isMega": false
   },
@@ -132279,8 +132279,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/6b/881.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/6b/881.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/881.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/881.png",
     "altForm": null,
     "isMega": false
   },
@@ -133070,8 +133070,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/2/2d/882.png",
-    "artwork": "https://wiki.p-insurgence.com/images/2/2d/882.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/882.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/882.png",
     "altForm": null,
     "isMega": false
   },
@@ -133892,8 +133892,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/78/883.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/78/883.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/883.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/883.png",
     "altForm": null,
     "isMega": false
   },
@@ -134697,8 +134697,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/36/884.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/36/884.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/884.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/884.png",
     "altForm": null,
     "isMega": false
   },
@@ -135529,8 +135529,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/4/4f/885.png",
-    "artwork": "https://wiki.p-insurgence.com/images/4/4f/885.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/885.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/885.png",
     "altForm": null,
     "isMega": false
   },
@@ -136508,8 +136508,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/b2/886.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/b2/886.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/886.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/886.png",
     "altForm": null,
     "isMega": false
   },
@@ -137301,8 +137301,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/8/84/887.png",
-    "artwork": "https://wiki.p-insurgence.com/images/8/84/887.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/887.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/887.png",
     "altForm": null,
     "isMega": false
   },
@@ -138205,8 +138205,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/6a/888.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/6a/888.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/888.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/888.png",
     "altForm": null,
     "isMega": false
   },
@@ -139058,8 +139058,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/68/889.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/68/889.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/889.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/889.png",
     "altForm": null,
     "isMega": false
   },
@@ -139832,8 +139832,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/97/890.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/97/890.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/890.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/890.png",
     "altForm": null,
     "isMega": false
   },
@@ -140660,8 +140660,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/8/80/891.png",
-    "artwork": "https://wiki.p-insurgence.com/images/8/80/891.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/891.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/891.png",
     "altForm": null,
     "isMega": false
   },
@@ -141447,8 +141447,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/a7/892.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/a7/892.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/892.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/892.png",
     "altForm": null,
     "isMega": false
   },
@@ -142377,8 +142377,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/bd/893.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/bd/893.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/893.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/893.png",
     "altForm": null,
     "isMega": false
   },
@@ -143090,8 +143090,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/0/07/894.png",
-    "artwork": "https://wiki.p-insurgence.com/images/0/07/894.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/894.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/894.png",
     "altForm": null,
     "isMega": false
   },
@@ -143899,8 +143899,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/74/895.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/74/895.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/895.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/895.png",
     "altForm": null,
     "isMega": false
   },
@@ -144698,8 +144698,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/71/896.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/71/896.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/896.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/896.png",
     "altForm": null,
     "isMega": false
   },
@@ -145442,8 +145442,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/64/897.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/64/897.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/897.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/897.png",
     "altForm": null,
     "isMega": false
   },
@@ -146359,8 +146359,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/91/898.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/91/898.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/898.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/898.png",
     "altForm": null,
     "isMega": false
   },
@@ -147150,8 +147150,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/e/ed/899.png",
-    "artwork": "https://wiki.p-insurgence.com/images/e/ed/899.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/899.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/899.png",
     "altForm": null,
     "isMega": false
   },
@@ -148048,8 +148048,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/95/900.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/95/900.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/900.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/900.png",
     "altForm": null,
     "isMega": false
   },
@@ -148805,8 +148805,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/b/b0/901.png",
-    "artwork": "https://wiki.p-insurgence.com/images/b/b0/901.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/901.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/901.png",
     "altForm": null,
     "isMega": false
   },
@@ -149624,8 +149624,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/99/902.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/99/902.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/902.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/902.png",
     "altForm": null,
     "isMega": false
   },
@@ -150344,8 +150344,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/a3/903.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/a3/903.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/903.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/903.png",
     "altForm": null,
     "isMega": false
   },
@@ -151092,8 +151092,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/8/86/904.png",
-    "artwork": "https://wiki.p-insurgence.com/images/8/86/904.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/904.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/904.png",
     "altForm": null,
     "isMega": false
   },
@@ -151867,8 +151867,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/6a/905.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/6a/905.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/905.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/905.png",
     "altForm": null,
     "isMega": false
   },
@@ -152835,8 +152835,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/d1/906.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/d1/906.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/906.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/906.png",
     "altForm": null,
     "isMega": false
   },
@@ -153605,8 +153605,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/36/907.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/36/907.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/907.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/907.png",
     "altForm": null,
     "isMega": false
   },
@@ -154438,8 +154438,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/a/aa/908.png",
-    "artwork": "https://wiki.p-insurgence.com/images/a/aa/908.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/908.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/908.png",
     "altForm": null,
     "isMega": false
   },
@@ -155319,8 +155319,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/94/909.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/94/909.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/909.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/909.png",
     "altForm": null,
     "isMega": false
   },
@@ -156181,8 +156181,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/fc/910.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/fc/910.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/910.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/910.png",
     "altForm": null,
     "isMega": false
   },
@@ -157070,8 +157070,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/2/27/911.png",
-    "artwork": "https://wiki.p-insurgence.com/images/2/27/911.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/911.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/911.png",
     "altForm": null,
     "isMega": false
   },
@@ -158118,8 +158118,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/7/7b/912.png",
-    "artwork": "https://wiki.p-insurgence.com/images/7/7b/912.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/912.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/912.png",
     "altForm": null,
     "isMega": false
   },
@@ -158947,8 +158947,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/cb/913.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/cb/913.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/913.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/913.png",
     "altForm": null,
     "isMega": false
   },
@@ -160219,8 +160219,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/9/96/914.png",
-    "artwork": "https://wiki.p-insurgence.com/images/9/96/914.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/914.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/914.png",
     "altForm": null,
     "isMega": false
   },
@@ -160982,8 +160982,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/2/2e/915.png",
-    "artwork": "https://wiki.p-insurgence.com/images/2/2e/915.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/915.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/915.png",
     "altForm": null,
     "isMega": false
   },
@@ -161850,8 +161850,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/6/66/916.png",
-    "artwork": "https://wiki.p-insurgence.com/images/6/66/916.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/916.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/916.png",
     "altForm": null,
     "isMega": false
   },
@@ -162518,8 +162518,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/f/f5/917.png",
-    "artwork": "https://wiki.p-insurgence.com/images/f/f5/917.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/917.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/917.png",
     "altForm": null,
     "isMega": false
   },
@@ -163229,8 +163229,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/c6/918.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/c6/918.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/918.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/918.png",
     "altForm": null,
     "isMega": false
   },
@@ -164105,8 +164105,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/4/40/919.png",
-    "artwork": "https://wiki.p-insurgence.com/images/4/40/919.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/919.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/919.png",
     "altForm": null,
     "isMega": false
   },
@@ -164899,8 +164899,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/d/dd/920.png",
-    "artwork": "https://wiki.p-insurgence.com/images/d/dd/920.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/920.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/920.png",
     "altForm": null,
     "isMega": false
   },
@@ -165755,8 +165755,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/3/36/921.png",
-    "artwork": "https://wiki.p-insurgence.com/images/3/36/921.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/921.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/921.png",
     "altForm": null,
     "isMega": false
   },
@@ -166619,8 +166619,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/c/cb/922.png",
-    "artwork": "https://wiki.p-insurgence.com/images/c/cb/922.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/922.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/922.png",
     "altForm": null,
     "isMega": false
   },
@@ -167629,8 +167629,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/e/e7/923.png",
-    "artwork": "https://wiki.p-insurgence.com/images/e/e7/923.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/923.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/923.png",
     "altForm": null,
     "isMega": false
   },
@@ -168758,8 +168758,8 @@ export const INSURGENCE_POKEMON: InsurgencePokemon[] = [
         }
       ]
     },
-    "sprite": "https://wiki.p-insurgence.com/images/4/4a/924.png",
-    "artwork": "https://wiki.p-insurgence.com/images/4/4a/924.png",
+    "sprite": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/924.png",
+    "artwork": "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Insurgence/Pokemon/924.png",
     "altForm": null,
     "isMega": false
   }

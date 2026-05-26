@@ -34,12 +34,27 @@ const THROTTLE_MS = 200;
 const USER_AGENT = "Mozilla/5.0 (compatible; PokeDex-maintenance/1.0; +https://github.com/infinitel8p/PokeDex)";
 
 // Sprite URL pattern matches the existing dataset which hot-links from the
-// user's own PokeDexSprites repo. Forms have their own subfolder.
+// PokeDexSprites companion repo. Forms have their own subfolder.
 const SPRITE_REPO = "https://raw.githubusercontent.com/infinitel8p/PokeDexSprites/main/Uranium";
 const iconUrl = (id) => `${SPRITE_REPO}/Sprites/Icon${id}.gif`;
 const artworkBase = (id) => `${SPRITE_REPO}/Pokemon/${id}Popkas.png`;
 const artworkMega = (id, slot) => `${SPRITE_REPO}/Mega/${id}_${slot}Popkas.png`;
 const artworkNuclear = (id) => `${SPRITE_REPO}/Nuclear/N${id}Popkas.png`;
+
+/** Map an evolution stage's canonical slot ID (the `no{N}` field, e.g. "001" or
+ *  "002_1") to a sprite-repo URL. Mega slots get the Mega/ folder, base forms
+ *  Pokemon/. We key off `no{N}` not `image{N}` because the wiki's image
+ *  filenames vary between pages (Metalynx's page calls Mega Metalynx
+ *  "002-M.gif" while Orchynx's page calls the same stage "002_1.png") whereas
+ *  the dex slot ID stays consistent across all pages that reference it. */
+function dexSlotToSpriteUrl(dex) {
+    if (!dex) return "";
+    const id = String(dex).trim();
+    if (/_\d+$/.test(id)) {
+        return `${SPRITE_REPO}/Mega/${id}Popkas.png`;
+    }
+    return `${SPRITE_REPO}/Pokemon/${id}Popkas.png`;
+}
 
 // ── HTTP layer with on-disk cache ────────────────────────────────────────────
 
@@ -155,6 +170,13 @@ function stripComments(s) {
  *  fetch (those redirect to the base on Fandom anyway). */
 function loadSeed() {
     const src = fs.readFileSync(SEED_PATH, "utf8");
+    const arrayMatch = src.match(/URANIUM_POKEMON: UraniumPokemon\[\] = (\[[\s\S]+?\]);/);
+    if (arrayMatch) {
+        try {
+            return JSON.parse(arrayMatch[1]);
+        } catch {
+        }
+    }
     const re = /\{\s*name:\s*"([^"]+)",\s*id:\s*"(\d+)",[^}]*?types:\s*\[([^\]]+)\][^}]*?altForm:\s*(null|"[^"]+")\s*\}/g;
     const entries = [];
     let m;
@@ -198,9 +220,86 @@ function normalizeType(s) {
     return TITLE_CASE_TYPES.has(cased) ? cased : null;
 }
 
-/** Extract per-form data from a Pokémon's wikitext page. Returns:
- *    { ndex, baseTypes, megaTypes, nuclearTypes, megaSlot, hasMega, hasNuclear, ... }
- *  Each form's types may differ - `image2`/`type1_alt`/etc. capture this. */
+function num(v) {
+    if (v == null || v === "") return null;
+    const n = parseFloat(String(v).replace(/[^\d.-]/g, ""));
+    return Number.isFinite(n) ? n : null;
+}
+
+function cleanProse(s) {
+    if (!s) return null;
+    let out = String(s)
+        .replace(/\[\[(?:Image|File):[^\]]+\]\]/gi, "")
+        .replace(/\[\[(?:[^|\]]+\|)?([^\]]+)\]\]/g, "$1")
+        .replace(/\{\{(?:item|color|color2?|p|2t)\|([^}]+)\}\}/gi, (_, args) => {
+            const parts = args.split("|");
+            return parts[parts.length - 1] || "";
+        })
+        .replace(/\{\{[^|}]+\|([^}]+)\}\}/g, "$1")
+        .replace(/'''(.+?)'''/g, "$1")
+        .replace(/''(.+?)''/g, "$1")
+        .replace(/<br\s*\/?>/g, " ")
+        .replace(/&mdash;/g, "—")
+        .replace(/&ndash;/g, "–")
+        .replace(/\s+/g, " ")
+        .trim();
+    return out || null;
+}
+
+function extractStats(wikitext) {
+    const block = findTemplate(wikitext, "Stats");
+    if (!block) return null;
+    const f = parseTemplateFields(block);
+    const hp = num(f.HP);
+    const attack = num(f.Attack);
+    const defense = num(f.Defense);
+    const spAtk = num(f.SpAtk);
+    const spDef = num(f.SpDef);
+    const speed = num(f.Speed);
+    if ([hp, attack, defense, spAtk, spDef, speed].some((v) => v == null)) return null;
+    return { hp, attack, defense, spAtk, spDef, speed };
+}
+
+function extractFlavor(wikitext) {
+    const block = findTemplate(wikitext, "Dex");
+    if (!block) return null;
+    const f = parseTemplateFields(block);
+    const raw = f["1"] || f["2"] || f["3"];
+    return raw ? cleanProse(raw) : null;
+}
+
+const EVO_TEMPLATES = [
+    "ThreeStageMega", "ThreeStage", "TwoStageMega", "TwoStage",
+    "OneStageMega", "OneStage", "Branched", "BranchedMega",
+];
+
+function extractEvolution(wikitext) {
+    let block = null;
+    for (const name of EVO_TEMPLATES) {
+        block = findTemplate(wikitext, name);
+        if (block) break;
+    }
+    if (!block) return null;
+    const f = parseTemplateFields(block);
+    const stages = [];
+    for (let i = 1; i <= 5; i++) {
+        const name = f[`name${i}`];
+        if (!name) continue;
+        const types = [normalizeType(f[`type1-${i}`]), normalizeType(f[`type2-${i}`])].filter(Boolean);
+        const stage = {
+            dex: f[`no${i}`] ? String(f[`no${i}`]).trim() : null,
+            name: cleanProse(name) || name.trim(),
+            types,
+            image: f[`image${i}`] ? String(f[`image${i}`]).trim() : null,
+        };
+        if (i > 1 && f[`evo${i - 1}`]) {
+            stage.condition = cleanProse(f[`evo${i - 1}`]) || undefined;
+        }
+        stages.push(stage);
+    }
+    return stages.length > 1 ? stages : null;
+}
+
 function extractFormData(wikitext) {
     const clean = stripComments(wikitext);
     const block = findTemplate(clean, "Pokemon Infobox") || findTemplate(clean, "Pokémon Infobox");
@@ -209,10 +308,6 @@ function extractFormData(wikitext) {
     const ndex = f.ndex ? String(parseInt(f.ndex, 10)).padStart(3, "0") : null;
     const baseTypes = [normalizeType(f.type1), normalizeType(f.type2)].filter(Boolean);
 
-    // The Uranium wiki uses image2/caption2/image3/caption3 to describe alternate
-    // forms on the same page. `caption*` is a free-text label like "Mega" or
-    // "Nuclear". Form-specific types are sometimes in `type1-2`/`type2-2` (for the
-    // 2nd form) or sometimes inferred - when no override exists we reuse baseTypes.
     const forms = [];
     for (let i = 2; i <= 4; i++) {
         const image = f[`image${i}`];
@@ -222,14 +317,21 @@ function extractFormData(wikitext) {
         const t2 = normalizeType(f[`type2-${i}`] || f[`type2_${i}`]);
         const formTypes = [t1, t2].filter(Boolean);
         forms.push({
-            slot: i - 1, // matches the existing URL convention: 002_1Popkas.png for slot 1
+            slot: i - 1,
             label: caption,
             image,
             types: formTypes.length ? formTypes : baseTypes.slice(),
         });
     }
 
-    return { ndex, baseTypes, forms };
+    return {
+        ndex,
+        baseTypes,
+        forms,
+        stats: extractStats(clean),
+        flavorText: extractFlavor(clean),
+        evolution: extractEvolution(clean),
+    };
 }
 
 // ── Main scrape ──────────────────────────────────────────────────────────────
@@ -279,7 +381,6 @@ async function main() {
         const { base, variant } = parseFormName(e.name);
         const data = pageData.get(base);
         if (!data) {
-            // Fall back to existing seed data if the fetch failed.
             out.push({
                 name: e.name,
                 id: e.id,
@@ -287,17 +388,15 @@ async function main() {
                 artwork: variant === "nuclear" ? artworkNuclear(e.id) : artworkBase(e.id),
                 types: e.types,
                 altForm: e.altForm,
+                flavorText: null,
+                stats: null,
+                evolution: null,
             });
             continue;
         }
         let types = data.baseTypes.slice();
         let artwork = artworkBase(e.id);
 
-        // For variants: only trust the wiki's form-specific types when it provides a
-        // complete spec (≥2 types). Some wiki entries only list the CHANGED type for a
-        // variant, expecting the base-form's other type to carry over - that would lose
-        // information here. When wiki data is incomplete, keep the seed's authoritative
-        // types for the variant.
         const acceptWikiTypes = (formTypes) =>
             Array.isArray(formTypes) && formTypes.length >= 2;
 
@@ -319,6 +418,14 @@ async function main() {
             artwork = artworkNuclear(e.id);
         }
 
+        const evolution = (data.evolution || []).map((stage) => ({
+            dex: stage.dex,
+            name: stage.name,
+            types: stage.types,
+            sprite: dexSlotToSpriteUrl(stage.dex),
+            condition: stage.condition,
+        }));
+
         out.push({
             name: e.name,
             id: e.id,
@@ -326,6 +433,9 @@ async function main() {
             artwork,
             types,
             altForm: e.altForm,
+            flavorText: data.flavorText,
+            stats: data.stats,
+            evolution: evolution.length ? evolution : null,
         });
     }
 
@@ -334,6 +444,24 @@ async function main() {
 // Re-run that script to refresh - it preserves the existing entry order and uses
 // the seed list to know which Mega / Nuclear variants to emit per dex ID.
 // Sprite + artwork URLs hot-link from the PokeDexSprites companion repo.
+
+export interface UraniumStats {
+    hp: number;
+    attack: number;
+    defense: number;
+    spAtk: number;
+    spDef: number;
+    speed: number;
+}
+
+export interface UraniumEvolutionStage {
+    dex: string | null;
+    name: string;
+    types: string[];
+    sprite: string;
+    condition?: string;
+}
+
 export interface UraniumPokemon {
     name: string;
     id: string;
@@ -341,19 +469,15 @@ export interface UraniumPokemon {
     artwork: string;
     types: string[];
     altForm: string | null;
+    flavorText: string | null;
+    stats: UraniumStats | null;
+    evolution: UraniumEvolutionStage[] | null;
 }
 
-export const URANIUM_POKEMON: UraniumPokemon[] = [
+export const URANIUM_POKEMON: UraniumPokemon[] = ${JSON.stringify(out, null, 2)};
 `;
-    const body = out
-        .map(
-            (e) =>
-                `    { name: ${JSON.stringify(e.name)}, id: ${JSON.stringify(e.id)}, sprite: ${JSON.stringify(e.sprite)}, artwork: ${JSON.stringify(e.artwork)}, types: ${JSON.stringify(e.types)}, altForm: ${e.altForm === null ? "null" : JSON.stringify(e.altForm)} },`
-        )
-        .join("\n");
-    const footer = "\n];\n";
 
-    fs.writeFileSync(OUTPUT_PATH, header + body + footer, "utf8");
+    fs.writeFileSync(OUTPUT_PATH, header, "utf8");
     console.log(`Wrote ${OUTPUT_PATH} (${out.length} entries, ${(fs.statSync(OUTPUT_PATH).size / 1024).toFixed(1)} KB)`);
 }
 

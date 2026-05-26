@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
+import EvolutionStrip from "../components/EvolutionStrip";
 import HoloArtwork from "../components/HoloArtwork";
 import Search from "../components/Search";
+import StatBars from "../components/StatBars";
 import StatusBar from "../components/StatusBar";
 import { INSURGENCE_POKEMON, InsurgencePokemon } from "../data/insurgence-pokemon";
 import {
@@ -183,6 +185,14 @@ const Insurgence = () => {
             </div>
 
             <div className="relative flex-1 min-h-0">
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 top-0 z-10 h-3 bg-linear-to-b from-canvas to-transparent"
+                />
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-4 bg-linear-to-t from-canvas to-transparent"
+                />
                 <section className="h-full overflow-y-auto">
                     <AnimatePresence mode="wait" initial={false}>
                         {viewKey === "loading" && (
@@ -210,9 +220,9 @@ const Insurgence = () => {
                                                 <span aria-hidden="true" className="mr-1">Δ</span>
                                                 № {submitted.id.padStart(3, "0")}
                                             </p>
-                                            <h2 className="font-display text-3xl font-bold mt-1 leading-[0.95] break-words tracking-tight">
+                                            <h1 className="font-display text-4xl font-bold mt-1 leading-[0.95] break-words tracking-tight min-w-0">
                                                 {submitted.name}
-                                            </h2>
+                                            </h1>
                                             <div className="mt-3 flex flex-wrap gap-1.5">
                                                 {submitted.types.map((typeName) => {
                                                     const c = INSURGENCE_TYPE_COLORS[typeName as InsurgenceType];
@@ -232,13 +242,18 @@ const Insurgence = () => {
                                                 })}
                                             </div>
                                         </div>
-                                        <div className="h-28 w-28 shrink-0 -mt-2 -mr-2">
+                                        <div className="h-32 w-32 shrink-0 -mt-2 -mr-2">
                                             <HoloArtwork
                                                 src={submitted.artwork}
                                                 alt={`${submitted.name} artwork`}
                                             />
                                         </div>
                                     </div>
+                                    {submitted.flavorText && (
+                                        <p className="mt-3 pt-3 border-t border-fg/30 text-xs text-muted italic leading-relaxed">
+                                            {submitted.flavorText}
+                                        </p>
+                                    )}
                                 </header>
 
                                 <div className="mt-4 space-y-2.5">
@@ -286,6 +301,32 @@ const Insurgence = () => {
                                             </div>
                                         </motion.section>
                                     ))}
+                                    {submitted.stats && (
+                                        <StatBars
+                                            stats={[
+                                                { base_stat: submitted.stats.hp, stat: { name: "hp", url: "" } },
+                                                { base_stat: submitted.stats.attack, stat: { name: "attack", url: "" } },
+                                                { base_stat: submitted.stats.defense, stat: { name: "defense", url: "" } },
+                                                { base_stat: submitted.stats.spAtk, stat: { name: "special-attack", url: "" } },
+                                                { base_stat: submitted.stats.spDef, stat: { name: "special-defense", url: "" } },
+                                                { base_stat: submitted.stats.speed, stat: { name: "speed", url: "" } },
+                                            ]}
+                                        />
+                                    )}
+                                    {submitted.evolution && submitted.evolution.length > 1 && (
+                                        <EvolutionStrip
+                                            chain={submitted.evolution.map((stage) => {
+                                                // Look up sprite in our dataset by name — wiki doesn't expose per-stage sprite URLs.
+                                                const match = INSURGENCE_POKEMON.find((p) => p.name === stage.name);
+                                                return {
+                                                    name: stage.name,
+                                                    sprite: match?.artwork ?? "",
+                                                    is_current: stage.name === submitted.name,
+                                                };
+                                            })}
+                                            onPick={(name) => submit(name)}
+                                        />
+                                    )}
                                     <p className="text-[0.625rem] text-faint italic text-center px-6 pt-2 pb-1">
                                         {t("insurgence.disclaimer")}
                                     </p>
@@ -352,6 +393,7 @@ const Insurgence = () => {
                                         <Search
                                             onSearch={submit}
                                             autoFocus
+                                            accent="neutral"
                                             placeholder={t("search.placeholderInsurgence")}
                                             transform={(s) => s.trim()}
                                         />
@@ -365,7 +407,7 @@ const Insurgence = () => {
                                         className="mt-5"
                                     >
                                         <p className="font-display text-[0.625rem] text-faint tabular-nums tracking-[0.28em] uppercase text-center mb-2">
-                                            {t("uranium.tryOne")}
+                                            {t("home.tryOne")}
                                         </p>
                                         <div className="grid grid-cols-3 gap-1.5">
                                             {examples.map((ex) => (
@@ -373,10 +415,10 @@ const Insurgence = () => {
                                                     key={ex}
                                                     type="button"
                                                     onClick={() => submit(ex)}
-                                                    className="group inline-flex items-center justify-center gap-1 py-1.5 px-2 font-display text-[0.5625rem] font-bold uppercase tracking-[0.12em] text-fg border-2 border-divider/60 hover:border-fg hover:bg-fg hover:text-canvas transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg focus-visible:ring-offset-2 focus-visible:ring-offset-canvas overflow-hidden"
+                                                    className="group inline-flex items-center justify-center gap-1 py-1.5 px-2 font-display text-xs font-bold uppercase tracking-[0.18em] text-fg border-2 border-divider/60 hover:border-fg hover:bg-fg hover:text-canvas transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg focus-visible:ring-offset-2 focus-visible:ring-offset-canvas overflow-hidden"
                                                     title={ex}
                                                 >
-                                                    <span aria-hidden="true" className="opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 -ml-2 transition-opacity shrink-0">Δ</span>
+                                                    <span aria-hidden="true" className="opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 -ml-3 transition-opacity shrink-0">Δ</span>
                                                     <span className="truncate min-w-0">{ex}</span>
                                                 </button>
                                             ))}
@@ -394,6 +436,7 @@ const Insurgence = () => {
                     <hr className="mb-6 border-divider/40" />
                     <Search
                         onSearch={submit}
+                        accent="neutral"
                         placeholder={t("search.placeholderInsurgence")}
                         transform={(s) => s.trim()}
                     />
