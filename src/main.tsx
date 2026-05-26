@@ -18,6 +18,7 @@ import Navbar from "./components/Navbar";
 import ShortcutsModal from "./components/ShortcutsModal";
 import { applyCRTClass, getCRTPreference } from "./lib/crt";
 import { applyFontClass, getFontPreference } from "./lib/font";
+import { applyLanguageAttr, getLanguagePreference } from "./lib/i18n";
 import { applyTheme, getInitialTheme } from "./lib/theme";
 
 import App from "./App";
@@ -28,6 +29,7 @@ import Settings from "./pages/Settings";
 applyTheme(getInitialTheme());
 applyCRTClass(getCRTPreference());
 applyFontClass(getFontPreference());
+applyLanguageAttr(getLanguagePreference());
 
 if (typeof window !== "undefined") {
     console.log(

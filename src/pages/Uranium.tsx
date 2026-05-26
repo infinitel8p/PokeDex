@@ -9,28 +9,30 @@ import {
     URANIUM_TYPE_COLORS,
     UraniumType,
 } from "../lib/uranium-types";
+import { useLanguage } from "../lib/i18n";
+import type { TranslationKey } from "../data/translations";
 
 const SECTION_META: Record<
     keyof ReturnType<typeof calculateUraniumMatchups>,
-    { label: string; headerClass: string; dividerClass: string; tooltip: string }
+    { labelKey: TranslationKey; tooltipKey: TranslationKey; headerClass: string; dividerClass: string }
 > = {
     "2x": {
-        label: "Weaknesses",
+        labelKey: "result.weaknesses",
+        tooltipKey: "result.weaknessesTooltip",
         headerClass: "bg-red-600 text-white",
         dividerClass: "border-white/25",
-        tooltip: "Takes double damage from these types",
     },
     "0.5x": {
-        label: "Resistances",
+        labelKey: "result.resistances",
+        tooltipKey: "result.resistancesTooltip",
         headerClass: "bg-amber-500 text-stone-900",
         dividerClass: "border-black/15",
-        tooltip: "Takes half damage from these types",
     },
     "0x": {
-        label: "Immunities",
+        labelKey: "result.immunities",
+        tooltipKey: "result.immunitiesTooltip",
         headerClass: "bg-slate-600 text-white",
         dividerClass: "border-white/25",
-        tooltip: "Takes no damage from these types",
     },
 };
 
@@ -113,6 +115,7 @@ const Uranium = () => {
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState(false);
     const examples = useMemo(() => pickRandom(SUGGESTION_POOL, 3), []);
+    const { t, tf } = useLanguage();
 
     const submit = (raw: string) => {
         const trimmed = raw.trim();
@@ -126,9 +129,8 @@ const Uranium = () => {
                 setError("");
             } else {
                 setSubmitted(null);
-                setError(
-                    `No Uranium Pokémon matches "${trimmed.slice(0, 24)}${trimmed.length > 24 ? "…" : ""}". Try a name or number.`
-                );
+                const truncated = trimmed.slice(0, 24) + (trimmed.length > 24 ? "…" : "");
+                setError(tf("error.uraniumNotFound", { query: truncated }));
             }
             setLoading(false);
         }, 120);
@@ -151,11 +153,17 @@ const Uranium = () => {
         : null;
 
     const sections = matchups
-        ? (Object.keys(SECTION_META) as Array<keyof typeof SECTION_META>).map((key) => ({
-              multiplier: key,
-              ...SECTION_META[key],
-              entries: [...matchups[key]].sort(),
-          }))
+        ? (Object.keys(SECTION_META) as Array<keyof typeof SECTION_META>).map((key) => {
+              const meta = SECTION_META[key];
+              return {
+                  multiplier: key,
+                  headerClass: meta.headerClass,
+                  dividerClass: meta.dividerClass,
+                  label: t(meta.labelKey),
+                  tooltip: t(meta.tooltipKey),
+                  entries: [...matchups[key]].sort(),
+              };
+          })
         : [];
 
     let viewKey: "loading" | "result" | "error" | "empty";
@@ -184,7 +192,7 @@ const Uranium = () => {
                                     animate={{ opacity: [0.4, 1, 0.4] }}
                                     transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
                                 >
-                                    Scanning Uranium…
+                                    {t("loading.uranium")}
                                 </motion.div>
                             </motion.div>
                         )}
@@ -220,11 +228,11 @@ const Uranium = () => {
                                             </div>
                                             {submitted.altForm && (
                                                 <p className="mt-2 text-xs text-muted italic">
-                                                    Alt form: {submitted.altForm}
+                                                    {tf("uranium.altForm", { name: submitted.altForm })}
                                                 </p>
                                             )}
                                         </div>
-                                        <div className="h-28 w-28 flex-shrink-0 -mt-2 -mr-2">
+                                        <div className="h-28 w-28 shrink-0 -mt-2 -mr-2">
                                             <HoloArtwork
                                                 src={submitted.artwork}
                                                 alt={`${submitted.name} artwork`}
@@ -258,7 +266,7 @@ const Uranium = () => {
                                             </header>
                                             <div className="px-3 py-2.5">
                                                 {section.entries.length === 0 ? (
-                                                    <p className="text-xs text-faint italic text-center py-1">None</p>
+                                                    <p className="text-xs text-faint italic text-center py-1">{t("result.none")}</p>
                                                 ) : (
                                                     <div className="flex flex-wrap gap-1.5">
                                                         {section.entries.map((t) => {
@@ -279,7 +287,7 @@ const Uranium = () => {
                                         </motion.section>
                                     ))}
                                     <p className="text-[0.625rem] text-faint italic text-center px-6 pt-2 pb-1">
-                                        Nuclear is super-effective vs all standard types except Steel.
+                                        {t("uranium.disclaimer")}
                                     </p>
                                 </div>
                             </motion.div>
@@ -324,13 +332,13 @@ const Uranium = () => {
                                             variants={wordmarkLine}
                                             className="mt-4 font-display text-3xl font-bold tracking-tight"
                                         >
-                                            Pokémon Uranium
+                                            {t("uranium.title")}
                                         </motion.h1>
                                         <motion.p
                                             variants={wordmarkLine}
                                             className="mt-3 font-display text-[0.6875rem] text-lime-700 dark:text-lime-400 tabular-nums tracking-[0.28em] uppercase"
                                         >
-                                            200 Pokémon · Nuclear type
+                                            {t("uranium.subtitle")}
                                         </motion.p>
                                     </motion.div>
 
@@ -345,7 +353,7 @@ const Uranium = () => {
                                             onSearch={submit}
                                             autoFocus
                                             accent="lime"
-                                            placeholder="Type an Uranium Pokémon or number"
+                                            placeholder={t("search.placeholderUranium")}
                                             transform={(s) => s.trim()}
                                         />
                                     </motion.div>
@@ -358,7 +366,7 @@ const Uranium = () => {
                                         className="mt-5"
                                     >
                                         <p className="font-display text-[0.625rem] text-faint tabular-nums tracking-[0.28em] uppercase text-center mb-2">
-                                            Try one
+                                            {t("uranium.tryOne")}
                                         </p>
                                         <div className="grid grid-cols-3 gap-1.5">
                                             {examples.map((ex) => (
@@ -382,12 +390,12 @@ const Uranium = () => {
             </div>
 
             {viewKey !== "empty" && (
-                <section className="flex-shrink-0 px-6 pb-4">
+                <section className="shrink-0 px-6 pb-4">
                     <hr className="mb-6 border-divider/40" />
                     <Search
                         onSearch={submit}
                         accent="lime"
-                        placeholder="Type an Uranium Pokémon or number"
+                        placeholder={t("search.placeholderUranium")}
                         transform={(s) => s.trim()}
                     />
                 </section>

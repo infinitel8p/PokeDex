@@ -10,27 +10,50 @@
 	--surface: 25 32 44;
 	--divider: 60 70 88;
 
+	--font-cjk: "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Microsoft YaHei UI",
+		"Microsoft JhengHei UI", "Malgun Gothic", "Apple SD Gothic Neo",
+		"Noto Sans CJK JP", "Noto Sans CJK SC", "Noto Sans CJK TC", "Noto Sans CJK KR";
+
 	/* Default font set — "Pixelify" preset */
-	--font-display: "Pixelify Sans", "DM Sans", system-ui, sans-serif;
-	--font-sans: "DM Sans", system-ui, sans-serif;
+	--font-display: "Pixelify Sans", "DM Sans", var(--font-cjk), system-ui, sans-serif;
+	--font-sans: "DM Sans", var(--font-cjk), system-ui, sans-serif;
 
 	color: rgb(var(--fg));
 	background-color: rgb(var(--canvas));
 }
 
 :root.font-pixelify {
-	--font-display: "Pixelify Sans", "DM Sans", system-ui, sans-serif;
-	--font-sans: "DM Sans", system-ui, sans-serif;
+	--font-display: "Pixelify Sans", "DM Sans", var(--font-cjk), system-ui, sans-serif;
+	--font-sans: "DM Sans", var(--font-cjk), system-ui, sans-serif;
 }
 
 :root.font-crisp {
-	--font-display: "Geist", "Geist Sans", system-ui, sans-serif;
-	--font-sans: "Geist", "Geist Sans", system-ui, sans-serif;
+	--font-display: "Geist", "Geist Sans", var(--font-cjk), system-ui, sans-serif;
+	--font-sans: "Geist", "Geist Sans", var(--font-cjk), system-ui, sans-serif;
 }
 
 :root.font-arcade {
-	--font-display: "VT323", "DM Sans", monospace;
-	--font-sans: "DM Sans", system-ui, sans-serif;
+	--font-display: "VT323", "DM Sans", var(--font-cjk), monospace;
+	--font-sans: "DM Sans", var(--font-cjk), system-ui, sans-serif;
+}
+
+:root:lang(ja) .tracking-\[0\.28em\],
+:root:lang(ko) .tracking-\[0\.28em\],
+:root:lang(zh-Hans) .tracking-\[0\.28em\],
+:root:lang(zh-Hant) .tracking-\[0\.28em\] {
+	letter-spacing: 0.08em;
+}
+:root:lang(ja) .tracking-\[0\.18em\],
+:root:lang(ko) .tracking-\[0\.18em\],
+:root:lang(zh-Hans) .tracking-\[0\.18em\],
+:root:lang(zh-Hant) .tracking-\[0\.18em\] {
+	letter-spacing: 0.05em;
+}
+:root:lang(ja) .tracking-\[0\.15em\],
+:root:lang(ko) .tracking-\[0\.15em\],
+:root:lang(zh-Hans) .tracking-\[0\.15em\],
+:root:lang(zh-Hant) .tracking-\[0\.15em\] {
+	letter-spacing: 0.04em;
 }
 
 :root.light {

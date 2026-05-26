@@ -14,7 +14,7 @@ const SPRITE_BASE: &str =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield";
 const CACHE_FILE: &str = "pokeapi-cache.json";
 const HTTP_TIMEOUT_SECS: u64 = 10;
-const CACHE_SCHEMA_VERSION: u32 = 2;
+const CACHE_SCHEMA_VERSION: u32 = 3;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct NamedRef {
@@ -63,8 +63,16 @@ pub struct Pokemon {
 // ── Evolution chain types ─────────────────────────────────────────────────
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct LocalizedName {
+    pub name: String,
+    pub language: NamedRef,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Species {
     pub evolution_chain: UrlRef,
+    #[serde(default)]
+    pub names: Vec<LocalizedName>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -84,6 +92,7 @@ pub struct EvolutionEntry {
     pub name: String,
     pub sprite: String,
     pub is_current: bool,
+    pub names: Vec<LocalizedName>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default)]
@@ -358,21 +367,36 @@ pub async fn get_evolution_chain(app: &AppHandle, url: &str) -> Result<Evolution
 const POKEMON_SPRITE_BASE: &str =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork";
 
-fn walk_chain(node: &EvolutionNode, current: &str, out: &mut Vec<EvolutionEntry>) {
-    let id = extract_id_from_url(&node.species.url).unwrap_or_default();
-    out.push(EvolutionEntry {
-        name: node.species.name.clone(),
-        sprite: format!("{}/{}.png", POKEMON_SPRITE_BASE, id),
-        is_current: node.species.name.to_lowercase() == current.to_lowercase(),
-    });
-    for child in &node.evolves_to {
-        walk_chain(child, current, out);
-    }
-}
-
-pub fn flatten_chain(chain: &EvolutionChain, current_name: &str) -> Vec<EvolutionEntry> {
+pub async fn flatten_chain(
+    app: &AppHandle,
+    chain: &EvolutionChain,
+    current_name: &str,
+) -> Vec<EvolutionEntry> {
     let mut out = Vec::new();
-    walk_chain(&chain.chain, current_name, &mut out);
+    let mut stack: Vec<&EvolutionNode> = vec![&chain.chain];
+    let current_lower = current_name.to_lowercase();
+    while let Some(node) = stack.pop() {
+        for child in node.evolves_to.iter().rev() {
+            stack.push(child);
+        }
+        let id = extract_id_from_url(&node.species.url).unwrap_or_default();
+        let names = match get_species(app, &node.species.url).await {
+            Ok(species) => species.names,
+            Err(e) => {
+                eprintln!(
+                    "evolution species fetch failed for {}: {}",
+                    node.species.name, e
+                );
+                Vec::new()
+            }
+        };
+        out.push(EvolutionEntry {
+            name: node.species.name.clone(),
+            sprite: format!("{}/{}.png", POKEMON_SPRITE_BASE, id),
+            is_current: node.species.name.to_lowercase() == current_lower,
+            names,
+        });
+    }
     out
 }
 

@@ -1,14 +1,17 @@
 import { MouseEvent } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useLanguage } from "../lib/i18n";
+import type { TranslationKey } from "../data/translations";
 
-const ROUTES = [
-    { to: "/", label: "Home", end: true },
-    { to: "/uranium", label: "Uranium", end: false },
-    { to: "/insurgence", label: "Insurgence", end: false },
-] as const;
+const ROUTES: ReadonlyArray<{ to: string; labelKey: TranslationKey; end: boolean }> = [
+    { to: "/", labelKey: "nav.home", end: true },
+    { to: "/uranium", labelKey: "nav.uranium", end: false },
+    { to: "/insurgence", labelKey: "nav.insurgence", end: false },
+];
 
 const Navbar = () => {
     const location = useLocation();
+    const { t } = useLanguage();
 
     const handleHomeClick = (e: MouseEvent<HTMLAnchorElement>) => {
         if (location.pathname === "/") {
@@ -25,10 +28,10 @@ const Navbar = () => {
                     "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0.12) 100%)",
             }}
         >
-            <nav aria-label="Primary" className="flex items-center justify-between px-2 py-1">
+            <nav aria-label={t("nav.primary")} className="flex items-center justify-between px-2 py-1">
                 {/* Route tabs */}
                 <ul className="flex items-stretch gap-0.5">
-                    {ROUTES.map(({ to, label, end }) => (
+                    {ROUTES.map(({ to, labelKey, end }) => (
                         <li key={to}>
                             <NavLink
                                 to={to}
@@ -54,7 +57,7 @@ const Navbar = () => {
                                         >
                                             ▸
                                         </span>
-                                        {label}
+                                        {t(labelKey)}
                                     </>
                                 )}
                             </NavLink>
@@ -65,7 +68,7 @@ const Navbar = () => {
                 {/* Right: settings gear */}
                 <NavLink
                     to="/settings"
-                    aria-label="Settings"
+                    aria-label={t("nav.settings")}
                     className={({ isActive }) =>
                         `inline-flex items-center justify-center h-6 w-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-0 ${
                             isActive

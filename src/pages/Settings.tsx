@@ -1,248 +1,73 @@
-import { useState } from "react";
+import { ReactNode } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { PreferenceToggle } from "../components/PreferenceToggle";
 import StatusBar from "../components/StatusBar";
+import type { TranslationKey } from "../data/translations";
 import { CRTPreference, getCRTPreference, setCRTPreference } from "../lib/crt";
 import { CrySource, getCrySource, setCrySource } from "../lib/cry-source";
 import { FontPreference, FONT_OPTIONS, getFontPreference, setFontPreference } from "../lib/font";
+import {
+    Language,
+    LANGUAGE_OPTIONS,
+    getLanguagePreference,
+    setLanguagePreference,
+    useLanguage,
+} from "../lib/i18n";
 import { clearRecentSearches } from "../lib/recent";
 import { ShinyPreference, getShinyPreference, setShinyPreference } from "../lib/shiny";
 import { SpriteStyle, SPRITE_STYLE_OPTIONS, getSpriteStyle, setSpriteStyle } from "../lib/sprite-style";
 import { getInitialTheme, setTheme, Theme } from "../lib/theme";
 
-const UPCOMING_SETTINGS = [
-    {
-        label: "Language",
-        hint: "Search Pokémon in your preferred language",
-    },
-    {
-        label: "Default generation",
-        hint: "Limit matchups to a specific Pokémon generation",
-    },
-    {
-        label: "Saved teams",
-        hint: "Build a team and see combined weaknesses",
-    },
+const FONT_LABEL_KEY: Record<FontPreference, TranslationKey> = {
+    pixelify: "settings.fontPixelify",
+    crisp: "settings.fontCrisp",
+    arcade: "settings.fontArcade",
+};
+
+const SPRITE_LABEL_KEY: Record<SpriteStyle, TranslationKey> = {
+    artwork: "settings.spriteArtwork",
+    home: "settings.spriteHome",
+    showdown: "settings.spriteAnimated",
+    gen5: "settings.spriteGen5",
+    gen4: "settings.spriteGen4",
+    gen1: "settings.spriteGen1",
+};
+
+const UPCOMING_KEYS: ReadonlyArray<{ labelKey: TranslationKey; hintKey: TranslationKey }> = [
+    { labelKey: "settings.upcomingGen", hintKey: "settings.upcomingGenHint" },
+    { labelKey: "settings.upcomingTeams", hintKey: "settings.upcomingTeamsHint" },
 ];
 
-const ThemeControl = () => {
-    const [current, setCurrent] = useState<Theme>(getInitialTheme());
+interface SettingsRowProps {
+    labelKey: TranslationKey;
+    hintKey: TranslationKey;
+    stacked?: boolean;
+    children: ReactNode;
+}
 
-    const select = (theme: Theme) => {
-        setTheme(theme);
-        setCurrent(theme);
-    };
-
+const SettingsRow = ({ labelKey, hintKey, stacked, children }: SettingsRowProps) => {
+    const { t } = useLanguage();
+    const containerClass = stacked
+        ? "border-2 border-divider/60 px-3 py-3 space-y-2.5"
+        : "flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3";
     return (
-        <div
-            role="radiogroup"
-            aria-label="Theme"
-            className="shrink-0 inline-flex border-2 border-divider/60"
-        >
-            {(["dark", "light"] as const).map((option) => {
-                const active = current === option;
-                return (
-                    <button
-                        key={option}
-                        type="button"
-                        role="radio"
-                        aria-checked={active}
-                        onClick={() => select(option)}
-                        className={`font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
-                            active
-                                ? "bg-red-500 text-white"
-                                : "text-muted hover:text-fg"
-                        }`}
-                    >
-                        {option}
-                    </button>
-                );
-            })}
-        </div>
+        <li className={containerClass}>
+            <div className="min-w-0">
+                <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
+                    {t(labelKey)}
+                </p>
+                <p className="text-xs text-muted mt-0.5">{t(hintKey)}</p>
+            </div>
+            {children}
+        </li>
     );
 };
 
-const FontControl = () => {
-    const [current, setCurrent] = useState<FontPreference>(() => getFontPreference());
-
-    const select = (value: FontPreference) => {
-        setFontPreference(value);
-        setCurrent(value);
-    };
-
-    return (
-        <div
-            role="radiogroup"
-            aria-label="Font"
-            className="shrink-0 inline-flex border-2 border-divider/60"
-        >
-            {FONT_OPTIONS.map(({ value, label }) => {
-                const active = current === value;
-                return (
-                    <button
-                        key={value}
-                        type="button"
-                        role="radio"
-                        aria-checked={active}
-                        onClick={() => select(value)}
-                        className={`font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
-                            active
-                                ? "bg-red-500 text-white"
-                                : "text-muted hover:text-fg"
-                        }`}
-                    >
-                        {label}
-                    </button>
-                );
-            })}
-        </div>
-    );
-};
-
-const CrySourceControl = () => {
-    const [current, setCurrent] = useState<CrySource>(() => getCrySource());
-
-    const select = (value: CrySource) => {
-        setCrySource(value);
-        setCurrent(value);
-    };
-
-    return (
-        <div
-            role="radiogroup"
-            aria-label="Cry source"
-            className="shrink-0 inline-flex border-2 border-divider/60"
-        >
-            {(["latest", "legacy"] as const).map((option) => {
-                const active = current === option;
-                return (
-                    <button
-                        key={option}
-                        type="button"
-                        role="radio"
-                        aria-checked={active}
-                        onClick={() => select(option)}
-                        className={`font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
-                            active ? "bg-red-500 text-white" : "text-muted hover:text-fg"
-                        }`}
-                    >
-                        {option}
-                    </button>
-                );
-            })}
-        </div>
-    );
-};
-
-const SpriteStyleControl = () => {
-    const [current, setCurrent] = useState<SpriteStyle>(() => getSpriteStyle());
-
-    const select = (value: SpriteStyle) => {
-        setSpriteStyle(value);
-        setCurrent(value);
-    };
-
-    return (
-        <div
-            role="radiogroup"
-            aria-label="Sprite style"
-            className="grid grid-cols-3 gap-1.5 w-full"
-        >
-            {SPRITE_STYLE_OPTIONS.map(({ value, label }) => {
-                const active = current === value;
-                return (
-                    <button
-                        key={value}
-                        type="button"
-                        role="radio"
-                        aria-checked={active}
-                        onClick={() => select(value)}
-                        className={`font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-2 py-1.5 border-2 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
-                            active
-                                ? "bg-red-500 text-white border-red-500"
-                                : "text-muted hover:text-fg border-divider/60"
-                        }`}
-                    >
-                        {label}
-                    </button>
-                );
-            })}
-        </div>
-    );
-};
-
-const ShinyControl = () => {
-    const [current, setCurrent] = useState<ShinyPreference>(() => getShinyPreference());
-
-    const select = (value: ShinyPreference) => {
-        setShinyPreference(value);
-        setCurrent(value);
-    };
-
-    return (
-        <div
-            role="radiogroup"
-            aria-label="Shiny artwork"
-            className="shrink-0 inline-flex border-2 border-divider/60"
-        >
-            {(["off", "on"] as const).map((option) => {
-                const active = current === option;
-                return (
-                    <button
-                        key={option}
-                        type="button"
-                        role="radio"
-                        aria-checked={active}
-                        onClick={() => select(option)}
-                        className={`font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
-                            active ? "bg-red-500 text-white" : "text-muted hover:text-fg"
-                        }`}
-                    >
-                        {option}
-                    </button>
-                );
-            })}
-        </div>
-    );
-};
-
-const CRTControl = () => {
-    const [current, setCurrent] = useState<CRTPreference>(() => getCRTPreference());
-
-    const select = (value: CRTPreference) => {
-        setCRTPreference(value);
-        setCurrent(value);
-    };
-
-    return (
-        <div
-            role="radiogroup"
-            aria-label="CRT effect"
-            className="shrink-0 inline-flex border-2 border-divider/60"
-        >
-            {(["on", "off"] as const).map((option) => {
-                const active = current === option;
-                return (
-                    <button
-                        key={option}
-                        type="button"
-                        role="radio"
-                        aria-checked={active}
-                        onClick={() => select(option)}
-                        className={`font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
-                            active
-                                ? "bg-red-500 text-white"
-                                : "text-muted hover:text-fg"
-                        }`}
-                    >
-                        {option}
-                    </button>
-                );
-            })}
-        </div>
-    );
-};
+const CLEAR_BUTTON_CLASS =
+    "shrink-0 font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 border-2 border-divider/60 text-muted hover:text-fg hover:border-red-500 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas";
 
 const Settings = () => {
+    const { t } = useLanguage();
     return (
         <main className="h-screen flex flex-col pt-9 px-4 pb-4">
             <div className="pt-3">
@@ -251,126 +76,132 @@ const Settings = () => {
 
             <div className="flex-1 min-h-0 overflow-y-auto pt-8">
                 <header className="text-center">
-                    <h1 className="font-display text-3xl font-bold tracking-tight">Settings</h1>
+                    <h1 className="font-display text-3xl font-bold tracking-tight">{t("settings.title")}</h1>
                 </header>
 
                 <ul className="mt-8 space-y-1.5">
-                    <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
-                        <div className="min-w-0">
-                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
-                                Theme
-                            </p>
-                            <p className="text-xs text-muted mt-0.5">
-                                Light or dark Pokédex screen
-                            </p>
-                        </div>
-                        <ThemeControl />
-                    </li>
-                    <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
-                        <div className="min-w-0">
-                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
-                                CRT effect
-                            </p>
-                            <p className="text-xs text-muted mt-0.5">
-                                Scanlines, phosphor edges, vignette
-                            </p>
-                        </div>
-                        <CRTControl />
-                    </li>
-                    <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
-                        <div className="min-w-0">
-                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
-                                Font
-                            </p>
-                            <p className="text-xs text-muted mt-0.5">
-                                Pixel · clean · retro CRT
-                            </p>
-                        </div>
-                        <FontControl />
-                    </li>
-                    <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
-                        <div className="min-w-0">
-                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
-                                Shiny artwork
-                            </p>
-                            <p className="text-xs text-muted mt-0.5">
-                                Prefer shiny sprites when available
-                            </p>
-                        </div>
-                        <ShinyControl />
-                    </li>
-                    <li className="border-2 border-divider/60 px-3 py-3 space-y-2.5">
-                        <div className="min-w-0">
-                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
-                                Sprite style
-                            </p>
-                            <p className="text-xs text-muted mt-0.5">
-                                Which sprite source to show
-                            </p>
-                        </div>
-                        <SpriteStyleControl />
-                    </li>
-                    <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
-                        <div className="min-w-0">
-                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
-                                Cry source
-                            </p>
-                            <p className="text-xs text-muted mt-0.5">
-                                Latest game cry vs Gen 1-5 legacy beep
-                            </p>
-                        </div>
-                        <CrySourceControl />
-                    </li>
-                    <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
-                        <div className="min-w-0">
-                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
-                                Recent searches
-                            </p>
-                            <p className="text-xs text-muted mt-0.5">
-                                Quick access to your last lookups
-                            </p>
-                        </div>
+                    <SettingsRow labelKey="settings.language" hintKey="settings.languageHint" stacked>
+                        <PreferenceToggle<Language>
+                            initialValue={getLanguagePreference()}
+                            onSelect={setLanguagePreference}
+                            ariaLabelKey="settings.language"
+                            layout="grid"
+                            spacedCaps={false}
+                            options={LANGUAGE_OPTIONS.map(({ value, label }) => ({
+                                value,
+                                label,
+                                lang: value,
+                            }))}
+                        />
+                    </SettingsRow>
+
+                    <SettingsRow labelKey="settings.theme" hintKey="settings.themeHint">
+                        <PreferenceToggle<Theme>
+                            initialValue={getInitialTheme()}
+                            onSelect={setTheme}
+                            ariaLabelKey="settings.theme"
+                            options={[
+                                { value: "dark", labelKey: "settings.themeDark" },
+                                { value: "light", labelKey: "settings.themeLight" },
+                            ]}
+                        />
+                    </SettingsRow>
+
+                    <SettingsRow labelKey="settings.crt" hintKey="settings.crtHint">
+                        <PreferenceToggle<CRTPreference>
+                            initialValue={getCRTPreference()}
+                            onSelect={setCRTPreference}
+                            ariaLabelKey="settings.crt"
+                            options={[
+                                { value: "on", labelKey: "settings.crtOn" },
+                                { value: "off", labelKey: "settings.crtOff" },
+                            ]}
+                        />
+                    </SettingsRow>
+
+                    <SettingsRow labelKey="settings.font" hintKey="settings.fontHint">
+                        <PreferenceToggle<FontPreference>
+                            initialValue={getFontPreference()}
+                            onSelect={setFontPreference}
+                            ariaLabelKey="settings.font"
+                            options={FONT_OPTIONS.map(({ value }) => ({
+                                value,
+                                labelKey: FONT_LABEL_KEY[value],
+                            }))}
+                        />
+                    </SettingsRow>
+
+                    <SettingsRow labelKey="settings.shiny" hintKey="settings.shinyHint">
+                        <PreferenceToggle<ShinyPreference>
+                            initialValue={getShinyPreference()}
+                            onSelect={setShinyPreference}
+                            ariaLabelKey="settings.shiny"
+                            options={[
+                                { value: "off", labelKey: "settings.shinyOff" },
+                                { value: "on", labelKey: "settings.shinyOn" },
+                            ]}
+                        />
+                    </SettingsRow>
+
+                    <SettingsRow labelKey="settings.sprite" hintKey="settings.spriteHint" stacked>
+                        <PreferenceToggle<SpriteStyle>
+                            initialValue={getSpriteStyle()}
+                            onSelect={setSpriteStyle}
+                            ariaLabelKey="settings.sprite"
+                            layout="grid"
+                            options={SPRITE_STYLE_OPTIONS.map(({ value }) => ({
+                                value,
+                                labelKey: SPRITE_LABEL_KEY[value],
+                            }))}
+                        />
+                    </SettingsRow>
+
+                    <SettingsRow labelKey="settings.cry" hintKey="settings.cryHint">
+                        <PreferenceToggle<CrySource>
+                            initialValue={getCrySource()}
+                            onSelect={setCrySource}
+                            ariaLabelKey="settings.cry"
+                            options={[
+                                { value: "latest", labelKey: "settings.cryLatest" },
+                                { value: "legacy", labelKey: "settings.cryLegacy" },
+                            ]}
+                        />
+                    </SettingsRow>
+
+                    <SettingsRow labelKey="settings.recent" hintKey="settings.recentHint">
                         <button
                             type="button"
                             onClick={() => clearRecentSearches()}
-                            className="shrink-0 font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 border-2 border-divider/60 text-muted hover:text-fg hover:border-red-500 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                            className={CLEAR_BUTTON_CLASS}
                         >
-                            Clear
+                            {t("settings.clear")}
                         </button>
-                    </li>
-                    <li className="flex items-center justify-between gap-3 border-2 border-divider/60 px-3 py-3">
-                        <div className="min-w-0">
-                            <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
-                                API cache
-                            </p>
-                            <p className="text-xs text-muted mt-0.5">
-                                Clear cached PokéAPI responses (forces re-fetch)
-                            </p>
-                        </div>
+                    </SettingsRow>
+
+                    <SettingsRow labelKey="settings.cache" hintKey="settings.cacheHint">
                         <button
                             type="button"
                             onClick={() => { void invoke("clear_cache"); }}
-                            className="shrink-0 font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase px-3 py-1.5 border-2 border-divider/60 text-muted hover:text-fg hover:border-red-500 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+                            className={CLEAR_BUTTON_CLASS}
                         >
-                            Clear
+                            {t("settings.clear")}
                         </button>
-                    </li>
-                    {UPCOMING_SETTINGS.map((item) => (
+                    </SettingsRow>
+
+                    {UPCOMING_KEYS.map(({ labelKey, hintKey }) => (
                         <li
-                            key={item.label}
+                            key={labelKey}
                             className="flex items-center justify-between gap-3 border-2 border-divider/40 px-3 py-3 opacity-70"
                             aria-disabled="true"
                         >
                             <div className="min-w-0">
                                 <p className="font-display text-sm font-bold uppercase tracking-[0.18em] text-muted">
-                                    {item.label}
+                                    {t(labelKey)}
                                 </p>
-                                <p className="text-xs text-muted mt-0.5">
-                                    {item.hint}
-                                </p>
+                                <p className="text-xs text-muted mt-0.5">{t(hintKey)}</p>
                             </div>
                             <span className="font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase text-faint shrink-0 border border-divider/60 px-2 py-0.5">
-                                Soon
+                                {t("settings.soon")}
                             </span>
                         </li>
                     ))}
@@ -379,7 +210,7 @@ const Settings = () => {
                 <details className="mt-6 border-2 border-divider/60 group">
                     <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden flex items-center justify-between gap-3 px-3 py-3 transition-colors hover:bg-divider/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas">
                         <p className="font-display text-sm font-bold uppercase tracking-[0.18em]">
-                            About PokéDex
+                            {t("settings.about")}
                         </p>
                         <span
                             aria-hidden="true"
@@ -389,33 +220,29 @@ const Settings = () => {
                         </span>
                     </summary>
                     <div className="border-t-2 border-divider/40 px-3 py-3 space-y-3 text-xs text-muted leading-relaxed">
-                        <p>
-                            A type matchup oracle for Pokémon battles. Type any name or number to see what beats it.
-                        </p>
+                        <p>{t("settings.aboutText")}</p>
                         <div>
                             <p className="font-display text-[0.625rem] uppercase tracking-[0.28em] text-faint mb-1">
-                                Multipliers
+                                {t("settings.aboutMultipliers")}
                             </p>
                             <dl className="space-y-1">
                                 <div className="flex items-baseline gap-2">
                                     <dt className="font-display font-bold tabular-nums text-red-500 w-10 shrink-0">2×</dt>
-                                    <dd>Takes double damage from these types</dd>
+                                    <dd>{t("settings.aboutMult2x")}</dd>
                                 </div>
                                 <div className="flex items-baseline gap-2">
                                     <dt className="font-display font-bold tabular-nums text-amber-500 w-10 shrink-0">0.5×</dt>
-                                    <dd>Takes half damage from these types</dd>
+                                    <dd>{t("settings.aboutMultHalf")}</dd>
                                 </div>
                                 <div className="flex items-baseline gap-2">
                                     <dt className="font-display font-bold tabular-nums text-fg w-10 shrink-0">0×</dt>
-                                    <dd>Takes no damage from these types</dd>
+                                    <dd>{t("settings.aboutMult0x")}</dd>
                                 </div>
                             </dl>
                         </div>
-                        <p>
-                            Data from <span className="font-display tracking-wider text-fg">PokéAPI</span>. Multipliers reflect core-series mechanics — other Pokémon games may differ.
-                        </p>
+                        <p>{t("settings.aboutData")}</p>
                         <p className="font-display text-[0.625rem] uppercase tracking-[0.28em] text-faint pt-1">
-                            Tip · Press any letter to focus search
+                            {t("settings.aboutTip")}
                         </p>
                     </div>
                 </details>

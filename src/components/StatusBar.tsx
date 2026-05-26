@@ -1,15 +1,18 @@
 import { useApiStatus, ApiStatusKind } from "../hooks/useApiStatus";
+import { useLanguage } from "../lib/i18n";
+import type { TranslationKey } from "../data/translations";
 
-const STATUS_LABEL: Record<ApiStatusKind, string> = {
-    checking: "Connecting",
-    online: "Online",
-    offline: "Offline",
+const STATUS_LABEL_KEY: Record<ApiStatusKind, TranslationKey> = {
+    checking: "status.connecting",
+    online: "status.online",
+    offline: "status.offline",
 };
 
 const APP_VERSION = __APP_VERSION__;
 
 const StatusBar = () => {
     const status = useApiStatus();
+    const { t } = useLanguage();
     const showLatency = status.kind === "online" && status.latencyMs !== undefined;
 
     return (
@@ -45,13 +48,13 @@ const StatusBar = () => {
                     aria-live="polite"
                     className="font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase text-fg truncate"
                 >
-                    {STATUS_LABEL[status.kind]}
+                    {t(STATUS_LABEL_KEY[status.kind])}
                     {showLatency && (
                         <span className="text-faint ml-1.5">· {status.latencyMs}ms</span>
                     )}
                 </span>
             </div>
-            <span className="font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase text-faint flex-shrink-0">
+            <span className="font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase text-faint shrink-0">
                 v {APP_VERSION}
             </span>
         </div>

@@ -12,8 +12,18 @@ export function getStoredTheme(): Theme | null {
     }
 }
 
+function detectSystemTheme(): Theme {
+    if (typeof window === "undefined") return "dark";
+    try {
+        if (window.matchMedia?.("(prefers-color-scheme: light)").matches) return "light";
+    } catch {
+        // matchMedia unavailable
+    }
+    return "dark";
+}
+
 export function getInitialTheme(): Theme {
-    return getStoredTheme() ?? "dark";
+    return getStoredTheme() ?? detectSystemTheme();
 }
 
 export function applyTheme(theme: Theme) {

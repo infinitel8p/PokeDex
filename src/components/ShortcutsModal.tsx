@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLanguage } from "../lib/i18n";
+import type { TranslationKey } from "../data/translations";
 
-const SHORTCUTS = [
-    { keys: ["Any letter"], desc: "Focus the search input" },
-    { keys: ["Enter"], desc: "Submit the search" },
-    { keys: ["?"], desc: "Show this help overlay" },
-    { keys: ["Esc"], desc: "Close any overlay or modal" },
-    { keys: ["Click sprite"], desc: "Enlarge the Pokémon artwork" },
-    { keys: ["Click", "type chip"], desc: "(Coming soon) filter by type" },
-] as const;
+const SHORTCUTS: ReadonlyArray<{ keys: TranslationKey[]; descKey: TranslationKey }> = [
+    { keys: ["shortcuts.anyLetter"], descKey: "shortcuts.focusSearch" },
+    { keys: ["shortcuts.enter"], descKey: "shortcuts.submitSearch" },
+    { keys: ["shortcuts.question"], descKey: "shortcuts.showHelp" },
+    { keys: ["shortcuts.esc"], descKey: "shortcuts.closeOverlay" },
+    { keys: ["shortcuts.clickSprite"], descKey: "shortcuts.enlargeArt" },
+    { keys: ["shortcuts.clickType", "shortcuts.typeChip"], descKey: "shortcuts.filterByType" },
+];
 
 const ShortcutsModal = () => {
     const [open, setOpen] = useState(false);
+    const { t } = useLanguage();
 
     useEffect(() => {
         const handler = (e: KeyboardEvent) => {
@@ -33,7 +36,7 @@ const ShortcutsModal = () => {
         <AnimatePresence>
             {open && (
                 <motion.div
-                    className="fixed inset-0 z-[70] flex items-center justify-center bg-black/75 backdrop-blur-sm px-6"
+                    className="fixed inset-0 z-70 flex items-center justify-center bg-black/75 backdrop-blur-sm px-6"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -41,7 +44,7 @@ const ShortcutsModal = () => {
                     onClick={() => setOpen(false)}
                     role="dialog"
                     aria-modal="true"
-                    aria-label="Keyboard shortcuts"
+                    aria-label={t("shortcuts.dialogAria")}
                 >
                     <motion.div
                         initial={{ scale: 0.95, opacity: 0, y: 8 }}
@@ -52,22 +55,22 @@ const ShortcutsModal = () => {
                         className="bg-canvas border-2 border-red-500 w-full max-w-sm p-5"
                     >
                         <p className="font-display text-[0.625rem] text-red-500 tabular-nums tracking-[0.28em] uppercase">
-                            Reference
+                            {t("shortcuts.reference")}
                         </p>
                         <h2 className="mt-1 font-display text-2xl font-bold tracking-tight">
-                            Keyboard shortcuts
+                            {t("shortcuts.title")}
                         </h2>
                         <ul className="mt-4 space-y-2">
-                            {SHORTCUTS.map(({ keys, desc }) => (
-                                <li key={desc} className="flex items-baseline justify-between gap-3 text-sm">
-                                    <span className="text-muted">{desc}</span>
+                            {SHORTCUTS.map(({ keys, descKey }) => (
+                                <li key={descKey} className="flex items-baseline justify-between gap-3 text-sm">
+                                    <span className="text-muted">{t(descKey)}</span>
                                     <span className="flex gap-1 shrink-0">
                                         {keys.map((k) => (
                                             <kbd
                                                 key={k}
                                                 className="font-display text-[0.625rem] tabular-nums tracking-[0.18em] uppercase px-1.5 py-0.5 border border-divider/60 bg-surface/40 text-fg"
                                             >
-                                                {k}
+                                                {t(k)}
                                             </kbd>
                                         ))}
                                     </span>
@@ -75,7 +78,14 @@ const ShortcutsModal = () => {
                             ))}
                         </ul>
                         <p className="mt-5 text-xs text-faint italic text-center">
-                            Press <kbd className="font-display tracking-[0.18em] px-1">Esc</kbd> or click outside to close.
+                            {t("shortcuts.escToClose").split("{esc}").map((part, i, arr) => (
+                                <span key={i}>
+                                    {part}
+                                    {i < arr.length - 1 && (
+                                        <kbd className="font-display tracking-[0.18em] px-1">{t("shortcuts.esc")}</kbd>
+                                    )}
+                                </span>
+                            ))}
                         </p>
                     </motion.div>
                 </motion.div>

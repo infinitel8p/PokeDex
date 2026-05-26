@@ -21,10 +21,16 @@ export interface PokemonCries {
     legacy?: string;
 }
 
+export interface LocalizedName {
+    name: string;
+    language: { name: string; url?: string };
+}
+
 export interface EvolutionEntry {
     name: string;
     sprite: string;
     is_current: boolean;
+    names?: LocalizedName[];
 }
 
 export interface Pokemon {
@@ -36,6 +42,7 @@ export interface Pokemon {
     cries?: PokemonCries;
     weaknesses: Partial<Record<WeaknessMultiplier, WeaknessEntry[]>>;
     evolution: EvolutionEntry[];
+    names?: LocalizedName[];
 }
 
 export const TYPE_COLORS: Record<string, { bg: string; fg: string }> = {

@@ -1,14 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useLanguage } from "../lib/i18n";
 
 type AccentVariant = "red" | "lime";
 
 interface SearchProps {
     onSearch: (name: string) => void;
     autoFocus?: boolean;
-    /** Normalize input before submit. Defaults to PokéAPI-style kebab-case. */
     transform?: (input: string) => string;
     placeholder?: string;
-    /** Focus accent color — matches the page's brand tint. */
     accent?: AccentVariant;
 }
 
@@ -34,11 +33,13 @@ const Search: React.FC<SearchProps> = ({
     onSearch,
     autoFocus = false,
     transform = defaultTransform,
-    placeholder = "Type a Pokémon name or number",
+    placeholder,
     accent = "red",
 }) => {
     const [name, setName] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
+    const { t } = useLanguage();
+    const resolvedPlaceholder = placeholder ?? t("search.placeholder");
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -75,13 +76,13 @@ const Search: React.FC<SearchProps> = ({
 
     return (
         <form onSubmit={handleSubmit} className="relative w-full">
-            <label htmlFor="pokemon-input" className="sr-only">Search for a Pokémon</label>
+            <label htmlFor="pokemon-input" className="sr-only">{resolvedPlaceholder}</label>
             <input
                 ref={inputRef}
                 id="pokemon-input"
                 autoFocus={autoFocus}
                 onChange={(e) => setName(e.currentTarget.value)}
-                placeholder={placeholder}
+                placeholder={resolvedPlaceholder}
                 autoComplete="off"
                 spellCheck={false}
                 maxLength={48}
@@ -92,7 +93,7 @@ const Search: React.FC<SearchProps> = ({
                     type="submit"
                     className={`text-muted hover:text-fg transition-all duration-150 active:scale-90 rounded-sm focus-visible:outline-none focus-visible:ring-2 ${ACCENT_CLASSES[accent].button} focus-visible:ring-offset-2 focus-visible:ring-offset-canvas`}
                 >
-                    <span className="sr-only">Search</span>
+                    <span className="sr-only">{t("search.submit")}</span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

@@ -9,9 +9,17 @@ import Search from "./components/Search";
 import StatBars from "./components/StatBars";
 import StatusBar from "./components/StatusBar";
 import { CRY_CHANGE_EVENT, CrySource, getCrySource, pickCryUrl } from "./lib/cry-source";
-import { getRecentSearches, pushRecentSearch, RECENT_CHANGE_EVENT } from "./lib/recent";
+import { pickSpeciesName, useLanguage } from "./lib/i18n";
+import {
+    getRecentNamesMap,
+    getRecentSearches,
+    pushRecentSearch,
+    RECENT_CHANGE_EVENT,
+    type RecentNamesMap,
+} from "./lib/recent";
 import { getShinyPreference, SHINY_CHANGE_EVENT, ShinyPreference } from "./lib/shiny";
 import { getSpriteStyle, getSpriteUrl, SPRITE_CHANGE_EVENT, SpriteStyle } from "./lib/sprite-style";
+import type { TranslationKey } from "./data/translations";
 import {
     classifySearchError,
     getTypeColor,
@@ -24,25 +32,25 @@ const MAX_POKEMON_ID = 1025;
 
 const SECTION_META: Record<
     WeaknessMultiplier,
-    { label: string; headerClass: string; dividerClass: string; tooltip: string }
+    { labelKey: TranslationKey; tooltipKey: TranslationKey; headerClass: string; dividerClass: string }
 > = {
     "2x": {
-        label: "Weaknesses",
+        labelKey: "result.weaknesses",
+        tooltipKey: "result.weaknessesTooltip",
         headerClass: "bg-red-600 text-white",
         dividerClass: "border-white/25",
-        tooltip: "Takes double damage from these types",
     },
     "0.5x": {
-        label: "Resistances",
+        labelKey: "result.resistances",
+        tooltipKey: "result.resistancesTooltip",
         headerClass: "bg-amber-500 text-stone-900",
         dividerClass: "border-black/15",
-        tooltip: "Takes half damage from these types",
     },
     "0x": {
-        label: "Immunities",
+        labelKey: "result.immunities",
+        tooltipKey: "result.immunitiesTooltip",
         headerClass: "bg-slate-600 text-white",
         dividerClass: "border-white/25",
-        tooltip: "Takes no damage from these types",
     },
 };
 
@@ -74,10 +82,10 @@ function pickRandomExamples(pool: string[], count: number): string[] {
     return arr.slice(0, count);
 }
 
-const LOADING_MESSAGES = [
-    "Scanning…",
-    "Analyzing types…",
-    "Calculating matchups…",
+const LOADING_MESSAGE_KEYS: TranslationKey[] = [
+    "loading.scanning",
+    "loading.analyzing",
+    "loading.calculating",
 ];
 
 const heroFade: Variants = {
@@ -113,15 +121,20 @@ function App() {
     const [loading, setLoading] = useState(false);
     const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
     const [recent, setRecent] = useState<string[]>(() => getRecentSearches());
+    const [recentNames, setRecentNames] = useState<RecentNamesMap>(() => getRecentNamesMap());
     const [shiny, setShiny] = useState<ShinyPreference>(() => getShinyPreference());
     const [crySource, setCrySourceState] = useState<CrySource>(() => getCrySource());
     const [spriteStyle, setSpriteStyleState] = useState<SpriteStyle>(() => getSpriteStyle());
     const requestIdRef = useRef(0);
     const examples = useMemo(() => pickRandomExamples(EXAMPLE_POKEMON, 3), []);
+    const { lang, t, tf } = useLanguage();
 
     // React to preference changes from Settings
     useEffect(() => {
-        const onRecent = (e: Event) => setRecent((e as CustomEvent<string[]>).detail);
+        const onRecent = (e: Event) => {
+            setRecent((e as CustomEvent<string[]>).detail);
+            setRecentNames(getRecentNamesMap());
+        };
         const onShiny = (e: Event) => setShiny((e as CustomEvent<ShinyPreference>).detail);
         const onCry = (e: Event) => setCrySourceState((e as CustomEvent<CrySource>).detail);
         const onSprite = (e: Event) => setSpriteStyleState((e as CustomEvent<SpriteStyle>).detail);
@@ -141,7 +154,7 @@ function App() {
         if (!loading) return;
         setLoadingMessageIndex(0);
         const interval = window.setInterval(() => {
-            setLoadingMessageIndex((i) => (i + 1) % LOADING_MESSAGES.length);
+            setLoadingMessageIndex((i) => (i + 1) % LOADING_MESSAGE_KEYS.length);
         }, 650);
         return () => window.clearInterval(interval);
     }, [loading]);
@@ -154,7 +167,7 @@ function App() {
             const result = await invoke<string>("search_pokemon", { name });
             if (myId !== requestIdRef.current) return;
             const data = JSON.parse(result) as Pokemon;
-            pushRecentSearch(data.name);
+            pushRecentSearch(data.name, data.names);
             const doc = document as Document & {
                 startViewTransition?: (cb: () => void) => unknown;
             };
@@ -170,17 +183,13 @@ function App() {
             const classified = classifySearchError(err, name);
             switch (classified.kind) {
                 case "not_found":
-                    setError(
-                        `No Pokémon called "${truncateQuery(classified.query)}". Check the spelling, or search by number (e.g. 25 for Pikachu).`
-                    );
+                    setError(tf("error.notFound", { query: truncateQuery(classified.query) }));
                     break;
                 case "network":
-                    setError(
-                        "Couldn't reach the Pokémon database. Check your internet connection."
-                    );
+                    setError(t("error.network"));
                     break;
                 default:
-                    setError("Something went wrong. Try searching again.");
+                    setError(t("error.unknown"));
                     break;
             }
             setPokemonData(null);
@@ -246,9 +255,20 @@ function App() {
             const entries = [...(pokemonData.weaknesses[multiplier] ?? [])].sort(
                 (a, b) => a.type.localeCompare(b.type)
             );
-            return { multiplier, ...meta, entries };
+            return {
+                multiplier,
+                headerClass: meta.headerClass,
+                dividerClass: meta.dividerClass,
+                label: t(meta.labelKey),
+                tooltip: t(meta.tooltipKey),
+                entries,
+            };
         })
         : [];
+
+    const displayName = pokemonData
+        ? pickSpeciesName(pokemonData.names, lang, capitalize(pokemonData.name))
+        : "";
 
     let viewKey: "loading" | "result" | "error" | "empty";
     if (loading) viewKey = "loading";
@@ -284,7 +304,8 @@ function App() {
                         >
                             <motion.img
                                 src="/loading.png"
-                                alt="Loading"
+                                alt=""
+                                aria-hidden="true"
                                 className="h-40"
                                 animate={{
                                     opacity: [0.55, 1, 0.55],
@@ -305,7 +326,7 @@ function App() {
                                     transition={{ duration: 0.22, ease: EASE_OUT_QUINT }}
                                     className="font-display text-[0.625rem] tabular-nums tracking-[0.28em] uppercase text-muted"
                                 >
-                                    {LOADING_MESSAGES[loadingMessageIndex]}
+                                    {t(LOADING_MESSAGE_KEYS[loadingMessageIndex])}
                                 </motion.p>
                             </AnimatePresence>
                         </motion.div>
@@ -327,17 +348,17 @@ function App() {
                                         </p>
                                         <div className="flex items-baseline gap-2 mt-1">
                                             <h1
-                                                className="font-display text-4xl font-bold capitalize leading-[0.95] break-words tracking-tight min-w-0"
+                                                className="font-display text-4xl font-bold leading-[0.95] break-words tracking-tight min-w-0"
                                                 style={{ viewTransitionName: "pokemon-name" }}
                                             >
-                                                {capitalize(pokemonData.name)}
+                                                {displayName}
                                             </h1>
                                             {(pokemonData.cries?.latest || pokemonData.cries?.legacy) && (
                                                 <button
                                                     type="button"
                                                     onClick={() => playCry(pokemonData.cries)}
                                                     className="shrink-0 inline-flex items-center justify-center h-6 w-6 text-muted hover:text-red-500 transition-all duration-150 active:scale-90 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
-                                                    aria-label={`Play ${capitalize(pokemonData.name)} cry`}
+                                                    aria-label={tf("result.playCry", { name: displayName })}
                                                 >
                                                     <svg
                                                         viewBox="0 0 24 24"
@@ -357,7 +378,7 @@ function App() {
                                             )}
                                         </div>
                                         <div className="mt-3 flex flex-wrap gap-1.5">
-                                            <span className="sr-only">Type: </span>
+                                            <span className="sr-only">{t("result.typeSrLabel")} </span>
                                             {pokemonData.types.map((t) => {
                                                 const color = getTypeColor(t.type.name);
                                                 return (
@@ -377,16 +398,16 @@ function App() {
                                         </div>
                                     </div>
                                     {artworkUrl ? (
-                                        <div className="scan-sweep h-32 w-32 flex-shrink-0 -mt-2 -mr-2">
+                                        <div className="scan-sweep h-32 w-32 shrink-0 -mt-2 -mr-2">
                                             <HoloArtwork
                                                 src={artworkUrl}
-                                                alt={`${capitalize(pokemonData.name)} official artwork${shiny === "on" ? " (shiny)" : ""}`}
+                                                alt={`${displayName}${shiny === "on" ? " ✦" : ""}`}
                                             />
                                         </div>
                                     ) : (
                                         <div
                                             aria-hidden="true"
-                                            className="h-32 w-32 flex-shrink-0 -mt-2 -mr-2 border-2 border-divider/40 flex items-center justify-center font-display text-3xl text-faint"
+                                            className="h-32 w-32 shrink-0 -mt-2 -mr-2 border-2 border-divider/40 flex items-center justify-center font-display text-3xl text-faint"
                                         >
                                             ?
                                         </div>
@@ -397,7 +418,7 @@ function App() {
                             <div className="mt-4 px-4 space-y-2.5">
                                 {weaknessSections.length === 0 ? (
                                     <p className="text-sm text-center text-faint py-6 border-2 border-divider/60">
-                                        No matchup data available.
+                                        {t("result.noMatchupData")}
                                     </p>
                                 ) : (
                                     weaknessSections.map((section, index) => (
@@ -437,7 +458,7 @@ function App() {
                                             <div className="px-3 py-3">
                                                 {section.entries.length === 0 ? (
                                                     <p className="text-xs text-faint italic text-center py-1">
-                                                        None
+                                                        {t("result.none")}
                                                     </p>
                                                 ) : (
                                                     <div className="flex flex-wrap gap-2">
@@ -461,7 +482,7 @@ function App() {
                                     onPick={(name) => searchPokemon(name.toLowerCase())}
                                 />
                                 <p className="text-[0.625rem] text-faint italic text-center px-6 pt-2 pb-1">
-                                    Based on core-series type effectiveness.
+                                    {t("result.disclaimer")}
                                 </p>
                             </div>
                         </motion.div>
@@ -509,7 +530,7 @@ function App() {
                                         variants={wordmarkLine}
                                         className="mt-5 font-display text-[0.6875rem] text-muted tabular-nums tracking-[0.28em] uppercase"
                                     >
-                                        Makes winning easy
+                                        {t("home.tagline")}
                                     </motion.p>
                                 </motion.div>
 
@@ -526,8 +547,8 @@ function App() {
                                     <button
                                         type="button"
                                         onClick={randomSearch}
-                                        aria-label="Random Pokémon"
-                                        title="Random Pokémon"
+                                        aria-label={t("home.randomAria")}
+                                        title={t("home.randomAria")}
                                         className="shrink-0 border-2 border-divider/70 hover:border-red-500 px-3 text-fg hover:text-red-500 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas font-display text-lg leading-none"
                                     >
                                         🎲
@@ -542,20 +563,26 @@ function App() {
                                     className="mt-5"
                                 >
                                     <p className="font-display text-[0.625rem] text-faint tabular-nums tracking-[0.28em] uppercase text-center mb-2">
-                                        {recent.length > 0 ? "Recent" : "Try one"}
+                                        {recent.length > 0 ? t("home.recent") : t("home.tryOne")}
                                     </p>
                                     <div className="grid grid-cols-3 gap-1.5">
-                                        {(recent.length > 0 ? recent : examples).slice(0, 3).map((ex) => (
-                                            <button
-                                                key={ex}
-                                                type="button"
-                                                onClick={() => searchPokemon(ex.toLowerCase())}
-                                                className="group inline-flex items-center justify-center gap-1 py-1.5 px-2 font-display text-xs font-bold uppercase tracking-[0.18em] text-fg border-2 border-divider/60 hover:border-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
-                                            >
-                                                <span aria-hidden="true" className="opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 -ml-3 transition-opacity">▸</span>
-                                                {ex}
-                                            </button>
-                                        ))}
+                                        {(recent.length > 0 ? recent : examples).slice(0, 3).map((ex) => {
+                                            const label = recent.length > 0
+                                                ? pickSpeciesName(recentNames[ex.toLowerCase()], lang, capitalize(ex))
+                                                : capitalize(ex);
+                                            return (
+                                                <button
+                                                    key={ex}
+                                                    type="button"
+                                                    onClick={() => searchPokemon(ex.toLowerCase())}
+                                                    className="group inline-flex items-center justify-center gap-1 py-1.5 px-2 font-display text-xs font-bold uppercase tracking-[0.18em] text-fg border-2 border-divider/60 hover:border-red-500 hover:bg-red-500 hover:text-white transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas overflow-hidden"
+                                                    title={label}
+                                                >
+                                                    <span aria-hidden="true" className="opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 -ml-3 transition-opacity shrink-0">▸</span>
+                                                    <span className="truncate min-w-0">{label}</span>
+                                                </button>
+                                            );
+                                        })}
                                     </div>
                                 </motion.div>
                             </div>
@@ -566,7 +593,7 @@ function App() {
             </div>
 
             {viewKey !== "empty" && (
-                <section className="flex-shrink-0 px-6 pb-4">
+                <section className="shrink-0 px-6 pb-4">
                     <hr className="mb-6 border-divider/40" />
                     <Search onSearch={searchPokemon} />
                 </section>

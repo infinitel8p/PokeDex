@@ -1,16 +1,18 @@
 import { PokemonStat } from "../types/pokemon";
+import { useLanguage } from "../lib/i18n";
+import type { TranslationKey } from "../data/translations";
 
 interface Props {
     stats: PokemonStat[];
 }
 
-const STAT_LABEL: Record<string, string> = {
-    "hp": "HP",
-    "attack": "ATK",
-    "defense": "DEF",
-    "special-attack": "SP.A",
-    "special-defense": "SP.D",
-    "speed": "SPD",
+const STAT_LABEL_KEY: Record<string, TranslationKey> = {
+    "hp": "stats.hp",
+    "attack": "stats.atk",
+    "defense": "stats.def",
+    "special-attack": "stats.spa",
+    "special-defense": "stats.spd",
+    "speed": "stats.spe",
 };
 
 const STAT_ORDER = ["hp", "attack", "defense", "special-attack", "special-defense", "speed"];
@@ -26,6 +28,7 @@ function statColor(value: number): string {
 }
 
 const StatBars: React.FC<Props> = ({ stats }) => {
+    const { t } = useLanguage();
     if (!stats || stats.length === 0) return null;
 
     const byName: Record<string, number> = {};
@@ -38,11 +41,11 @@ const StatBars: React.FC<Props> = ({ stats }) => {
         <section className="border-2 border-divider/60">
             <header className="flex items-stretch bg-slate-700 text-white">
                 <div className="flex items-center justify-center px-3 py-1.5 font-display text-sm font-bold tabular-nums border-r-2 border-white/25">
-                    BST
+                    {t("stats.bst")}
                 </div>
                 <div className="flex-1 flex items-center justify-between px-3 py-1.5">
                     <span className="font-display text-xs font-bold tracking-[0.18em] uppercase">
-                        Base Stats
+                        {t("stats.title")}
                     </span>
                     <span className="font-display text-[0.625rem] tabular-nums tracking-[0.28em] opacity-80">
                         Σ {total}
@@ -56,7 +59,7 @@ const StatBars: React.FC<Props> = ({ stats }) => {
                     return (
                         <li key={key} className="flex items-center gap-2">
                             <span className="font-display text-[0.6875rem] tabular-nums tracking-[0.18em] uppercase text-muted w-12 shrink-0">
-                                {STAT_LABEL[key]}
+                                {t(STAT_LABEL_KEY[key])}
                             </span>
                             <span className="font-display text-xs tabular-nums w-8 shrink-0 text-right">
                                 {value}
